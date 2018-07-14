@@ -30,8 +30,10 @@ if (!firebase.apps.length) {
 
 const db = firebase.database();
 const auth = firebase.auth();
+const f = firebase;
 
 export {
   db,
   auth,
+  f
 };

@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sign_in_user } from "../../actions/user_actions";
+import { 
+  sign_in_user
+} from "../../actions/user_actions";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
 import { auth } from "../../firebase";
 import * as routes from "../../constants/routes";
+import FbLogin from "./fbLogin";
+import GoogleLogin from "./googleLogin";
 
 class SignInPage extends Component {
   constructor(props) {
@@ -20,6 +24,8 @@ class SignInPage extends Component {
       <div>
         <h1>SignIn</h1>
         <SignInForm history={this.props.history} parentProps={this.props} />
+        <GoogleLogin/>
+        <FbLogin/>
         <PasswordForgetLink />
         <SignUpLink />
       </div>

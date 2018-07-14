@@ -1,51 +1,24 @@
 import axios from "axios";
 
 import { conf_dev } from "../config";
-import { firebase } from "../firebase";
-
+import { firebase, db} from "../firebase";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithEmailAndPassword,
+  doSignInWithGoogleAuthProvider,
+  doSignInWithFacebookAuthProvider,
   doSignOut
 } from "../firebase/auth";
 
-export const SET_USER = "SET_USER";
-export const USER_LIST = "USER_LIST";
-export const SET_USER_INSTANCE = "SET_USER_INSTANCE";
+
 export const AUTH_USER = "AUTH_USER";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const SIGN_OUT_USER = "SIGN_OUT_USER";
+export const COPY_SIGN_UP = "COPY_SIGN_UP";
 
 export const URL_API = conf_dev.url_api;
 
-export const set_user = user_name => {
-  localStorage.setItem("user_name", user_name);
-  return dispatch => {
-    dispatch({
-      type: SET_USER,
-      payload: user_name
-    }),
-      dispatch(() => {
-        return axios.get(URL_API + "/" + user_name + "/lists").then(request => {
-          dispatch({
-            type: USER_LIST,
-            payload: request
-          });
-        });
-      });
-  };
-};
 
-export const set_user_instance = auth_user => {
-  return dispatch => {
-    console.log("alala");
-    console.log(auth_user);
-    dispatch({
-      type: SET_USER_INSTANCE,
-      payload: auth_user
-    });
-  };
-};
 
 export const sign_up_user = credentials => {
   return dispatch => {
@@ -54,7 +27,8 @@ export const sign_up_user = credentials => {
       credentials.password
     )
       .then(response => {
-		console.log("sign_up_user succes");
+        console.log("sign_up_user succes");
+        //db.doCreateUser()
         dispatch(auth_user());
       })
       .catch(error => {
@@ -63,6 +37,25 @@ export const sign_up_user = credentials => {
       });
   };
 };
+
+export const sign_up_copy_private_db = user =>{
+  const data = {
+    uid: user.uid,
+    identifier : user.identifier
+  };
+  console.log('COPY_A');
+  return dispatch =>{
+    return axios.post(URL_API+"/signUp",data)
+			.then(
+				(request)=>{
+					dispatch({
+						type : COPY_SIGN_UP,
+						payload : request
+					});
+				}
+			) 
+  }
+}
 
 export const sign_in_user = credentials => {
   return dispatch => {
@@ -76,6 +69,30 @@ export const sign_in_user = credentials => {
       });
   };
 };
+
+export const sign_in_user_google = ()=>{
+  return dispatch=>{
+    return doSignInWithGoogleAuthProvider()
+      .then(response=>{
+        console.log("yata")
+        console.log(response)
+        if(!response.additionalUserInfo.isNewUser){
+          dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
+        }
+      })
+  }
+}
+
+export const sign_in_user_facebook = ()=>{
+  console.log("presque yolo")
+  return dispatch=>{
+    return doSignInWithFacebookAuthProvider()
+      .then(response=>{
+        console.log("yolo")
+        console.log(response)
+      })
+  }
+}
 
 export const auth_user = () => {
   console.log("user authed");

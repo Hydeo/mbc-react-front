@@ -1,5 +1,5 @@
 export const conf_dev = {
-	url_api : "https://linkitlist-back.herokuapp.com/",
+	url_api : "https://mbc-mongo-back.herokuapp.com/",
 	breakpoints : {
 		S : 600, 
 		M : 900, 
