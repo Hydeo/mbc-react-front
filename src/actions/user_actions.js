@@ -74,9 +74,8 @@ export const sign_in_user_google = ()=>{
   return dispatch=>{
     return doSignInWithGoogleAuthProvider()
       .then(response=>{
-        console.log("yata")
         console.log(response)
-        if(!response.additionalUserInfo.isNewUser){
+        if(response.additionalUserInfo.isNewUser){
           dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
         }
       })
@@ -90,6 +89,9 @@ export const sign_in_user_facebook = ()=>{
       .then(response=>{
         console.log("yolo")
         console.log(response)
+        if(response.additionalUserInfo.isNewUser){
+          dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
+        }
       })
   }
 }

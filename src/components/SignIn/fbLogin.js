@@ -22,9 +22,9 @@ class FbLogin extends Component{
 	}
 
 	componentDidMount(){
-		window.fbLoaded.promise.then(() => {
+		/*window.fbLoaded.promise.then(() => {
 		  window.FB.XFBML.parse()
-		})
+		})*/
 	}
 }
 
