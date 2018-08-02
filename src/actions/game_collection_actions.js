@@ -5,14 +5,16 @@ import { URL_API } from "./user_actions";
 export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
 
 
-export const get_user_game_collection = user =>{
+export const get_user_game_collection = uid =>{
     console.log('get user collection');
-    console.log(user);
+    console.log(uid);
     return dispatch =>{
-        return axios.get(URL_API+"/GameCollection/"+user.name)
+        return axios.get(URL_API+"/GameCollection/"+uid)
             .then((request)=>{
-                console.log('Request back');
-                console.log(request)
+                dispatch({
+                    type : GET_USER_GAME_COLLECTION,
+                    payload : request.data
+                })
             })
     }
 }

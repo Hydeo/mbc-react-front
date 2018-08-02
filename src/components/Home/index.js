@@ -17,14 +17,14 @@ class HomePage extends Component {
       users: {}
     };
     console.log(this.props);
- //console.log(this.props.user_state.get_authentificated_user());
-    //this.props.get_user_game_collection();
+   
   }
 
   componentDidMount() {
     db.onceGetUsers().then(snapshot =>
       this.setState(() => ({ users: snapshot.val() }))
     );
+    this.props.get_user_game_collection(this.props.user_state.user_authed.uid);
   }
 
   render() {
@@ -36,8 +36,10 @@ class HomePage extends Component {
         <p>The Home Page is accessible by every signed in user.</p>
 
         { !!users && <UserList users={users} /> }
+
+        {!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>}
       </div>
-    );
+    );  
   }
 }
 
@@ -51,10 +53,24 @@ const UserList = ({ users }) =>
     )}
   </div>
 
+const GameList = ({game_collection})=>
+  <div style={{display: "inline-flex"}}>
+    {game_collection.gameList.map(game=>
+      <div key={game._id}>
+        <h2>{game.localization.eng.title}</h2>
+        <img src={game.localization.eng.imageUrl} alt="lik"/>
+        <p>{game.localization.eng.description}</p>
+      </div>
+    )
+  } 
+</div>
+
+
 const authCondition = (authUser) => !!authUser;
 
 const mapStateToProps = state => ({
-  user_state: state.user
+  user_state: state.user,
+  game_collection : state.game_collection
 });
 
 //On injecte les actions possible au props ?
