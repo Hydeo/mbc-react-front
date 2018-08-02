@@ -27,12 +27,9 @@ export const sign_up_user = credentials => {
       credentials.password
     )
       .then(response => {
-        console.log("sign_up_user succes");
-        //db.doCreateUser()
         dispatch(auth_user());
       })
       .catch(error => {
-        console.log("sign_up_user error");
         dispatch(auth_error({"type" : "sign_up_error", "error" : error }));
       });
   };
@@ -43,7 +40,6 @@ export const sign_up_copy_private_db = user =>{
     uid: user.uid,
     identifier : user.identifier
   };
-  console.log('COPY_A');
   return dispatch =>{
     return axios.post(URL_API+"/signUp",data)
 			.then(
@@ -61,10 +57,9 @@ export const sign_in_user = credentials => {
   return dispatch => {
     return doSignInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
-        dispatch(auth_user());
+        dispatch(auth_user(response.user));
       })
       .catch(error => {
-		console.log("sign_in_user error");
         dispatch(auth_error({"type" : "sign_in_error",  "error" : error}));
       });
   };
@@ -74,7 +69,6 @@ export const sign_in_user_google = ()=>{
   return dispatch=>{
     return doSignInWithGoogleAuthProvider()
       .then(response=>{
-        console.log(response)
         if(response.additionalUserInfo.isNewUser){
           dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
         }
@@ -83,12 +77,9 @@ export const sign_in_user_google = ()=>{
 }
 
 export const sign_in_user_facebook = ()=>{
-  console.log("presque yolo")
   return dispatch=>{
     return doSignInWithFacebookAuthProvider()
       .then(response=>{
-        console.log("yolo")
-        console.log(response)
         if(response.additionalUserInfo.isNewUser){
           dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
         }
@@ -96,17 +87,18 @@ export const sign_in_user_facebook = ()=>{
   }
 }
 
-export const auth_user = () => {
+export const auth_user = user => {
   console.log("user authed");
+  console.log(user);
   return dispatch => {
     dispatch({
-      type: AUTH_USER
+      type: AUTH_USER,
+      payload : user
     });
   };
 };
 
 export const auth_error = error => {
-  console.log("auth ***** error");
   return dispatch => {
     dispatch({
       type: AUTH_ERROR,
@@ -116,7 +108,6 @@ export const auth_error = error => {
 };
 
 export const sign_out_user = () =>{
-	console.log('sign out user');
 	return dispatch => {
 		return firebase.auth.signOut()
 		.then(() => {
@@ -136,7 +127,7 @@ export const verif_auth = () => {
     firebase.auth.onAuthStateChanged(user => {
 		console.log(user)
       if (user) {
-        dispatch(auth_user());
+        dispatch(auth_user(user));
       } else {
         dispatch(sign_out_user());
       }

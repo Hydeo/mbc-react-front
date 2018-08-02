@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+import {connect } from "react-redux";
+import {bindActionCreators} from "redux";
+import {
+  get_user_game_collection
+} from "../../actions/game_collection_actions";
+
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
@@ -10,6 +16,9 @@ class HomePage extends Component {
     this.state = {
       users: {}
     };
+    console.log(this.props);
+ //console.log(this.props.user_state.get_authentificated_user());
+    //this.props.get_user_game_collection();
   }
 
   componentDidMount() {
@@ -44,4 +53,17 @@ const UserList = ({ users }) =>
 
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(HomePage);
+const mapStateToProps = state => ({
+  user_state: state.user
+});
+
+//On injecte les actions possible au props ?
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      get_user_game_collection
+    },
+    dispatch
+  );
+
+export default withAuthorization(authCondition)(connect(mapStateToProps,mapDispatchToProps)(HomePage));

@@ -4,11 +4,39 @@ import {
   SIGN_OUT_USER,
   COPY_SIGN_UP
 } from "../actions/user_actions";
+import { firebase } from '../firebase';
+
+
+
+const get_authentificated_user = () => {
+  console.log('in fonction chelou');
+  var user_authed = null;
+  /*firebase.auth.onAuthStateChanged(authUser => {
+    if(authUser){
+      console.log('user is authed');
+      user_authed = authUser
+    }
+    else{
+      console.log('user is not authed');
+      user_authed = null;
+    }
+  }).then((response)=>{
+    console.log('returned');
+    console.log(response);
+    console.log(user_authed);
+    return user_authed;
+  });*/
+
+  
+}
 
 const initialState = {
   authenticated: null,
+  user_authed : null,
   error_type: { sign_in_error: null, sign_up_error: null }
 };
+
+
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -22,9 +50,12 @@ export default (state = initialState, action) => {
     break;
     
     case AUTH_USER:
+      console.log('Authed user reduc');
+      console.log(action.payload);
       return {
         ...state,
         authenticated: true,
+        user_authed : action.payload,
         error_type: { sign_in_error: null, sign_up_error: null }
       };
       break;
@@ -43,7 +74,8 @@ export default (state = initialState, action) => {
       console.log("sign out reduc");
       return {
         ...state,
-        authenticated: false,
+        authenticated: null,
+        user_authed : null,
         error_type : { sign_in_error: null, sign_up_error: null }
       };
       break;
