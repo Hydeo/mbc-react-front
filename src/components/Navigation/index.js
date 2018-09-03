@@ -21,7 +21,6 @@ const drawerWidth = 240;
 const styles = theme =>({
   root: {
     flexGrow: 1,
-    height: 430,
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -42,12 +41,22 @@ const styles = theme =>({
       width: `calc(100% - ${drawerWidth}px)`,
     },
   },
+  navIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
       position: 'relative',
     },
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
   },
 });
 
@@ -58,7 +67,6 @@ class Navigation extends React.Component {
   }
 
   handleDrawerToggle = () => {
-    console.log('Toggle drawer');
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
@@ -86,9 +94,24 @@ class Navigation extends React.Component {
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}>
-            qzdqzd
+            <Typography variant="button" color="inherit" className={classes.flex}>
+            <Link to={routes.LANDING}>Landing</Link>
+            </Typography>
+            <Typography variant="button" color="inherit" className={classes.flex}>
+            <Link to={routes.HOME}>Home</Link>
+            </Typography>
+            <Typography variant="button" color="inherit" className={classes.flex}>
+            <Link to={routes.ACCOUNT}>Account</Link>
+            </Typography>
+            <Typography variant="button" color="inherit" className={classes.flex}>
+              <SignOutButton />
+            </Typography>
           </Drawer>
         </Hidden>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+        </main>
       </div>
     )
   }
@@ -97,23 +120,33 @@ class Navigation extends React.Component {
 const NavigationAuth = (props) =>{
   const { classes, handleDrawerToggle } = props;
   return(
-    <Toolbar>
-      <IconButton onClick={handleDrawerToggle} className={classes.menuButton} color="inherit" aria-label="Menu">
-        <MenuIcon />
-      </IconButton>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        <Link to={routes.LANDING}>Landing</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-      <Link to={routes.HOME}>Home</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-      <Link to={routes.ACCOUNT}>Account</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        <SignOutButton />
-      </Typography>
-    </Toolbar>
+    
+      <Toolbar>
+        <Hidden smDown>
+          {/* AUTHED AppBar rendered for =DESKTOP= */}
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            <Link to={routes.LANDING}>Landing</Link>
+          </Typography>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+          <Link to={routes.HOME}>Home</Link>
+          </Typography>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+          <Link to={routes.ACCOUNT}>Account</Link>
+          </Typography>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            <SignOutButton />
+          </Typography>
+        </Hidden>
+        <Hidden mdUp>
+          <IconButton onClick={handleDrawerToggle} className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+          </IconButton>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+              MyBoardGameCollection o/
+          </Typography>
+        </Hidden>
+      </Toolbar>
+    
   )
 }
 
@@ -134,6 +167,8 @@ const NavigationNonAuth = (props) =>{
     </Toolbar>
   )
 }
+
+
 Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
