@@ -55,13 +55,22 @@ const UserList = ({ users }) =>
 
 const GameList = ({game_collection})=>
   <div style={{display: "inline-flex"}}>
-    {game_collection.gameList.map(game=>
-      <div key={game._id}>
-        <h2>{game.localization.eng.title}</h2>
-        <img src={game.localization.eng.imageUrl} alt="lik"/>
-        <p>{game.localization.eng.description}</p>
-      </div>
-    )
+    { 
+      game_collection.gameList.map(function(game){
+
+      var has_mask  = this.hasOwnProperty(game._id); //this == gameMask object passend as this in map function
+
+      var title = game.localization.eng.title;
+      var description = (has_mask && this[game._id].comment != null) ? this[game._id].comment : game.localization.eng.description;
+      return(
+        <div key={game._id}>
+          <h2>{game.localization.eng.title}</h2>
+          <img src={game.localization.eng.imageUrl} alt="lik"/>
+          <p>{description}</p>
+        </div>
+      )
+    }
+  , game_collection.gameMask)
   } 
 </div>
 
