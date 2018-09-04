@@ -87,9 +87,8 @@ export const sign_in_user_facebook = ()=>{
   }
 }
 
-export const auth_user = user => {
+export const auth_user = (user) => {
   console.log("user authed");
-  console.log(user);
   return dispatch => {
     dispatch({
       type: AUTH_USER,
