@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthUserContext from '../Session/AuthUserContext';
@@ -7,6 +7,7 @@ import * as routes from '../../constants/routes';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -71,43 +72,17 @@ class Navigation extends React.Component {
   };
 
   render(){
-    const { classes, theme } = this.props;
+    const { classes, theme, width } = this.props;
     return(
       <div className={classes.root}>
-        <AppBar className={classes.toolbar}>
+        
             <AuthUserContext.Consumer>
               {authUser => authUser
-                ? <NavigationAuth classes={classes} handleDrawerToggle={this.handleDrawerToggle}/>
-                : <NavigationNonAuth classes={classes} handleDrawerToggle={this.handleDrawerToggle}/>
+                ? <NavigationAuth classes={classes} width={width} theme={theme} handleDrawerToggle={this.handleDrawerToggle} mobileOpen={this.state.mobileOpen}/>
+                : <NavigationNonAuth classes={classes} width={width} theme={theme} handleDrawerToggle={this.handleDrawerToggle} mobileOpen={this.state.mobileOpen}/>
               }
             </AuthUserContext.Consumer>
-        </AppBar>
-        <Hidden mdUp>
-          <Drawer
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={this.state.mobileOpen}
-            onClose={this.handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}>
-            <Typography variant="button" color="inherit" className={classes.flex}>
-            <Link to={routes.LANDING}>Landing</Link>
-            </Typography>
-            <Typography variant="button" color="inherit" className={classes.flex}>
-            <Link to={routes.HOME}>Home</Link>
-            </Typography>
-            <Typography variant="button" color="inherit" className={classes.flex}>
-            <Link to={routes.ACCOUNT}>Account</Link>
-            </Typography>
-            <Typography variant="button" color="inherit" className={classes.flex}>
-              <SignOutButton />
-            </Typography>
-          </Drawer>
-        </Hidden>
+      
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
@@ -118,56 +93,145 @@ class Navigation extends React.Component {
 }
 
 const NavigationAuth = (props) =>{
-  const { classes, handleDrawerToggle } = props;
+  const { classes,width, theme, handleDrawerToggle, mobileOpen } = props;
   return(
-    
-      <Toolbar>
-        <Hidden smDown>
-          {/* AUTHED AppBar rendered for =DESKTOP= */}
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            <Link to={routes.LANDING}>Landing</Link>
-          </Typography>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-          <Link to={routes.HOME}>Home</Link>
-          </Typography>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-          <Link to={routes.ACCOUNT}>Account</Link>
-          </Typography>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            <SignOutButton />
-          </Typography>
-        </Hidden>
-        <Hidden mdUp>
-          <IconButton onClick={handleDrawerToggle} className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-              MyBoardGameCollection o/
-          </Typography>
-        </Hidden>
-      </Toolbar>
-    
+    <Fragment>
+      <AppBar className={classes.toolbar}>
+        <Toolbar>
+          {isWidthUp('sm', width) ?
+            (<AuthWideScreenNavigation classes={classes}/>)
+            :
+            (<SmallScreenNavigation classes={classes} handleDrawerToggle={handleDrawerToggle}/>)
+          }
+        </Toolbar>
+      </AppBar>
+      <AuthDrawer theme={theme} classes={classes} mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle}/>
+    </Fragment>
   )
 }
 
 const NavigationNonAuth = (props) =>{
-  
-  const { classes, handleDrawerToggle } = props;
+  const { classes, width, theme , handleDrawerToggle, mobileOpen } = props;
   return(
-    <Toolbar>
+    <Fragment>
+      <AppBar className={classes.toolbar}>
+        <Toolbar>
+          {isWidthUp('sm', width) ?
+          (<NonAuthWideScreenNavigation classes={classes}/>)
+          :
+          (<SmallScreenNavigation classes={classes} handleDrawerToggle={handleDrawerToggle}/>)
+          }
+        </Toolbar>
+      </AppBar>
+      <NonAuthDrawer theme={theme} classes={classes}  mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle}/>
+    </Fragment>
+  )
+}
+
+
+const AuthWideScreenNavigation = (props)=>{
+  const { classes } = props;
+  return(
+    <Fragment>
+      <Typography variant="title" color="inherit" className={classes.flex}>
+        <Link to={routes.LANDING}>Landing</Link>
+      </Typography>
+      <Typography variant="title" color="inherit" className={classes.flex}>
+      <Link to={routes.HOME}>Home</Link>
+      </Typography>
+      <Typography variant="title" color="inherit" className={classes.flex}>
+      <Link to={routes.ACCOUNT}>Account</Link>
+      </Typography>
+      <Typography variant="title" color="inherit" className={classes.flex}>
+        <SignOutButton />
+      </Typography>
+    </Fragment>
+  )
+}
+
+const NonAuthWideScreenNavigation = (props)=>{
+  const { classes } = props;
+  return(
+    <Fragment>
+        <Typography variant="title" color="inherit" className={classes.flex}>
+          <Link to={routes.LANDING}>Landing</Link>
+        </Typography>
+        <Typography variant="title" color="inherit" className={classes.flex}>
+          <Link to={routes.SIGN_IN}>Sign In</Link>
+        </Typography>
+    </Fragment>
+  )
+}
+
+const SmallScreenNavigation = (props) =>{
+  const { classes, handleDrawerToggle } = props;
+  console.log('smallscreen');
+  return(
+    <Fragment>
       <IconButton onClick={handleDrawerToggle} className={classes.menuButton} color="inherit" aria-label="Menu">
-        <MenuIcon />
+          <MenuIcon />
       </IconButton>
+      <Typography variant="title" color="inherit" className={classes.flex}>
+          MyBoardGameCollection o/
+      </Typography>
+    </Fragment>
+  )
+}
+
+const AuthDrawer = (props) =>{
+  const { classes, theme , handleDrawerToggle, mobileOpen } = props;
+  return(
+    <Drawer
+    variant="temporary"
+    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+    open={mobileOpen}
+    onClose={handleDrawerToggle}
+    classes={{
+      paper: classes.drawerPaper,
+    }}
+    ModalProps={{
+      keepMounted: true, // Better open performance on mobile.
+    }}>
+      <Typography variant="button" color="inherit" className={classes.flex}>
+        <Link to={routes.LANDING}>Landing</Link>
+      </Typography>
+      <Typography variant="button" color="inherit" className={classes.flex}>
+      <Link to={routes.HOME}>Home</Link>
+      </Typography>
+      <Typography variant="button" color="inherit" className={classes.flex}>
+      <Link to={routes.ACCOUNT}>Account</Link>
+      </Typography>
+      <Typography variant="button" color="inherit" className={classes.flex}>
+        <SignOutButton />
+      </Typography>
+    </Drawer>
+
+  )
+}
+
+const NonAuthDrawer = (props) =>{
+  const { classes, theme , handleDrawerToggle, mobileOpen } = props;
+  return(
+    <Drawer
+    variant="temporary"
+    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+    open={mobileOpen}
+    onClose={handleDrawerToggle}
+    classes={{
+      paper: classes.drawerPaper,
+    }}
+    ModalProps={{
+      keepMounted: true, // Better open performance on mobile.
+    }}>
       <Typography variant="title" color="inherit" className={classes.flex}>
         <Link to={routes.LANDING}>Landing</Link>
       </Typography>
       <Typography variant="title" color="inherit" className={classes.flex}>
         <Link to={routes.SIGN_IN}>Sign In</Link>
       </Typography>
-    </Toolbar>
+    </Drawer>
   )
 }
-
 
 Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -179,4 +243,4 @@ NavigationNonAuth.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Navigation);
+export default withWidth()(withStyles(styles, { withTheme: true })(Navigation));
