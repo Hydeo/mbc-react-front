@@ -10,12 +10,13 @@ import { withStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
+
+import {authDrawerListItems, nonAuthDrawerListItems} from "./navigationItems";
 
 const drawerWidth = 240;
 
@@ -133,18 +134,7 @@ const AuthWideScreenNavigation = (props)=>{
   const { classes } = props;
   return(
     <Fragment>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        <Link to={routes.LANDING}>Landing</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-      <Link to={routes.HOME}>Home</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-      <Link to={routes.ACCOUNT}>Account</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        <SignOutButton />
-      </Typography>
+       {authDrawerListItems}
     </Fragment>
   )
 }
@@ -153,12 +143,7 @@ const NonAuthWideScreenNavigation = (props)=>{
   const { classes } = props;
   return(
     <Fragment>
-        <Typography variant="title" color="inherit" className={classes.flex}>
-          <Link to={routes.LANDING}>Landing</Link>
-        </Typography>
-        <Typography variant="title" color="inherit" className={classes.flex}>
-          <Link to={routes.SIGN_IN}>Sign In</Link>
-        </Typography>
+        {nonAuthDrawerListItems}
     </Fragment>
   )
 }
@@ -192,18 +177,7 @@ const AuthDrawer = (props) =>{
     ModalProps={{
       keepMounted: true, // Better open performance on mobile.
     }}>
-      <Typography variant="button" color="inherit" className={classes.flex}>
-        <Link to={routes.LANDING}>Landing</Link>
-      </Typography>
-      <Typography variant="button" color="inherit" className={classes.flex}>
-      <Link to={routes.HOME}>Home</Link>
-      </Typography>
-      <Typography variant="button" color="inherit" className={classes.flex}>
-      <Link to={routes.ACCOUNT}>Account</Link>
-      </Typography>
-      <Typography variant="button" color="inherit" className={classes.flex}>
-        <SignOutButton />
-      </Typography>
+      <List>{authDrawerListItems}</List>
     </Drawer>
 
   )
@@ -223,12 +197,7 @@ const NonAuthDrawer = (props) =>{
     ModalProps={{
       keepMounted: true, // Better open performance on mobile.
     }}>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        <Link to={routes.LANDING}>Landing</Link>
-      </Typography>
-      <Typography variant="title" color="inherit" className={classes.flex}>
-        <Link to={routes.SIGN_IN}>Sign In</Link>
-      </Typography>
+      {nonAuthDrawerListItems}
     </Drawer>
   )
 }
