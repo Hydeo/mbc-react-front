@@ -12,12 +12,14 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 
 import SignOutButton from '../SignOut';
-
+const styleListItem = {
+    width : "unset"
+}
 export const authDrawerListItems = (
     <Fragment> 
 
         <Link to={routes.LANDING}>
-            <ListItem button>
+            <ListItem style={styleListItem} button>
             <ListItemIcon>
                 <HomeIcon/>
             </ListItemIcon>
@@ -26,7 +28,7 @@ export const authDrawerListItems = (
         </Link>
 
         <Link to={routes.HOME}>
-            <ListItem button>
+            <ListItem style={styleListItem} button>
             <ListItemIcon>
                 <AppsIcon />
             </ListItemIcon>
@@ -35,7 +37,7 @@ export const authDrawerListItems = (
         </Link>
 
         <Link to={routes.ACCOUNT}>  
-            <ListItem button>
+            <ListItem style={styleListItem} button>
             <ListItemIcon>
                 <AccountCircleIcon />
             </ListItemIcon>
@@ -43,7 +45,7 @@ export const authDrawerListItems = (
             </ListItem>
         </Link>
 
-        <ListItem button>
+        <ListItem style={styleListItem} button>
             <SignOutButton />
         </ListItem>
     </Fragment>
@@ -53,7 +55,7 @@ export const nonAuthDrawerListItems = (
     <Fragment> 
 
         <Link to={routes.LANDING}>
-            <ListItem button>
+            <ListItem style={styleListItem} button>
             <ListItemIcon>
                 <HomeIcon />
             </ListItemIcon>
@@ -62,7 +64,7 @@ export const nonAuthDrawerListItems = (
         </Link>
 
         <Link to={routes.SIGN_IN}>
-            <ListItem button>
+            <ListItem style={styleListItem} button>
             <ListItemIcon>
                 <InputIcon />
             </ListItemIcon>
