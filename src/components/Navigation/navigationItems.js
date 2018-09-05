@@ -3,6 +3,8 @@ import React, { Fragment } from "react";
 import * as routes from "../../constants/routes";
 import { Link } from "react-router-dom";
 
+import LangSwitcher from './langSwitcher';
+
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -99,6 +101,7 @@ export const authNavbarListItems = (
         <SignOutButton />
       </ListItem>
     </div>
+    <LangSwitcher/>
   </Fragment>
 );
 
@@ -137,6 +140,8 @@ export const authDrawerListItems = (
   </Fragment>
 );
 
+
+/*This one is used for wide & mobile thanks to the Hidden*/ 
 export const nonAuthDrawerListItems = (
   <Fragment>
     <Link to={routes.LANDING}>
