@@ -1,0 +1,14 @@
+{
+    "title": "Welcome to react using react-i18next",
+    "description": {
+      "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
+      "part2": "Switch language between english and german using buttons above."
+    },
+    "navigation":{
+        "landing" : "Accueil",
+        "my_collection" : "Ma Collec'",
+        "my_account" : "Mon Compte",
+        "sign_out" : "Se Déconnecter",
+        "sign_in" : "Se Connecter"
+    }
+  }

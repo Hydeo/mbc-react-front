@@ -113,19 +113,18 @@ class Navigation extends React.Component {
               <div className={classes.toolbar} />
               <Typography noWrap>
                 <Trans i18nKey="description.part1">
-                  To get started, edit <code>src/App.js</code> and save to reload.
-                  <br/>
+                  To get started, edit <code>src/App.js</code> and save to
+                  reload.
+                  <br />
                 </Trans>
                 {"You think water moves fast? You should see ice."}
               </Typography>
             </main>
           </div>
         )}
-        
       </I18n>
     );
   }
-
 }
 
 const NavigationAuth = props => {

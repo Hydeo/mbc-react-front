@@ -3,5 +3,12 @@
   "description": {
     "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
     "part2": "Switch language between english and german using buttons above."
+  },
+  "navigation": {
+    "landing": "Landing",
+    "my_collection": "My Games",
+    "my_account": "My Account",
+    "sign_out": "Sign Out",
+    "sign_in" : "Sign In"
   }
 }
