@@ -82,15 +82,23 @@ class LinkCard extends React.Component{
 		const {classes, link_data} = this.props;
 		if(link_data.image == null || link_data.image == undefined || !link_data.image.includes("http"))
 			link_data.image="/images/404jpg";
+
+
+		//Pourquoi le mask ne s'applique pas ?
+		
+			var has_mask  = this.hasOwnProperty(link_data._id); //this == gameMask object passend as this in map function
+      var title = link_data.localization.eng.title;
+      var description = (has_mask && this[link_data._id].comment != null) ? this[link_data._id].comment : link_data.localization.eng.description;
+
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
 	      	<LazyLoad  className="qzd" offset={0}>
 	      		<div>
-		      		<a target="_blank" href={link_data.url}>
+		      		<a target="_blank" href={link_data.localization.eng.imageUrl}>
 				        <CardMedia
 				          className={classes.media +' '+classes.loadingBackgound}
-				          image={link_data.image}
+				          image={link_data.localization.eng.imageUrl}
 				          title={link_data.title}
 				        />
 				    </a>
@@ -98,13 +106,13 @@ class LinkCard extends React.Component{
 	        </LazyLoad>
 	        <CardContent>
 	          <Typography gutterBottom variant="headline" component="h2">
-	            {link_data.title}
+	            {link_data.localization.eng.title}
 	          </Typography>
 	        </CardContent>
 	        <Collapse in={this.state.expanded} onExited={()=>{this.update_isotope_layout()}} onEntered={()=>{this.update_isotope_layout()}} timeout="auto" unmountOnExit>
 		        <CardContent>
 		          <Typography component="p">
-		            {link_data.description}
+		            {description}
 		          </Typography>
 		        </CardContent>
 		    </Collapse>
@@ -144,7 +152,7 @@ class LinkCard extends React.Component{
 
 //On recupere la tate dans les props
 const mapStateToProps = state =>({
-	isotope_instance : state.bim.isotope_instance
+	isotope_instance : state.collection_isotope.isotope_instance
 })
 
 

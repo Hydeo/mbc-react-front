@@ -39,7 +39,7 @@ class HomePage extends Component {
 
         { !!users && <UserList users={users} /> }
 
-        {!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>}
+        {/*!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>*/}
         <LinkList/>
       </div>
      
@@ -63,7 +63,6 @@ const GameList = ({game_collection})=>
       game_collection.gameList.map(function(game){
 
       var has_mask  = this.hasOwnProperty(game._id); //this == gameMask object passend as this in map function
-
       var title = game.localization.eng.title;
       var description = (has_mask && this[game._id].comment != null) ? this[game._id].comment : game.localization.eng.description;
       return(

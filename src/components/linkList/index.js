@@ -60,12 +60,14 @@ class LinkList extends React.Component{
 
 	render(){
 		const {classes} = this.props;
+		console.log('STATE');
+		console.log(!!this.props.game_collection.game_collection);
 		return(
 			  <div id="link_list">
 			  	<div  style={this.state.link_size_state} className="link_sizer"/>
 			  	<div  style={link_gutter} className="link_gutter"/>
-			    {
-			    	this.props.links.map((link,index)=>(
+			    {!!this.props.game_collection.game_collection &&
+			    	this.props.game_collection.game_collection.gameList.map((link,index)=>(
 			    		<LinkCard link_data={link} key={index} isotopeUpdate={this.update_isotope} cardSize={this.state.link_size_state} update={this.update_confirm_dialog_state}/>
 			  		))
 			    }
@@ -74,7 +76,7 @@ class LinkList extends React.Component{
 		)
 	}
 
-
+	
 	componentDidMount = ()=>{
 		console.log("--["+class_name+"] componentDidMount--");
 		window.addEventListener("resize", this.updateDimensions);
@@ -112,7 +114,8 @@ class LinkList extends React.Component{
 //On recupere la tate dans les props
 const mapStateToProps = state =>({
 	links : state.collection_isotope.links,
-	isotope_instance : state.collection_isotope.isotope_instance
+	isotope_instance : state.collection_isotope.isotope_instance,
+	game_collection : state.game_collection
 })
 
 //On injecte les actions possible au props ?
