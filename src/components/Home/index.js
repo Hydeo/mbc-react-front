@@ -9,6 +9,8 @@ import {
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
+import LinkList from "../linkList";
+
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +40,9 @@ class HomePage extends Component {
         { !!users && <UserList users={users} /> }
 
         {!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>}
+        <LinkList/>
       </div>
+     
     );  
   }
 }
