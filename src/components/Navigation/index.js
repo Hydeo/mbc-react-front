@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 
-import {authDrawerListItems, nonAuthDrawerListItems} from "./navigationItems";
+import {authDrawerListItems, nonAuthDrawerListItems, authNavbarListItems} from "./navigationItems";
 
 const drawerWidth = 240;
 
@@ -60,6 +60,10 @@ const styles = theme =>({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
   },
+  text: {
+    color: "green",
+    background: "magenta"
+  }
 });
 
 
@@ -134,7 +138,7 @@ const AuthWideScreenNavigation = (props)=>{
   const { classes } = props;
   return(
     <Fragment>
-       {authDrawerListItems}
+       {authNavbarListItems}
     </Fragment>
   )
 }

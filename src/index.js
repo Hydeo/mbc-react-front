@@ -9,8 +9,24 @@ import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import red from '@material-ui/core/colors/red';
 
-const theme = createMuiTheme();
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+
+            main: '#b71c1c',
+
+          },
+          secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#ffffff  ',
+          },
+    },
+  });
 
 ReactDOM.render(
     <div>

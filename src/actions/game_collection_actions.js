@@ -2,7 +2,6 @@ import axios from "axios";
 import { conf_dev } from "../config";
 
 import { check_token_before_query } from "./utils_actions";
-import { validateCallback } from "@firebase/util";
 
 export const URL_API = conf_dev.url_api;
 export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
