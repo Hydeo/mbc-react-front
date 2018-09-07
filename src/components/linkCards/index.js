@@ -79,16 +79,16 @@ class LinkCard extends React.Component{
 
 	render(){
 		
-		const {classes, link_data} = this.props;
+		const {classes, link_data, game_mask} = this.props;
 		if(link_data.image == null || link_data.image == undefined || !link_data.image.includes("http"))
 			link_data.image="/images/404jpg";
 
 
 		//Pourquoi le mask ne s'applique pas ?
 		
-			var has_mask  = this.hasOwnProperty(link_data._id); //this == gameMask object passend as this in map function
+			var has_mask  = game_mask.hasOwnProperty(link_data._id); //this == gameMask object passend as this in map function
       var title = link_data.localization.eng.title;
-      var description = (has_mask && this[link_data._id].comment != null) ? this[link_data._id].comment : link_data.localization.eng.description;
+      var description = (has_mask && game_mask[link_data._id].comment != null) ? game_mask[link_data._id].comment : link_data.localization.eng.description;
 
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
