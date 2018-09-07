@@ -9,8 +9,7 @@ import {
 
 import classnames from 'classnames';
 import LazyLoad from 'react-lazyload';
-
-
+import i18n from "i18next";
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -25,6 +24,8 @@ import LinkIcon from '@material-ui/icons/Link';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+
+import {apply_game_mask,get_property_by_current_lang} from './GameCardUtils';
 
 const styles = theme => ( {
   card: {
@@ -77,42 +78,45 @@ class LinkCard extends React.Component{
 	}
 
 
+
 	render(){
-		
+		//link_data = one item of gamelist 
 		const {classes, link_data, game_mask} = this.props;
 		if(link_data.image == null || link_data.image == undefined || !link_data.image.includes("http"))
 			link_data.image="/images/404jpg";
 
+		var has_mask  = game_mask.hasOwnProperty(link_data._id); 
+    var title = link_data.localization.eng.title;
+    var description = (has_mask && game_mask[link_data._id].comment != null) ? game_mask[link_data._id].comment : link_data.localization.eng.description;
+		//if the game doesn't have the current user selected lang, we pick english as default
+		var game_language = link_data.localization.hasOwnProperty(i18n.language.toLowerCase())?i18n.language:"eng"; 
+		console.log(game_language);
+		apply_game_mask(link_data,game_mask);
 
-		//Pourquoi le mask ne s'applique pas ?
 		
-			var has_mask  = game_mask.hasOwnProperty(link_data._id); //this == gameMask object passend as this in map function
-      var title = link_data.localization.eng.title;
-      var description = (has_mask && game_mask[link_data._id].comment != null) ? game_mask[link_data._id].comment : link_data.localization.eng.description;
-
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
 	      	<LazyLoad  className="qzd" offset={0}>
 	      		<div>
-		      		<a target="_blank" href={link_data.localization.eng.imageUrl}>
+		      		<a target="_blank" href={get_property_by_current_lang(link_data,"imageUrl")}>
 				        <CardMedia
 				          className={classes.media +' '+classes.loadingBackgound}
-				          image={link_data.localization.eng.imageUrl}
-				          title={link_data.title}
+				          image={get_property_by_current_lang(link_data,"imageUrl")}
+				          title={get_property_by_current_lang(link_data,"imageUrl")}
 				        />
 				    </a>
 		        </div>		
 	        </LazyLoad>
 	        <CardContent>
 	          <Typography gutterBottom variant="headline" component="h2">
-	            {link_data.localization.eng.title}
+	            {get_property_by_current_lang(link_data,"title")}
 	          </Typography>
 	        </CardContent>
 	        <Collapse in={this.state.expanded} onExited={()=>{this.update_isotope_layout()}} onEntered={()=>{this.update_isotope_layout()}} timeout="auto" unmountOnExit>
 		        <CardContent>
 		          <Typography component="p">
-		            {description}
+		            {get_property_by_current_lang(link_data,"description")}
 		          </Typography>
 		        </CardContent>
 		    </Collapse>
@@ -152,13 +156,14 @@ class LinkCard extends React.Component{
 
 //On recupere la tate dans les props
 const mapStateToProps = state =>({
-	isotope_instance : state.collection_isotope.isotope_instance
+	isotope_instance : state.collection_isotope.isotope_instance,
+	i18n : state.i18n
 })
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   update_isotope,
-  delete_link
+  delete_link,
 }, dispatch)
 
 const compoStyled = withStyles(styles)(LinkCard);
