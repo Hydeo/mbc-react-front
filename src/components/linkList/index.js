@@ -15,7 +15,7 @@ import {
 import ConfirmDialog from '../../components/ConfirmDialog'; 
 import {conf_dev} from '../../config';
 import Utils from '../../utils.js'
-import LinkCard from '../linkCards'
+import LinkCard from '../LinkCards'
 
 const class_name = "LinkList";
 

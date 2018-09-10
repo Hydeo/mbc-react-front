@@ -9,7 +9,7 @@ import {
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
-import LinkList from "../linkList";
+import LinkList from "../LinkList";
 
 class HomePage extends Component {
   constructor(props) {

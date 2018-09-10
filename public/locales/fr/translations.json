@@ -9,6 +9,7 @@
         "my_collection" : "Ma Collec'",
         "my_account" : "Mon Compte",
         "sign_out" : "Se Déconnecter",
-        "sign_in" : "Se Connecter"
+        "sign_in" : "Se Connecter",
+        "create_game" : "Ajouter un Jeu"
     }
   }

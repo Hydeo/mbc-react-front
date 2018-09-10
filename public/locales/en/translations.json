@@ -9,6 +9,7 @@
     "my_collection": "My Games",
     "my_account": "My Account",
     "sign_out": "Sign Out",
-    "sign_in" : "Sign In"
+    "sign_in" : "Sign In",
+    "create_game" : "Add Game"
   }
 }

@@ -79,6 +79,24 @@ export const authNavbarListItems = (
             />
           </ListItem>
         </Link>
+
+        <Link style={styleLink} to={routes.CREATE_GAME}>
+          <ListItem style={styleListItem} button>
+            <ListItemIcon>
+              <AppsIcon style={{ color: "white" }} color={"inherit"} />
+            </ListItemIcon>
+            <ListItemText
+              disableTypography
+              primary={
+                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                  {t("navigation.create_game")}
+                </Typography>
+              }
+            />
+          </ListItem>
+        </Link>
+
+        {/*==LOGO SOULD HAVE x * Item/Logo/ x * Item to be centered ====*/}
         <div style={styleLogoNavBar.container}>
           <div style={styleLogoNavBar.widthCalibration}>
             <img src="/images/logo-ss.png" alt="qzd" />
@@ -89,6 +107,7 @@ export const authNavbarListItems = (
             alt="qzd"
           />
         </div>
+        {/*================================================================*/}
         <Link style={styleLink} to={routes.ACCOUNT}>
           <ListItem style={styleListItem} button>
             <ListItemIcon>
