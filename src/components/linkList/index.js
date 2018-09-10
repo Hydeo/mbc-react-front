@@ -84,7 +84,7 @@ class LinkList extends React.Component {
               
             )
           )}
-          </SilentCatch>
+          </SilentCatch> 
         <ConfirmDialog
           parentState={this.state.confirm_dialog_state}
           update={this.update_confirm_dialog_state}

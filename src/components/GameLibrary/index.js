@@ -5,11 +5,11 @@ import {bindActionCreators} from "redux";
 import {
   get_game_library
 } from "../../actions/game_actions";
-
+import LinkList from "../LinkList";
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
-import LinkList from "../LinkList";
+
 
 class GameLibrary extends Component {
   constructor(props) {
