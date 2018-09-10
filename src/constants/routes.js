@@ -5,3 +5,4 @@ export const PASSWORD_FORGET = '/pw-forget';
 export const HOME = '/home';
 export const ACCOUNT = '/account';
 export const CREATE_GAME = '/create-game'
+export const GAME_LIBRARY = '/game-library'

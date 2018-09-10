@@ -5,6 +5,7 @@ import { check_token_before_query } from "./utils_actions";
 
 export const URL_API = conf_dev.url_api;
 export const CREATE_NEW_GAME = "CREATE_NEW_GAME";
+export const GET_GAME_LIBRARY = "GET_GAME_LIBRARY";
 
 export const create_new_game = new_game => {
   console.log("ACTION NEW GAME");
@@ -28,14 +29,26 @@ export const create_new_game = new_game => {
   };
 
   var callback = (token, dispatch) => {
-    axios.post(URL_API + "/game/", { token: token, new_game : new_game_profile }).then(request => {
+    axios
+      .post(URL_API + "/game/", { token: token, new_game: new_game_profile })
+      .then(request => {
+        dispatch({
+          type: CREATE_NEW_GAME,
+          payload: request.data
+        });
+      });
+  };
+
+  return check_token_before_query(callback);
+};
+
+export const get_game_library = () => {
+  return dispatch => {
+    return axios.get(URL_API + "/game").then(request => {
       dispatch({
-        type: CREATE_NEW_GAME,
-        payload: request.data
+        type: GET_GAME_LIBRARY,
+        payload: request
       });
     });
   };
-
-
-  return check_token_before_query(callback);
 };

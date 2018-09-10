@@ -108,6 +108,23 @@ export const authNavbarListItems = (
           />
         </div>
         {/*================================================================*/}
+
+        <Link style={styleLink} to={routes.GAME_LIBRARY}>
+          <ListItem style={styleListItem} button>
+            <ListItemIcon>
+              <AppsIcon style={{ color: "white" }} color={"inherit"} />
+            </ListItemIcon>
+            <ListItemText
+              disableTypography
+              primary={
+                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                  {t("navigation.game_library")}
+                </Typography>
+              }
+            />
+          </ListItem>
+        </Link>
+
         <Link style={styleLink} to={routes.ACCOUNT}>
           <ListItem style={styleListItem} button>
             <ListItemIcon>
@@ -143,7 +160,7 @@ export const authDrawerListItems = (
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary= {t("navigation.landing")} />
+            <ListItemText primary={t("navigation.landing")} />
           </ListItem>
         </Link>
 
@@ -152,7 +169,7 @@ export const authDrawerListItems = (
             <ListItemIcon>
               <AppsIcon />
             </ListItemIcon>
-            <ListItemText primary= {t("navigation.my_collection")} />
+            <ListItemText primary={t("navigation.my_collection")} />
           </ListItem>
         </Link>
 
@@ -185,7 +202,7 @@ export const nonAuthDrawerListItems = (
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary= {t("navigation.landing")} />
+              <ListItemText primary={t("navigation.landing")} />
             </Hidden>
             <Hidden xsDown>
               <ListItemIcon>
@@ -195,7 +212,7 @@ export const nonAuthDrawerListItems = (
                 disableTypography
                 primary={
                   <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
-                     {t("navigation.landing")}
+                    {t("navigation.landing")}
                   </Typography>
                 }
               />
@@ -209,7 +226,7 @@ export const nonAuthDrawerListItems = (
               <ListItemIcon>
                 <InputIcon />
               </ListItemIcon>
-              <ListItemText primary= {t("navigation.sign_in")} />
+              <ListItemText primary={t("navigation.sign_in")} />
             </Hidden>
             <Hidden xsDown>
               <ListItemIcon>

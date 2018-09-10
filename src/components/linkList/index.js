@@ -7,6 +7,7 @@ import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { update_isotope, set_isotope } from "../../actions/basic_actions";
+import SilentCatch from "../ErrorHandling/SilentCatch";
 
 import ConfirmDialog from "../../components/ConfirmDialog";
 import { conf_dev } from "../../config";
@@ -54,35 +55,44 @@ class LinkList extends React.Component {
     }
   };
 
+  
   render() {
     const { classes } = this.props;
+    console.log('HL');
+    console.log(this.props.hydrated_game_list);
+
     return (
       <div id="link_list">
         <div style={this.state.link_size_state} className="link_sizer" />
         <div style={link_gutter} className="link_gutter" />
-
-        {!!this.props.hydrated_game_list.game_collection &&
-          this.props.hydrated_game_list.game_collection.gameList.map(
+        <SilentCatch>
+        {!!this.props.hydrated_game_list &&
+          this.props.hydrated_game_list.gameList.map(
+            
             (link, index) => (
+             
               <LinkCard
                 key={index}
                 link_data={link}
                 game_mask={
-                  this.props.hydrated_game_list.game_collection.gameMask
+                  this.props.hydrated_game_list.gameMask
                 }
                 isotopeUpdate={this.update_isotope}
                 cardSize={this.state.link_size_state}
                 update={this.update_confirm_dialog_state}
               />
+              
             )
           )}
-
+          </SilentCatch>
         <ConfirmDialog
           parentState={this.state.confirm_dialog_state}
           update={this.update_confirm_dialog_state}
         />
       </div>
     );
+
+
   }
 
   componentDidMount = () => {

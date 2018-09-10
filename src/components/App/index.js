@@ -12,6 +12,7 @@ import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import CreateGamePage from '../CreateGame';
+import GameLibraryPage from '../GameLibrary';
 import withAuthentication from '../Session/withAuthentication';
 import * as routes from '../../constants/routes';
 
@@ -31,6 +32,7 @@ const App = () =>
       <Route exact path={routes.CREATE_GAME} component={() => <CreateGamePage/>} />
       <Route exact path={routes.HOME} component={() => <HomePage />} />
       <Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
+      <Route exact path={routes.GAME_LIBRARY} component={() => <GameLibraryPage />} />
 
       <hr/>
 
