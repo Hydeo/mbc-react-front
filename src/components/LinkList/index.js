@@ -69,7 +69,7 @@ class LinkList extends React.Component {
           this.props.hydrated_game_list.gameList.map(
             
             (link, index) => (
-             
+            <SilentCatch>
               <LinkCard
                 key={index}
                 link_data={link}
@@ -80,7 +80,7 @@ class LinkList extends React.Component {
                 cardSize={this.state.link_size_state}
                 update={this.update_confirm_dialog_state}
               />
-              
+            </SilentCatch>
             )
           )}
  

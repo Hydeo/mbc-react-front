@@ -14,12 +14,9 @@ import LinkList from "../LinkList";
 class HomePage extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       users: {}
-    };
-    console.log(this.props);
-   
+    };  
   }
 
   componentDidMount() {
@@ -35,7 +32,7 @@ class HomePage extends Component {
         <p>The Home Page is accessible by every signed in user.</p>
 
         {/*!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>*/}
-        <LinkList hydrated_game_list={this.props.user_games.game_colle}/>
+        <LinkList hydrated_game_list={this.props.user_games.game_collection}/>
       </div>
      
     );  
