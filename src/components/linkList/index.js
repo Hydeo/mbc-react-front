@@ -65,7 +65,7 @@ class LinkList extends React.Component {
       <div id="link_list">
         <div style={this.state.link_size_state} className="link_sizer" />
         <div style={link_gutter} className="link_gutter" />
-        <SilentCatch>
+        
         {!!this.props.hydrated_game_list &&
           this.props.hydrated_game_list.gameList.map(
             
@@ -84,7 +84,7 @@ class LinkList extends React.Component {
               
             )
           )}
-          </SilentCatch> 
+ 
         <ConfirmDialog
           parentState={this.state.confirm_dialog_state}
           update={this.update_confirm_dialog_state}
