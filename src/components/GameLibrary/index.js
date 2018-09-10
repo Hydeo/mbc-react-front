@@ -11,7 +11,7 @@ import { db } from '../../firebase';
 
 import LinkList from "../LinkList";
 
-class HomePage extends Component {
+class GameLibrary extends Component {
   constructor(props) {
     super(props);
 
@@ -23,6 +23,9 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
+    db.onceGetUsers().then(snapshot =>
+      this.setState(() => ({ users: snapshot.val() }))
+    );
     this.props.get_user_game_collection(this.props.user_state.user_authed.uid);
   }
 
@@ -34,8 +37,10 @@ class HomePage extends Component {
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
 
+        { !!users && <UserList users={users} /> }
+
         {/*!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>*/}
-        <LinkList hydrated_game_list={this.props.user_games}/>
+        <LinkList/>
       </div>
      
     );  
@@ -52,12 +57,32 @@ const UserList = ({ users }) =>
     )}
   </div>
 
+const GameList = ({game_collection})=>
+  <div style={{display: "inline-flex"}}>
+    { 
+      game_collection.gameList.map(function(game){
+
+      var has_mask  = this.hasOwnProperty(game._id); //this == gameMask object passend as this in map function
+      var title = game.localization.eng.title;
+      var description = (has_mask && this[game._id].comment != null) ? this[game._id].comment : game.localization.eng.description;
+      return(
+        <div key={game._id}>
+          <h2>{game.localization.eng.title}</h2>
+          <img src={game.localization.eng.imageUrl} alt="lik"/>
+          <p>{description}</p>
+        </div>
+      )
+    }
+  , game_collection.gameMask)
+  } 
+</div>
+
 
 const authCondition = (authUser) => !!authUser;
 
 const mapStateToProps = state => ({
   user_state: state.user,
-  user_games : state.game_collection
+  game_collection : state.game_collection
 });
 
 //On injecte les actions possible au props ?
@@ -69,4 +94,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default withAuthorization(authCondition)(connect(mapStateToProps,mapDispatchToProps)(HomePage));
+export default withAuthorization(authCondition)(connect(mapStateToProps,mapDispatchToProps)(GameLibrary));
