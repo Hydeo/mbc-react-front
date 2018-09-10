@@ -9,7 +9,7 @@ import {
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
-
+import LinkList from "../LinkList";
 
 class HomePage extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class HomePage extends Component {
         <p>The Home Page is accessible by every signed in user.</p>
 
         {/*!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>*/}
-      
+        <LinkList hydrated_game_list={this.props.user_games.game_collection}/>
       </div>
      
     );  
