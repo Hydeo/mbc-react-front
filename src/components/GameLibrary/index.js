@@ -5,7 +5,7 @@ import {bindActionCreators} from "redux";
 import {
   get_game_library
 } from "../../actions/game_actions";
-import LinkList from "../LinkList";
+
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
@@ -30,7 +30,7 @@ class GameLibrary extends Component {
       <div>
         <h1>Home</h1>
         <p>The Home Page is accessible by all the users .</p>
-        <LinkList hydrated_game_list={this.props.game_library}/>
+        
       </div>
      
     );  
