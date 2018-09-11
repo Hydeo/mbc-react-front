@@ -3,6 +3,10 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { update_isotope, delete_link } from "../../actions/basic_actions";
+import {
+  add_game_to_collection,
+  remove_game_from_collection
+} from "../../actions/game_collection_actions";
 
 import classnames from "classnames";
 import LazyLoad from "react-lazyload";
@@ -14,6 +18,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Collapse from "@material-ui/core/Collapse";
 import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Delete from "@material-ui/icons/Delete";
@@ -72,6 +77,14 @@ class LinkCard extends React.Component {
     this.props.isotope_instance.layout();
   };
 
+  add_game_to_user_collection = () => {
+    this.props.add_game_to_collection(this.props.link_data._id);
+  };
+  remove_game_from_user_collection = () => {
+    console.log(this.props.link_data._id);
+    this.props.remove_game_from_collection(this.props.link_data._id);
+  };
+
   render() {
     //link_data = one item of gamelist
     const { classes, link_data, game_mask } = this.props;
@@ -84,9 +97,7 @@ class LinkCard extends React.Component {
 
     if (game_mask != undefined) {
       apply_game_mask(link_data, game_mask);
-    } 
-
-    
+    }
 
     return (
       <div className={" link_item "} style={this.props.cardSize}>
@@ -135,7 +146,7 @@ class LinkCard extends React.Component {
                   description: "Url : " + link_data.url,
                   open: true,
                   agree_callback: () => {
-                    this.props.delete_link(link_data.id);
+                    this.remove_game_from_user_collection();
                   }
                 });
               }}
@@ -143,15 +154,15 @@ class LinkCard extends React.Component {
               <Delete color="error" />
             </IconButton>
 
-            <a
-              target="_blank"
-              href={link_data.url}
-              className={classes.marginAuto}
+            <IconButton
+              onClick={this.add_game_to_user_collection}
+              color="primary"
             >
-              <IconButton color="primary">
-                <LinkIcon />
-              </IconButton>
-            </a>
+              <LinkIcon />
+            </IconButton>
+            <IconButton>
+              <EditIcon/>
+            </IconButton>
             <IconButton
               className={classnames(classes.expand, classes.marginAuto, {
                 [classes.expandOpen]: this.state.expanded
@@ -181,7 +192,9 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       update_isotope,
-      delete_link
+      delete_link,
+      add_game_to_collection,
+      remove_game_from_collection
     },
     dispatch
   );
