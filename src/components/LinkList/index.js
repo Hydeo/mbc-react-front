@@ -53,7 +53,7 @@ class LinkList extends React.Component {
     }
   };
 
-  
+
   render() {
     const { classes } = this.props;
 
@@ -61,16 +61,16 @@ class LinkList extends React.Component {
       <div id="link_list">
         <div style={this.state.link_size_state} className="link_sizer" />
         <div style={link_gutter} className="link_gutter" />
-        
+
         {!!this.props.hydrated_game_list &&
           this.props.hydrated_game_list.gameList.map(
-            
+
             (link, index) => (
               <LinkCard
                 key={index}
                 link_data={link}
                 game_mask={
-                  this.props.hydrated_game_list.gameMask.hasOwnProperty(link._id) ? this.props.hydrated_game_list.gameMask[link._id] : null
+                  ( this.props.hydrated_game_list.hasOwnProperty("gameMask") && this.props.hydrated_game_list.gameMask.hasOwnProperty(link._id) )? this.props.hydrated_game_list.gameMask[link._id] : null
                 }
                 isotopeUpdate={this.update_isotope}
                 cardSize={this.state.link_size_state}
@@ -78,7 +78,7 @@ class LinkList extends React.Component {
               />
             )
           )}
- 
+
         <ConfirmDialog
           parentState={this.state.confirm_dialog_state}
           update={this.update_confirm_dialog_state}
@@ -90,7 +90,7 @@ class LinkList extends React.Component {
   }
 
   componentDidMount = () => {
-   // console.log("--[" + class_name + "] componentDidMount--");
+    // console.log("--[" + class_name + "] componentDidMount--");
     window.addEventListener("resize", this.updateDimensions);
   };
 
@@ -119,7 +119,7 @@ class LinkList extends React.Component {
 //On recupere la tate dans les props
 const mapStateToProps = (state, ownProps) => ({
   isotope_instance: state.collection_isotope.isotope_instance,
-  hydrated_game_list : ownProps.hydrated_game_list
+  hydrated_game_list: ownProps.hydrated_game_list
 });
 
 //On injecte les actions possible au props ?

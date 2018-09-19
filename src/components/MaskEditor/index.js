@@ -46,7 +46,7 @@ class MaskEditor extends Component {
     super(props);
 
     this.state = {
-      id : "",
+      id: "",
       title: "",
       age_recommended: "",
       nb_player_min: "",
@@ -55,7 +55,7 @@ class MaskEditor extends Component {
       complexity: "",
       url_image: "",
       description: "",
-      comment : ""
+      comment: ""
     };
   }
 
@@ -81,10 +81,10 @@ class MaskEditor extends Component {
       var game_data = this.props.location.state.game_data;
       var game_mask = this.props.location.state.game_mask;
 
-      Utils.apply_game_mask(game_data,game_mask);
+      Utils.apply_game_mask(game_data, game_mask);
 
       this.setState({
-        id : game_data._id,
+        id: game_data._id,
         title: Utils.get_game_localized_property(game_data, "title"),
         age_recommended: game_data.age_recommended,
         nb_player_min: game_data.nb_player_min,
@@ -93,7 +93,7 @@ class MaskEditor extends Component {
         complexity: game_data.complexity,
         url_image: Utils.get_game_localized_property(game_data, "imageUrl"),
         description: Utils.get_game_localized_property(game_data, "description"),
-        comment : game_data.comment
+        comment: game_data.comment
       });
     }
   }
@@ -127,14 +127,7 @@ class MaskEditor extends Component {
                   value={this.state.title}
                   onChange={this.handleChange("title")}
                   margin="normal"
-                />
-                <TextField
-                  id="url_image"
-                  label="Url Cover"
-                  className={classes.textField}
-                  value={this.state.url_image}
-                  onChange={this.handleChange("url_image")}
-                  margin="normal"
+                  disabled={true}
                 />
               </Grid>
               <Grid item md={9} xs={10}>
@@ -146,6 +139,7 @@ class MaskEditor extends Component {
                     value={this.state.time_to_play}
                     onChange={this.handleChange("time_to_play")}
                     margin="normal"
+                    disabled={true}
                   />
                   <TextField
                     id="complexity"
@@ -154,11 +148,12 @@ class MaskEditor extends Component {
                     value={this.state.complexity}
                     onChange={this.handleChange("complexity")}
                     margin="normal"
+                    disabled={true}
                   />
                 </Fragment>
               </Grid>
 
-              <Grid md={9} xs={10}>
+              <Grid item md={9} xs={10}>
                 <Fragment>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="age_recommended">
@@ -172,6 +167,7 @@ class MaskEditor extends Component {
                         name: "age_recommended",
                         id: "age_recommended"
                       }}
+                      disabled={true}
                     >
                       <option value="" />
                       <option value={10}>Ten</option>
@@ -192,6 +188,7 @@ class MaskEditor extends Component {
                         name: "nb_player_min",
                         id: "nb_player_min"
                       }}
+                      disabled={true}
                     >
                       <option value="" />
                       <option value={10}>Ten</option>
@@ -199,7 +196,6 @@ class MaskEditor extends Component {
                       <option value={30}>Thirty</option>
                     </Select>
                   </FormControl>
-
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="nb_player_max">
                       Maximun players
@@ -212,6 +208,7 @@ class MaskEditor extends Component {
                         name: "nb_player_max",
                         id: "nb_player_max"
                       }}
+                      disabled={true}
                     >
                       <option value="" />
                       <option value={10}>Ten</option>
@@ -219,8 +216,11 @@ class MaskEditor extends Component {
                       <option value={30}>Thirty</option>
                     </Select>
                   </FormControl>
-
-                  <Grid item md={5} xs={10}>
+                </Fragment>
+              </Grid>
+              
+                <Fragment>
+                  <Grid item md={9} xs={10}>
                     <TextField
                       id="description"
                       label="Description"
@@ -230,9 +230,10 @@ class MaskEditor extends Component {
                       multiline={true}
                       fullWidth
                       margin="normal"
+                      disabled={true}
                     />
                   </Grid>
-                  <Grid item md={5} xs={10}>
+                  <Grid item md={9} xs={10}>
                     <TextField
                       id="comment"
                       label="Comment"
@@ -245,7 +246,7 @@ class MaskEditor extends Component {
                     />
                   </Grid>
                 </Fragment>
-              </Grid>
+              
             </Grid>
           </Grid>
           <Grid container justify="flex-end">
@@ -261,7 +262,7 @@ class MaskEditor extends Component {
             </Grid>
           </Grid>
         </div>
-      </Fragment>
+      </Fragment >
     );
   }
 }
