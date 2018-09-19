@@ -1,7 +1,8 @@
 import {
     GET_USER_GAME_COLLECTION,
     ADD_GAME_TO_COLLECTION,
-    REMOVE_GAME_FROM_COLLECTION
+    REMOVE_GAME_FROM_COLLECTION,
+    CREATE_GAME_MASK
 } from "../actions/game_collection_actions"
 
 const initialState = {
@@ -28,6 +29,11 @@ export default (state = initialState, action) => {
         ...state,
         game_collection : action.payload
         //Trim the removed game from game_collection, but first we have to sort the "each time i mount the list i request it" issue
+      }
+      case CREATE_GAME_MASK:
+      return {
+        ...state,
+        game_collection : action.payload
       }
     
     default : 

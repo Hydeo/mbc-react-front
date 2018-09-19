@@ -22,7 +22,6 @@ const link_gutter = {
 class LinkList extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       first_render: true,
       isotope_instance: null,
@@ -57,8 +56,6 @@ class LinkList extends React.Component {
   
   render() {
     const { classes } = this.props;
-    console.log('HL');
-    console.log(this.props.hydrated_game_list);
 
     return (
       <div id="link_list">
@@ -73,7 +70,7 @@ class LinkList extends React.Component {
                 key={index}
                 link_data={link}
                 game_mask={
-                  this.props.hydrated_game_list.gameMask
+                  this.props.hydrated_game_list.gameMask.hasOwnProperty(link._id) ? this.props.hydrated_game_list.gameMask[link._id] : null
                 }
                 isotopeUpdate={this.update_isotope}
                 cardSize={this.state.link_size_state}
@@ -93,7 +90,7 @@ class LinkList extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("--[" + class_name + "] componentDidMount--");
+   // console.log("--[" + class_name + "] componentDidMount--");
     window.addEventListener("resize", this.updateDimensions);
   };
 
@@ -102,12 +99,12 @@ class LinkList extends React.Component {
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
-    console.log(
+    /*console.log(
       "--[" +
         class_name +
         "] componentDidUpdate -- first_render: " +
         this.state.first_render
-    );
+    );*/
     //console.log(this.props);
 
     if (this.state.first_render == true) {

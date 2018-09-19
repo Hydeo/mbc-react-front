@@ -2,6 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as routes from "../../constants/routes";
 import { update_isotope, delete_link } from "../../actions/basic_actions";
 import {
   add_game_to_collection,
@@ -10,7 +11,7 @@ import {
 
 import classnames from "classnames";
 import LazyLoad from "react-lazyload";
-import i18n from "i18next";
+
 
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -27,7 +28,8 @@ import LinkIcon from "@material-ui/icons/Link";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
-import { apply_game_mask, get_property_by_current_lang } from "./GameCardUtils";
+import { apply_game_mask } from "./GameCardUtils";
+import Utils from "../../utils";
 
 const styles = theme => ({
   card: {
@@ -81,13 +83,16 @@ class LinkCard extends React.Component {
     this.props.add_game_to_collection(this.props.link_data._id);
   };
   remove_game_from_user_collection = () => {
-    console.log(this.props.link_data._id);
     this.props.remove_game_from_collection(this.props.link_data._id);
   };
 
   render() {
-    //link_data = one item of gamelist
+  
     const { classes, link_data, game_mask } = this.props;
+    console.log('GM - cards');
+    
+    console.log(game_mask);
+    
     if (
       link_data.image == null ||
       link_data.image == undefined ||
@@ -95,7 +100,7 @@ class LinkCard extends React.Component {
     )
       link_data.image = "/images/404jpg";
 
-    if (game_mask != undefined) {
+    if (game_mask != null) {
       apply_game_mask(link_data, game_mask);
     }
 
@@ -106,19 +111,19 @@ class LinkCard extends React.Component {
             <div>
               <a
                 target="_blank"
-                href={get_property_by_current_lang(link_data, "imageUrl")}
+                href={Utils.get_game_localized_property(link_data, "imageUrl")}
               >
                 <CardMedia
                   className={classes.media + " " + classes.loadingBackgound}
-                  image={get_property_by_current_lang(link_data, "imageUrl")}
-                  title={get_property_by_current_lang(link_data, "imageUrl")}
+                  image={Utils.get_game_localized_property(link_data, "imageUrl")}
+                  title={Utils.get_game_localized_property(link_data, "imageUrl")}
                 />
               </a>
             </div>
           </LazyLoad>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
-              {get_property_by_current_lang(link_data, "title")}
+              {Utils.get_game_localized_property(link_data, "title")}
             </Typography>
           </CardContent>
           <Collapse
@@ -134,7 +139,7 @@ class LinkCard extends React.Component {
           >
             <CardContent>
               <Typography component="p">
-                {get_property_by_current_lang(link_data, "description")}
+                {Utils.get_game_localized_property(link_data, "description")}
               </Typography>
             </CardContent>
           </Collapse>
@@ -161,7 +166,9 @@ class LinkCard extends React.Component {
               <LinkIcon />
             </IconButton>
             <IconButton>
-              <EditIcon/>
+              <Link to={{ pathname: routes.CREATE_MASK, state: { game_data: link_data, game_mask : game_mask } }}>
+                <EditIcon />
+              </Link>
             </IconButton>
             <IconButton
               className={classnames(classes.expand, classes.marginAuto, {
@@ -179,7 +186,7 @@ class LinkCard extends React.Component {
     );
   }
 
-  componentDidUpdate = () => {};
+  componentDidUpdate = () => { };
 }
 
 //On recupere la tate dans les props
