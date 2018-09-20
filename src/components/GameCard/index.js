@@ -12,9 +12,6 @@ const styles = theme => ({
         height: "100%",
         overflow: 'hidden',
     },
-    demo: {
-        height: "100%",
-    },
     alignTextItem: {
         display: "flex",
         alignItems: "center"
@@ -22,11 +19,11 @@ const styles = theme => ({
 
 });
 
-function PaperSheet(props) {
+function GameCard(props) {
     const { classes } = props;
-
+    
     return (
-        <div className="container">
+        <div className="container link_item">
 
             <img className="cover" src={props.url} alt="qzd" />
             <div className="overlay" />
@@ -87,17 +84,14 @@ function PaperSheet(props) {
                         </Grid>
                     </Grid>
 
-
-
-
                 </div>
             </div>
         </div>
     );
 }
 
-PaperSheet.propTypes = {
+GameCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(GameCard);

@@ -123,7 +123,7 @@ class Navigation extends React.Component {
                 {"You think water moves fast? You should see ice."}
               </Typography>
 
-              <Grid container spacing={16}>
+              {/*<Grid container spacing={16}>
                 <Grid item>
                   <GameCard url="https://cf.geekdo-images.com/imagepage/img/-nnzXSm6wDQvH5lckCzUtaaprGE=/fit-in/900x600/filters:no_upscale()/pic2437871.jpg" />
                 </Grid>
@@ -165,7 +165,7 @@ class Navigation extends React.Component {
                 </Grid>
 
 
-              </Grid>
+              </Grid>*/}
             </main>
           </div>
         )}

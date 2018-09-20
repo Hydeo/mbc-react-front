@@ -12,12 +12,13 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { conf_dev } from "../../config";
 import Utils from "../../utils.js";
 import LinkCard from "../LinkCards";
-
+import GameCard from "../GameCard";
 const class_name = "LinkList";
 
 const link_gutter = {
-  width: "3%"
+  width: "1%"
 };
+
 
 class LinkList extends React.Component {
   constructor(props) {
@@ -65,8 +66,12 @@ class LinkList extends React.Component {
         {!!this.props.hydrated_game_list &&
           this.props.hydrated_game_list.gameList.map(
 
-            (link, index) => (
-              <LinkCard
+            (link, index) => {
+              //console.log(link);
+              
+              return (
+              
+              /*<LinkCard
                 key={index}
                 link_data={link}
                 game_mask={
@@ -75,8 +80,9 @@ class LinkList extends React.Component {
                 isotopeUpdate={this.update_isotope}
                 cardSize={this.state.link_size_state}
                 update={this.update_confirm_dialog_state}
-              />
-            )
+              />*/
+              <GameCard url={link.localization.eng.imageUrl} />
+            )}
           )}
 
         <ConfirmDialog
