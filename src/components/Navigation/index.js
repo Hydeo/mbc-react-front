@@ -17,12 +17,15 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
-
+import GameCard from "../GameCard"
 import {
   authDrawerListItems,
   nonAuthDrawerListItems,
   authNavbarListItems
 } from "./navigationItems";
+
+import Grid from '@material-ui/core/Grid';
+
 
 const drawerWidth = 240;
 
@@ -63,7 +66,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: "black",
     padding: theme.spacing.unit * 3
   },
   text: {
@@ -98,14 +101,14 @@ class Navigation extends React.Component {
                     mobileOpen={this.state.mobileOpen}
                   />
                 ) : (
-                  <NavigationNonAuth
-                    classes={classes}
-                    width={width}
-                    theme={theme}
-                    handleDrawerToggle={this.handleDrawerToggle}
-                    mobileOpen={this.state.mobileOpen}
-                  />
-                )
+                    <NavigationNonAuth
+                      classes={classes}
+                      width={width}
+                      theme={theme}
+                      handleDrawerToggle={this.handleDrawerToggle}
+                      mobileOpen={this.state.mobileOpen}
+                    />
+                  )
               }
             </AuthUserContext.Consumer>
 
@@ -119,6 +122,50 @@ class Navigation extends React.Component {
                 </Trans>
                 {"You think water moves fast? You should see ice."}
               </Typography>
+
+              <Grid container spacing={16}>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/-nnzXSm6wDQvH5lckCzUtaaprGE=/fit-in/900x600/filters:no_upscale()/pic2437871.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/ZyuP2RO95ntqAz6pE3LGf-XA-U8=/fit-in/900x600/filters:no_upscale()/pic4313310.png" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/sgZLoyg3KKeHvyHel8tZ2TIkXRw=/fit-in/900x600/filters:no_upscale()/pic3536616.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/Q6GnWhr1y1gMJpRNRogK_QBou_k=/fit-in/900x600/filters:no_upscale()/pic3918905.png" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/sKUvzQNCqEbJ-mk84VzQX947v2M=/fit-in/900x600/filters:no_upscale()/pic3122349.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/q_b5Jw43Tnyw3hT8l2zMKmLOPvU=/fit-in/900x600/filters:no_upscale()/pic3615739.png" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/XzToY7sWGP9v-KEG84k5V5ks8L4=/fit-in/900x600/filters:no_upscale()/pic4309360.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/VrePp6I9_HXw_NtBe4NFcwF5dRQ=/fit-in/900x600/filters:no_upscale()/pic3163924.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/jlHEfBOhoTpL2DCdeNqV4F40GSQ=/fit-in/900x600/filters:no_upscale()/pic4162054.png" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/9ik7Wc_ANTeGU-V5wXytIxPZ2sE=/fit-in/900x600/filters:no_upscale()/pic3490053.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/BwJJTrofiaH0Muxuo5rv0VCmuCY=/fit-in/900x600/filters:no_upscale()/pic2582929.jpg" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/MtQYIKLpnzWm601nexPN1qx-juM=/fit-in/900x600/filters:no_upscale()/pic3862634.png" />
+                </Grid>
+                <Grid item>
+                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/JnONKNDVGf5t3_m6TrBVDdFbn3w=/fit-in/900x600/filters:no_upscale()/pic3979766.png" />
+                </Grid>
+
+
+              </Grid>
             </main>
           </div>
         )}
@@ -136,11 +183,11 @@ const NavigationAuth = props => {
           {isWidthUp("sm", width) ? (
             <AuthWideScreenNavigation classes={classes} />
           ) : (
-            <SmallScreenNavigation
-              classes={classes}
-              handleDrawerToggle={handleDrawerToggle}
-            />
-          )}
+              <SmallScreenNavigation
+                classes={classes}
+                handleDrawerToggle={handleDrawerToggle}
+              />
+            )}
         </Toolbar>
       </AppBar>
       <AuthDrawer
@@ -162,11 +209,11 @@ const NavigationNonAuth = props => {
           {isWidthUp("sm", width) ? (
             <NonAuthWideScreenNavigation classes={classes} />
           ) : (
-            <SmallScreenNavigation
-              classes={classes}
-              handleDrawerToggle={handleDrawerToggle}
-            />
-          )}
+              <SmallScreenNavigation
+                classes={classes}
+                handleDrawerToggle={handleDrawerToggle}
+              />
+            )}
         </Toolbar>
       </AppBar>
       <NonAuthDrawer
