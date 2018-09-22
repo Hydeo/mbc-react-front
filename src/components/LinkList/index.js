@@ -16,8 +16,12 @@ import GameCard from "../GameCard";
 const class_name = "LinkList";
 
 const link_gutter = {
-  width: "1%"
+  width: "3%"
 };
+
+const itemListStyle={
+  
+}
 
 
 class LinkList extends React.Component {
@@ -59,7 +63,7 @@ class LinkList extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div id="link_list">
+      <div id="link_list" style={itemListStyle}>
         <div style={this.state.link_size_state} className="link_sizer" />
         <div style={link_gutter} className="link_gutter" />
 
@@ -81,7 +85,7 @@ class LinkList extends React.Component {
                 cardSize={this.state.link_size_state}
                 update={this.update_confirm_dialog_state}
               />*/
-              <GameCard url={link.localization.eng.imageUrl} />
+              <GameCard game_data={link} />
             )}
           )}
 

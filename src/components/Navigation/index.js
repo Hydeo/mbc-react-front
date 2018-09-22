@@ -66,7 +66,6 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: "black",
     padding: theme.spacing.unit * 3
   },
   text: {
@@ -114,58 +113,7 @@ class Navigation extends React.Component {
 
             <main className={classes.content}>
               <div className={classes.toolbar} />
-              <Typography noWrap>
-                <Trans i18nKey="description.part1">
-                  To get started, edit <code>src/App.js</code> and save to
-                  reload.
-                  <br />
-                </Trans>
-                {"You think water moves fast? You should see ice."}
-              </Typography>
-
-              {/*<Grid container spacing={16}>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/-nnzXSm6wDQvH5lckCzUtaaprGE=/fit-in/900x600/filters:no_upscale()/pic2437871.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/ZyuP2RO95ntqAz6pE3LGf-XA-U8=/fit-in/900x600/filters:no_upscale()/pic4313310.png" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/sgZLoyg3KKeHvyHel8tZ2TIkXRw=/fit-in/900x600/filters:no_upscale()/pic3536616.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/Q6GnWhr1y1gMJpRNRogK_QBou_k=/fit-in/900x600/filters:no_upscale()/pic3918905.png" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/sKUvzQNCqEbJ-mk84VzQX947v2M=/fit-in/900x600/filters:no_upscale()/pic3122349.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/q_b5Jw43Tnyw3hT8l2zMKmLOPvU=/fit-in/900x600/filters:no_upscale()/pic3615739.png" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/XzToY7sWGP9v-KEG84k5V5ks8L4=/fit-in/900x600/filters:no_upscale()/pic4309360.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/VrePp6I9_HXw_NtBe4NFcwF5dRQ=/fit-in/900x600/filters:no_upscale()/pic3163924.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/jlHEfBOhoTpL2DCdeNqV4F40GSQ=/fit-in/900x600/filters:no_upscale()/pic4162054.png" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/9ik7Wc_ANTeGU-V5wXytIxPZ2sE=/fit-in/900x600/filters:no_upscale()/pic3490053.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/BwJJTrofiaH0Muxuo5rv0VCmuCY=/fit-in/900x600/filters:no_upscale()/pic2582929.jpg" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/MtQYIKLpnzWm601nexPN1qx-juM=/fit-in/900x600/filters:no_upscale()/pic3862634.png" />
-                </Grid>
-                <Grid item>
-                  <GameCard url="https://cf.geekdo-images.com/imagepage/img/JnONKNDVGf5t3_m6TrBVDdFbn3w=/fit-in/900x600/filters:no_upscale()/pic3979766.png" />
-                </Grid>
-
-
-              </Grid>*/}
+              {this.props.children}
             </main>
           </div>
         )}

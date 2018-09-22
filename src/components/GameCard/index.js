@@ -20,12 +20,12 @@ const styles = theme => ({
 });
 
 function GameCard(props) {
-    const { classes } = props;
+    const { classes, game_data } = props;
     
     return (
         <div className="container link_item">
 
-            <img className="cover" src={props.url} alt="qzd" />
+            <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" />
             <div className="overlay" />
             <div className="info">
 
@@ -34,7 +34,7 @@ function GameCard(props) {
                         <Grid container
                             justify="center">
                             <Grid item>
-                                GLOOMHEAVEN
+                                {game_data.localization.eng.title}
                             </Grid>
                         </Grid>
                         <Grid item xs={6}>
