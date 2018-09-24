@@ -68,27 +68,27 @@ export const update_isotope = (iso_instance = null,force_new = false) =>{
 	return dispatch =>{
 		if(iso_instance == null || force_new == true){
 			console.log("-- init_Isotope --");
-			var iso_link_list ;
-			var link_list = document.querySelector('#link_list');
-			console.log(document.querySelector('#link_list'));
-			//ImagesLoaded("#link_list"),()=>{
-			iso_link_list = new Isotope(link_list,{
-					itemSelector : ".link_item",
+			var iso_item_list ;
+			var item_list = document.querySelector('#item_list');
+			console.log(document.querySelector('#item_list'));
+			//ImagesLoaded("#item_list"),()=>{
+			iso_item_list = new Isotope(item_list,{
+					itemSelector : ".item_iso",
 					percentPosition: true,
 					masonry : {
-						 columnWidth: ".link_sizer",
-						 gutter : ".link_gutter"
+						 columnWidth: ".item_sizer",
+						 gutter : ".item_gutter"
 					}
 				})
 			//}
 			dispatch({
 				type : SET_ISOTOPE,
-				payload: iso_link_list
+				payload: iso_item_list
 			})
 		}
 		else{
 			console.log("-- update_isotope -- update layout--");
-			console.log(document.querySelector('#link_list'));
+			console.log(document.querySelector('#item_list'));
 			iso_instance.reloadItems()
 			iso_instance.layout();
 			iso_instance.arrange();

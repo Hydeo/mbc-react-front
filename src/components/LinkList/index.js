@@ -15,7 +15,7 @@ import LinkCard from "../LinkCards";
 import GameCard from "../GameCard";
 const class_name = "LinkList";
 
-const link_gutter = {
+const item_gutter = {
   width: "3%"
 };
 
@@ -24,13 +24,13 @@ const itemListStyle={
 }
 
 
-class LinkList extends React.Component {
+class ItemList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       first_render: true,
       isotope_instance: null,
-      link_size_state: {
+      item_size_state: {
         width: Utils.calculateIsotopeItemWidth(3) + "%"
       },
       confirm_dialog_state: {
@@ -51,10 +51,11 @@ class LinkList extends React.Component {
     if (!this.state.first_render) {
       //TODO : Debounce ?
       this.setState({
-        link_size_state: {
-          width: Utils.calculateIsotopeItemWidth(3) + "%"
+        item_size_state: {
+          width: Utils.calculateIsotopeItemWidthPx(3) + "px"
         }
       });
+      
     }
   };
 
@@ -63,14 +64,14 @@ class LinkList extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div id="link_list" style={itemListStyle}>
-        <div style={this.state.link_size_state} className="link_sizer" />
-        <div style={link_gutter} className="link_gutter" />
+      <div id="item_list" style={itemListStyle}>
+        <div style={this.state.item_size_state} className="item_sizer" />
+        <div style={item_gutter} className="item_gutter" />
 
         {!!this.props.hydrated_game_list &&
           this.props.hydrated_game_list.gameList.map(
 
-            (link, index) => {
+            (item, index) => {
               //console.log(link);
               
               return (
@@ -85,7 +86,7 @@ class LinkList extends React.Component {
                 cardSize={this.state.link_size_state}
                 update={this.update_confirm_dialog_state}
               />*/
-              <GameCard game_data={link} />
+              <GameCard game_data={item} item_width={this.state.item_size_state.width}/>
             )}
           )}
 
@@ -145,4 +146,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LinkList);
+)(ItemList);

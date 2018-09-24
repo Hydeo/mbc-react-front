@@ -53,4 +53,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default withAuthorization(authCondition)(connect(mapStateToProps,mapDispatchToProps)(GameLibrary));
+export default (connect(mapStateToProps,mapDispatchToProps)(GameLibrary));

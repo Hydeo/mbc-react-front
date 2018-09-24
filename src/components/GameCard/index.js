@@ -20,10 +20,10 @@ const styles = theme => ({
 });
 
 function GameCard(props) {
-    const { classes, game_data } = props;
+    const { classes, game_data, item_width} = props;
     
     return (
-        <div className="container link_item">
+        <div className="container item_iso" style={{width : item_width}}>
 
             <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" />
             <div className="overlay" />

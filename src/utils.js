@@ -25,14 +25,39 @@ class Utils {
 		return "L";
 	}
 
+	static getWidth() {
+		return Math.max(
+		  document.body.scrollWidth,
+		  document.documentElement.scrollWidth,
+		  document.body.offsetWidth,
+		  document.documentElement.offsetWidth,
+		  document.documentElement.clientWidth
+		);
+	  }
+	  
+
 	static calculateIsotopeItemWidth(gutter_size) {
 		var nb_item = conf_dev.isotope_nb_item[Utils.getTypeSizeScreen(conf_dev.breakpoints, window.screen.width)];
 		var nb_gutters = nb_item - 1;
 		var item_width = (100 - (nb_gutters * gutter_size)) / nb_item;
-		console.log("URILS :  " + item_width)
+		//console.log("URILS :  " + item_width + " -- "+Utils.getTypeSizeScreen(conf_dev.breakpoints, window.screen.width))
 		return item_width;
 	}
 
+
+	static calculateIsotopeItemWidthPx(gutter_size) {		
+		var list_container_width = this.getWidth() - 48 // minus margin/padding the list has 
+		var nb_item = conf_dev.isotope_nb_item[Utils.getTypeSizeScreen(conf_dev.breakpoints, list_container_width)];
+		var nb_gutters = nb_item - 1;
+		var gutter_width = Math.floor((gutter_size * list_container_width) / 100) ;
+		var item_width = Math.floor((list_container_width - (nb_gutters * gutter_width)) / nb_item);
+		var occupied_width = (item_width*nb_item)+(nb_gutters*gutter_width)
+		console.log(item_width + " / "+gutter_width+ " = "+ list_container_width + "("+ occupied_width +")"+	 " -- "+Utils.getTypeSizeScreen(conf_dev.breakpoints, list_container_width)+" "+nb_item+" "+nb_gutters)
+		if((list_container_width - occupied_width) < 4)
+			return item_width - nb_item;
+		return item_width
+	}
+	
 	static get_game_localized_property = (game_data, property) => {
 
 		//Check if localisation really exists : 
