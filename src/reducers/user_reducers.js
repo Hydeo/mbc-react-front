@@ -50,8 +50,6 @@ export default (state = initialState, action) => {
     break;
     
     case AUTH_USER:
-      console.log('Authed user reduc');
-      console.log(action.payload);
       return {
         ...state,
         authenticated: true,

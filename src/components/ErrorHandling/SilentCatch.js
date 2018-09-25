@@ -8,7 +8,6 @@ class SilentCatch extends React.Component {
     
     componentDidCatch(error, errorInfo) {
       // Catch errors in any components below and re-render with error message
-      console.log('CUUUUUUUGGGHHHHHHHHHHT1111111111111111111111111111111111111');
       this.setState({
         error: error,
         errorInfo: errorInfo

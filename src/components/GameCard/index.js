@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import GameCardDialog from "../GameCardDialog";
+import LazyLoad from "react-lazyload";
 
 const styles = theme => ({
     root: {
@@ -21,95 +22,100 @@ const styles = theme => ({
 
 class GameCard extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            open : false
+            open: false
         }
     }
     handleClickOpen = () => {
         this.setState({ open: true });
-      };
-    
-    handleClose = () => {
-    this.setState({ open: false });
     };
 
-    show_game_details = () =>{
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    show_game_details = () => {
         this.props.set_active_game(this.props.game_data);
     }
-    
-    render(){
-    const { classes, game_data, item_width} = this.props;
-    
-    return (
-        <Fragment>
-        <div className="container item_iso" style={{width : item_width}}>
 
-            <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" />
-            <div className="overlay" />
-            <div className="info" onClick={this.show_game_details}>
+    render() {
+        const { classes, game_data, item_width } = this.props;
 
-                <div style={{ height: "100%" }}>
-                    <Grid container className={classes.root}>
-                        <Grid container
-                            justify="center">
-                            <Grid item>
-                                {game_data.localization.eng.title}
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Grid
-                                container
-                                className={classes.demo}
-                                direction="column"
-                                justify="space-evenly"
-                                alignItems="flex-start"
-                            >
-                                <Grid item className={classes.alignTextItem}>
-                                    <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
-                                    2 - 4
+        return (
+            <Fragment>
+                <div className="container item_iso" style={{ width: item_width }}>
+                    <LazyLoad>
+                        <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" />
+                    </LazyLoad>
+                    <div className="overlay" />
+                    <div className="info" onClick={this.show_game_details}>
+
+                        <div style={{ height: "100%" }}>
+                            <Grid container className={classes.root}>
+                                <Grid container
+                                    justify="center">
+                                    <Grid item>
+                                        {game_data.localization.eng.title}
+                                    </Grid>
                                 </Grid>
-                                <Grid item className={classes.alignTextItem}>
-                                    <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
-                                    12+
+                                <Grid item xs={6}>
+                                    <Grid
+                                        container
+                                        className={classes.demo}
+                                        direction="column"
+                                        justify="space-evenly"
+                                        alignItems="flex-start"
+                                    >
+                                        <Grid item className={classes.alignTextItem}>
+                                            <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
+                                            2 - 4
                                 </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Grid
-                                container
-                                className={classes.demo}
-                                direction="column"
-                                justify="space-evenly"
-                                alignItems="flex-end"
-                            >
-                                <Grid item className={classes.alignTextItem}>
-                                    3.5
+                                        <Grid item className={classes.alignTextItem}>
+                                            <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
+                                            12+
+                                </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Grid
+                                        container
+                                        className={classes.demo}
+                                        direction="column"
+                                        justify="space-evenly"
+                                        alignItems="flex-end"
+                                    >
+                                        <Grid item className={classes.alignTextItem}>
+                                            3.5
                                     <img width="25" height="25" src="/images/icons/complexity.svg" alt="Kiwi standing on oval"></img>
-                                </Grid>
-                                <Grid item className={classes.alignTextItem}>
-                                    40-80
+                                        </Grid>
+                                        <Grid item className={classes.alignTextItem}>
+                                            40-80
                                     <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid container wrap="nowrap" spacing={0} style={{ maxHeight: "30%" }}>
+                                    <Grid item xs={2} className={classes.alignTextItem}>
+                                        <img width="25" height="25" src="/images/icons/categories.svg" alt="Kiwi standing on oval"></img>
+                                    </Grid>
+                                    <Grid item xs={10} style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                                        qzd - zqd qzd - qzd -dfdvdrvdrv - srfdazdq - qzd qzddrgdr - sfrhsiuhf - qiedjiosejfio - uqhdqdz - iquzdhiozq - qkzdjizqjd - qzjdizqjd  - qjkzdhqzh - jqzdihqzd - oiqjzdizqd
+                            </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid container wrap="nowrap" spacing={2} style={{ maxHeight: "30%" }}>
-                            <Grid item xs={2} className={classes.alignTextItem}>
-                                <img width="25" height="25" src="/images/icons/categories.svg" alt="Kiwi standing on oval"></img>
-                            </Grid>
-                            <Grid item xs={10}   style={{overflow : "hidden",textOverflow: "ellipsis"}}>
-                                 qzd - zqd qzd - qzd -dfdvdrvdrv - srfdazdq - qzd qzddrgdr - sfrhsiuhf - qiedjiosejfio - uqhdqdz - iquzdhiozq - qkzdjizqjd - qzjdizqjd  - qjkzdhqzh - jqzdihqzd - oiqjzdizqd
-                                
-                            </Grid>
-                        </Grid>
-                    </Grid>
 
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </Fragment>
-    );
+            </Fragment>
+        );
+    }
+
+    componentDidMount = () =>{
+        console.log('Did mount');
+        
     }
 }
 

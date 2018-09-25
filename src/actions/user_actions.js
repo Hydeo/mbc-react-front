@@ -88,7 +88,6 @@ export const sign_in_user_facebook = ()=>{
 }
 
 export const auth_user = (user) => {
-  console.log("user authed");
   return dispatch => {
     dispatch({
       type: AUTH_USER,
@@ -121,10 +120,8 @@ export const sign_out_user = () =>{
 }
 
 export const verif_auth = () => {
-  console.log("Verif Auth");
   return dispatch => {
     firebase.auth.onAuthStateChanged(user => {
-		console.log(user)
       if (user) {
         dispatch(auth_user(user));
       } else {

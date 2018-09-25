@@ -89,10 +89,7 @@ class LinkCard extends React.Component {
   render() {
   
     const { classes, link_data, game_mask } = this.props;
-    console.log('GM - cards');
-    
-    console.log(game_mask);
-    
+  
     if (
       link_data.image == null ||
       link_data.image == undefined ||

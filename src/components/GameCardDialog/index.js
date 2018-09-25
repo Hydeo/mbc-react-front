@@ -49,33 +49,23 @@ class ResponsiveDialog extends React.Component {
 
   }
 
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
   handleClose = () => {
     this.setState({ open: false });
   };
 
   componentWillReceiveProps(props) {
-    console.log(props);
     this.setState({
       open: props.open,
       active_game: props.active_game
     })
-
-
   }
 
   render() {
     const { fullScreen, classes } = this.props;
     const { active_game } = this.state;
-    console.log(classes);
     if (active_game != null) {
       return (
         <div>
-          <Button onClick={this.handleClickOpen}>Open responsive dialog</Button>
           <Dialog
             fullScreen={fullScreen}
             open={this.state.open}
@@ -86,10 +76,10 @@ class ResponsiveDialog extends React.Component {
             <DialogContent style={container}>
 
               <Grid container alignItems="center" spacing={16}>
-                <Grid item md={4} xs={12}>
+                <Grid item  xs={12} md={5}>
                   <img style={cover} src={Utils.get_game_localized_property(active_game, "imageUrl")} alt="Img not found"></img>
                 </Grid>
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} md={7}>
                   <Grid container>
                     <Grid item xs={12}>
                       <Grid container justify="center">
@@ -128,7 +118,9 @@ class ResponsiveDialog extends React.Component {
               </Grid>
 
               <DialogContentText>
-                <p>Description : </p>
+                Description : 
+              </DialogContentText>
+              <DialogContentText>
                 {Utils.get_game_localized_property(active_game, "description")}
               </DialogContentText>
 

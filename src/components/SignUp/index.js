@@ -36,7 +36,6 @@ class SignUpForm extends Component {
     const { username, email, passwordOne } = this.state;
 
     const { history } = this.props;
-    console.log(this.props)
     event.preventDefault();
 
     this.props.sign_up_user({ "email": email, "password": passwordOne }).then(() => {

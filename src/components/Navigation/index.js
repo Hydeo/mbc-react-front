@@ -75,6 +75,12 @@ const styles = theme => ({
 });
 
 class Navigation extends React.Component {
+
+  constructor(props){
+    super(props)
+    console.log('Construct Nav');
+    
+  }
   state = {
     mobileOpen: false
   };
@@ -85,6 +91,8 @@ class Navigation extends React.Component {
 
   render() {
     const { classes, theme, width } = this.props;
+    console.log('Render Nav');
+    
     return (
       <I18n ns="translations">
         {(t, { i18n }) => (

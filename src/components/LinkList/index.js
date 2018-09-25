@@ -1,14 +1,13 @@
 import $ from "jquery";
 import Isotope from "isotope-layout";
 import ImagesLoaded from "imagesloaded";
-import React from "react";
+import React, { Fragment } from "react";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { update_isotope, set_isotope } from "../../actions/basic_actions";
 import SilentCatch from "../ErrorHandling/SilentCatch";
 
-import ConfirmDialog from "../../components/ConfirmDialog";
 import { conf_dev } from "../../config";
 import Utils from "../../utils.js";
 import LinkCard from "../LinkCards";
@@ -20,7 +19,7 @@ const item_gutter = {
 };
 
 const itemListStyle = {
-
+  opacity : 0
 }
 
 
@@ -36,20 +35,12 @@ class ItemList extends React.Component {
       details_dialog_state: {
         game_data: null,
         open: false
-      },
-      confirm_dialog_state: {
-        title: "",
-        description: "",
-        open: false,
-        agree_callback: null,
-        desagree_callback: null
       }
     };
+    console.log('Construct ItemList');
+    
   }
 
-  update_confirm_dialog_state = newState => {
-    this.setState({ confirm_dialog_state: newState });
-  };
 
   set_active_game_details_dialog = active_game => {
     this.setState({
@@ -72,11 +63,13 @@ class ItemList extends React.Component {
     }
   };
 
-
+//<div id="loadingding" style={{height:"1000px", width:"100%"}}> <h2>loading...</h2></div>
   render() {
     const { classes } = this.props;
 
     return (
+      <Fragment>
+      
       <div id="item_list" style={itemListStyle}>
         <div style={this.state.item_size_state} className="item_sizer" />
         <div style={item_gutter} className="item_gutter" />
@@ -85,8 +78,6 @@ class ItemList extends React.Component {
           this.props.hydrated_game_list.gameList.map(
 
             (item, index) => {
-              //console.log(link);
-
               return (
 
                 /*<LinkCard
@@ -99,24 +90,24 @@ class ItemList extends React.Component {
                   cardSize={this.state.link_size_state}
                   update={this.update_confirm_dialog_state}
                 />*/
-                <GameCard game_data={item} item_width={this.state.item_size_state.width} set_active_game={this.set_active_game_details_dialog} />
+                <GameCard key={index} game_data={item} item_width={this.state.item_size_state.width} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope}/>
               )
             }
           )}
         <GameCardDialog active_game={this.state.details_dialog_state.active_game} open={this.state.details_dialog_state.open} />
-        <ConfirmDialog
-          parentState={this.state.confirm_dialog_state}
-          update={this.update_confirm_dialog_state}
-        />
       </div>
+      </Fragment> 
     );
 
 
   }
 
   componentDidMount = () => {
-    // console.log("--[" + class_name + "] componentDidMount--");
     window.addEventListener("resize", this.updateDimensions);
+   
+      console.log('Did mount List');
+      
+  
   };
 
   componentWillUnmount() {
@@ -124,14 +115,6 @@ class ItemList extends React.Component {
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
-    /*console.log(
-      "--[" +
-        class_name +
-        "] componentDidUpdate -- first_render: " +
-        this.state.first_render
-    );*/
-    //console.log(this.props);
-
     if (this.state.first_render == true) {
       this.setState({ first_render: false });
       this.props.update_isotope(this.props.isotope_instance, true);

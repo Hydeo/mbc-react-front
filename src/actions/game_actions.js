@@ -8,8 +8,6 @@ export const CREATE_NEW_GAME = "CREATE_NEW_GAME";
 export const GET_GAME_LIBRARY = "GET_GAME_LIBRARY";
 
 export const create_new_game = new_game => {
-  console.log("ACTION NEW GAME");
-  console.log(new_game);
   var new_game_profile = {
     nb_player_min: new_game.nb_player_min,
     nb_player_max: new_game.nb_player_max,

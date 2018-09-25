@@ -18,7 +18,8 @@ class GameLibrary extends Component {
     this.state = {
       
     };
-   
+    console.log('Construct Library');
+    
   }
 
   componentDidMount() {
