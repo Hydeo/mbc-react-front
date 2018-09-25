@@ -16,15 +16,11 @@ import './i18n';
 const theme = createMuiTheme({
     palette: {
         primary: {
-
             main: '#b71c1c',
 
           },
           secondary: {
-            light: '#ff7961',
-            main: '#f44336',
-            dark: '#ba000d',
-            contrastText: '#ffffff  ',
+            main : "#ffffff"
           },
     },
   });

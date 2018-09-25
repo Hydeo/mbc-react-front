@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,13 +9,35 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import Utils from "../../utils";
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  titleColor: {
+      backgroundColor : theme.palette.primary.main,
+      color : theme.palette.secondary.main,
+      fontSize: "1.5em"
+  }
+  
+
+});
 
 const cover = {
   width: "100%"
 }
 
 const container ={
-  backgroundColor : "#E0E0E0"
+  backgroundColor : "#E0E0E0",
+  paddingTop : "24px"
+}
+
+const alignTextItem = {
+  display: "flex",
+  alignItems: "center",
+  marginBottom: "10px"
+}
+
+const marginTextItem ={
+  marginLeft : "10px"
 }
 class ResponsiveDialog extends React.Component {
   constructor(props) {
@@ -47,9 +69,9 @@ class ResponsiveDialog extends React.Component {
   }
 
   render() {
-    const { fullScreen } = this.props;
+    const { fullScreen, classes } = this.props;
     const { active_game } = this.state;
-    console.log(this.state);
+    console.log(classes);
     if (active_game != null) {
       return (
         <div>
@@ -60,52 +82,53 @@ class ResponsiveDialog extends React.Component {
             onClose={this.handleClose}
             aria-labelledby="responsive-dialog-title"
           >
-            <DialogTitle id="responsive-dialog-title">{Utils.get_game_localized_property(active_game, "title")}</DialogTitle>
+            <DialogTitle id="responsive-dialog-title" disableTypography={true} className={classes.titleColor}>{Utils.get_game_localized_property(active_game, "title")}</DialogTitle>
             <DialogContent style={container}>
 
               <Grid container alignItems="center" spacing={16}>
-                <Grid item md={4}>
+                <Grid item md={4} xs={12}>
                   <img style={cover} src={Utils.get_game_localized_property(active_game, "imageUrl")} alt="Img not found"></img>
                 </Grid>
-                <Grid item md={8}>
+                <Grid item xs={12} md={8}>
                   <Grid container>
-                    <Grid item md={12}>
-                      <Grid container>
-                        <Grid item md={6}>
+                    <Grid item xs={12}>
+                      <Grid container justify="center">
+                        <Grid item xs={6} style={alignTextItem}>
+                       
                           <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
-                          2 - 4
+                          <div style={marginTextItem}>2 - 4</div>
                         </Grid>
-                        <Grid item md={6}>
+                        <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
-                          12+
+                          <div style={marginTextItem}>12+</div>
                         </Grid>
-                        <Grid item md={6}>
+                        <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/complexity.svg" alt="Kiwi standing on oval"></img>
-                          3.5
+                          <div style={marginTextItem}>3.5</div>
                         </Grid>
-                        <Grid item md={6}>
+                        <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
-                          40-80
+                          <div style={marginTextItem}>40-80</div>
                         </Grid>
                         <Grid item md={12}>
-                            <Grid item xs={2}>
+                          <Grid container>
+                            <Grid item xs={2} style={alignTextItem}>
                                 <img width="25" height="25" src="/images/icons/categories.svg" alt="Kiwi standing on oval"></img>
                             </Grid>
                             <Grid item xs={10}   style={{overflow : "hidden",textOverflow: "ellipsis"}}>
                                  qzd - zqd qzd - qzd -dfdvdrvdrv - srfdazdq - qzd qzddrgdr - sfrhsiuhf - qiedjiosejfio - uqhdqdz - iquzdhiozq - qkzdjizqjd - qzjdizqjd  - qjkzdhqzh - jqzdihqzd - oiqjzdizqd
                                 
                             </Grid>
+                          </Grid>
                         </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item md={12}>
-                      description
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
 
               <DialogContentText>
+                <p>Description : </p>
                 {Utils.get_game_localized_property(active_game, "description")}
               </DialogContentText>
 
@@ -113,11 +136,8 @@ class ResponsiveDialog extends React.Component {
 
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Disagree
-            </Button>
-              <Button onClick={this.handleClose} color="primary" autoFocus>
-                Agree
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+                Close
             </Button>
             </DialogActions>
           </Dialog>
@@ -134,4 +154,4 @@ ResponsiveDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
 };
 
-export default withMobileDialog()(ResponsiveDialog);
+export default withMobileDialog()(withStyles(styles)(ResponsiveDialog));
