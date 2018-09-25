@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-
+import GameCardDialog from "../GameCardDialog";
 
 const styles = theme => ({
     root: {
@@ -19,15 +19,36 @@ const styles = theme => ({
 
 });
 
-function GameCard(props) {
-    const { classes, game_data, item_width} = props;
+class GameCard extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            open : false
+        }
+    }
+    handleClickOpen = () => {
+        this.setState({ open: true });
+      };
+    
+    handleClose = () => {
+    this.setState({ open: false });
+    };
+
+    show_game_details = () =>{
+        this.props.set_active_game(this.props.game_data);
+    }
+    
+    render(){
+    const { classes, game_data, item_width} = this.props;
     
     return (
+        <Fragment>
         <div className="container item_iso" style={{width : item_width}}>
 
             <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" />
             <div className="overlay" />
-            <div className="info">
+            <div className="info" onClick={this.show_game_details}>
 
                 <div style={{ height: "100%" }}>
                     <Grid container className={classes.root}>
@@ -87,7 +108,9 @@ function GameCard(props) {
                 </div>
             </div>
         </div>
+        </Fragment>
     );
+    }
 }
 
 GameCard.propTypes = {

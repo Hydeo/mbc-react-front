@@ -13,14 +13,14 @@ import { conf_dev } from "../../config";
 import Utils from "../../utils.js";
 import LinkCard from "../LinkCards";
 import GameCard from "../GameCard";
-const class_name = "LinkList";
+import GameCardDialog from "../GameCardDialog";
 
 const item_gutter = {
   width: "3%"
 };
 
-const itemListStyle={
-  
+const itemListStyle = {
+
 }
 
 
@@ -32,6 +32,10 @@ class ItemList extends React.Component {
       isotope_instance: null,
       item_size_state: {
         width: Utils.calculateIsotopeItemWidth(3) + "%"
+      },
+      details_dialog_state: {
+        game_data: null,
+        open: false
       },
       confirm_dialog_state: {
         title: "",
@@ -47,6 +51,15 @@ class ItemList extends React.Component {
     this.setState({ confirm_dialog_state: newState });
   };
 
+  set_active_game_details_dialog = active_game => {
+    this.setState({
+      details_dialog_state: {
+        active_game: active_game,
+        open: true
+      }
+    });
+  };
+
   updateDimensions = () => {
     if (!this.state.first_render) {
       //TODO : Debounce ?
@@ -55,7 +68,7 @@ class ItemList extends React.Component {
           width: Utils.calculateIsotopeItemWidthPx(3) + "px"
         }
       });
-      
+
     }
   };
 
@@ -73,23 +86,24 @@ class ItemList extends React.Component {
 
             (item, index) => {
               //console.log(link);
-              
-              return (
-              
-              /*<LinkCard
-                key={index}
-                link_data={link}
-                game_mask={
-                  ( this.props.hydrated_game_list.hasOwnProperty("gameMask") && this.props.hydrated_game_list.gameMask.hasOwnProperty(link._id) )? this.props.hydrated_game_list.gameMask[link._id] : null
-                }
-                isotopeUpdate={this.update_isotope}
-                cardSize={this.state.link_size_state}
-                update={this.update_confirm_dialog_state}
-              />*/
-              <GameCard game_data={item} item_width={this.state.item_size_state.width}/>
-            )}
-          )}
 
+              return (
+
+                /*<LinkCard
+                  key={index}
+                  link_data={link}
+                  game_mask={
+                    ( this.props.hydrated_game_list.hasOwnProperty("gameMask") && this.props.hydrated_game_list.gameMask.hasOwnProperty(link._id) )? this.props.hydrated_game_list.gameMask[link._id] : null
+                  }
+                  isotopeUpdate={this.update_isotope}
+                  cardSize={this.state.link_size_state}
+                  update={this.update_confirm_dialog_state}
+                />*/
+                <GameCard game_data={item} item_width={this.state.item_size_state.width} set_active_game={this.set_active_game_details_dialog} />
+              )
+            }
+          )}
+        <GameCardDialog active_game={this.state.details_dialog_state.active_game} open={this.state.details_dialog_state.open} />
         <ConfirmDialog
           parentState={this.state.confirm_dialog_state}
           update={this.update_confirm_dialog_state}
