@@ -52,7 +52,7 @@ class Utils {
 		var gutter_width = Math.floor((gutter_size * list_container_width) / 100) ;
 		var item_width = Math.floor((list_container_width - (nb_gutters * gutter_width)) / nb_item);
 		var occupied_width = (item_width*nb_item)+(nb_gutters*gutter_width)
-		console.log(item_width + " / "+gutter_width+ " = "+ list_container_width + "("+ occupied_width +")"+	 " -- "+Utils.getTypeSizeScreen(conf_dev.breakpoints, list_container_width)+" "+nb_item+" "+nb_gutters)
+		//console.log(item_width + " / "+gutter_width+ " = "+ list_container_width + "("+ occupied_width +")"+	 " -- "+Utils.getTypeSizeScreen(conf_dev.breakpoints, list_container_width)+" "+nb_item+" "+nb_gutters)
 		if((list_container_width - occupied_width) < 4)
 			return item_width - nb_item;
 		return item_width

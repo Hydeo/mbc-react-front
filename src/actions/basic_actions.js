@@ -95,7 +95,7 @@ export const update_isotope = (iso_instance = null, force_new = false) => {
 		else {
 	console.log("-- update_isotope -- update layout--");
 	iso_instance.reloadItems()
-	iso_instance.layout();
+	//iso_instance.layout();
 	iso_instance.arrange();
 }
 //Force check lazyload after isotope layout has been created
