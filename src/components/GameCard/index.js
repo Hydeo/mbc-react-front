@@ -1,4 +1,10 @@
 import React, { Fragment } from 'react';
+import {connect } from "react-redux";
+import {bindActionCreators} from "redux";
+import {
+    update_active_game_popup
+  } from "../../actions/game_cards_actions";
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -37,7 +43,7 @@ class GameCard extends React.Component {
     };
 
     show_game_details = () => {
-        this.props.set_active_game(this.props.game_data);
+        this.props.update_active_game_popup(this.props.game_data);
     }
 
     render() {
@@ -114,7 +120,7 @@ class GameCard extends React.Component {
     }
 
     componentDidMount = () =>{
-        console.log('Did mount');
+        //console.log('Did mount');
         
     }
 }
@@ -123,4 +129,13 @@ GameCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(GameCard);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+        update_active_game_popup
+    },
+    dispatch
+  );
+
+
+export default withStyles(styles)(connect(null,mapDispatchToProps)(GameCard));

@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import {connect } from "react-redux";
+import {bindActionCreators} from "redux";
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -46,7 +48,8 @@ class ResponsiveDialog extends React.Component {
       open: this.props.open,
       active_game: null
     };
-
+    
+    
   }
 
   handleClose = () => {
@@ -55,14 +58,15 @@ class ResponsiveDialog extends React.Component {
 
   componentWillReceiveProps(props) {
     this.setState({
-      open: props.open,
-      active_game: props.active_game
+      open: props.game_cards.open,
+      active_game: props.game_cards.active_game
     })
   }
 
   render() {
     const { fullScreen, classes } = this.props;
     const { active_game } = this.state;
+    console.log(this.props);
     if (active_game != null) {
       return (
         <div>
@@ -146,4 +150,18 @@ ResponsiveDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
 };
 
-export default withMobileDialog()(withStyles(styles)(ResponsiveDialog));
+const mapStateToProps = state => ({
+  game_cards : state.game_cards
+});
+
+//On injecte les actions possible au props ?
+/*const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      update
+    },
+    dispatch
+  );*/
+
+
+export default withMobileDialog()(withStyles(styles)(connect(mapStateToProps,null)(ResponsiveDialog)));
