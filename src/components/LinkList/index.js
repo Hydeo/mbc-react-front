@@ -30,7 +30,7 @@ class ItemList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_render: false,
+      first_render: true,
       isotope_instance: null,
       item_size_state: {
         width: Utils.calculateIsotopeItemWidth(3) + "%"
@@ -54,7 +54,7 @@ class ItemList extends React.Component {
       }
     });
 
-    
+
   };
 
   updateDimensions = () => {
@@ -74,13 +74,25 @@ class ItemList extends React.Component {
     }
   };
 
-  imgLoadedCounter = () =>{
-      imgLoaded ++;
-      console.log('imgLaoded ' + imgLoaded );
-      if(imgLoaded == this.props.hydrated_game_list.gameList.length){
-        console.log('Should update layout');
-        this.props.update_isotope(this.props.isotope_instance);
+  imgLoadedCounter = () => {
+    imgLoaded++;
+    console.log('imgLaoded ' + imgLoaded);
+    if (imgLoaded == this.props.hydrated_game_list.gameList.length) {
+      console.log('Should update layout');
+      if (this.state.first_render == true) {
+        console.log('Frist render');
+        
+        this.props.update_isotope(this.props.isotope_instance,true);
+        this.setState({
+          first_render: false
+        });
       }
+      else {
+        console.log('Not Frist render');
+        this.props.update_isotope(this.props.isotope_instance, true);
+      }
+
+    }
   }
 
   //<div id="loadingding" style={{height:"1000px", width:"100%"}}> <h2>loading...</h2></div>
@@ -99,18 +111,7 @@ class ItemList extends React.Component {
 
               (item, index) => {
                 return (
-
-                  /*<LinkCard
-                    key={index}
-                    link_data={link}
-                    game_mask={
-                      ( this.props.hydrated_game_list.hasOwnProperty("gameMask") && this.props.hydrated_game_list.gameMask.hasOwnProperty(link._id) )? this.props.hydrated_game_list.gameMask[link._id] : null
-                    }
-                    isotopeUpdate={this.update_isotope}
-                    cardSize={this.state.link_size_state}
-                    update={this.update_confirm_dialog_state}
-                  />*/
-                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} imgLoadedCounter={this.imgLoadedCounter}/>
+                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} imgLoadedCounter={this.imgLoadedCounter} />
                 )
               }
             )}
@@ -154,7 +155,7 @@ class ItemList extends React.Component {
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );
     console.log('Did UPDATE');
-    
+
     /*if (this.state.first_render == true) {
       this.setState({ first_render: false });
       this.props.update_isotope(this.props.isotope_instance, true);
