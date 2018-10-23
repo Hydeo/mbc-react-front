@@ -24,7 +24,7 @@ const itemListStyle = {
   opacity: 0
 }
 
-
+var imgLoaded = 0;
 
 class ItemList extends React.Component {
   constructor(props) {
@@ -40,6 +40,7 @@ class ItemList extends React.Component {
         open: false
       }
     };
+    imgLoaded = 0;
     console.log('Construct ItemList');
 
   }
@@ -52,6 +53,8 @@ class ItemList extends React.Component {
         open: true
       }
     });
+
+    
   };
 
   updateDimensions = () => {
@@ -63,7 +66,6 @@ class ItemList extends React.Component {
           width: newWidth + "px"
         }
       });*/
-      console.log('NewWIDTH');
       document.getElementsByClassName("item_sizer")[0].style.width = newWidth + "px";
       var iso_items = document.getElementsByClassName("item_iso");
       for (var i = 0; i < iso_items.length; i++) {
@@ -71,6 +73,15 @@ class ItemList extends React.Component {
       }
     }
   };
+
+  imgLoadedCounter = () =>{
+      imgLoaded ++;
+      console.log('imgLaoded ' + imgLoaded );
+      if(imgLoaded == this.props.hydrated_game_list.gameList.length){
+        console.log('Should update layout');
+        this.props.update_isotope(this.props.isotope_instance);
+      }
+  }
 
   //<div id="loadingding" style={{height:"1000px", width:"100%"}}> <h2>loading...</h2></div>
   render() {
@@ -99,7 +110,7 @@ class ItemList extends React.Component {
                     cardSize={this.state.link_size_state}
                     update={this.update_confirm_dialog_state}
                   />*/
-                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} />
+                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} imgLoadedCounter={this.imgLoadedCounter}/>
                 )
               }
             )}
@@ -113,13 +124,11 @@ class ItemList extends React.Component {
 
   shouldComponentUpdate = (nextProps, nextState) => {
     console.log('Should rerender  - size ');
-
     if (document.getElementById("item_list").childElementCount > 3) {
-      //if (!!this.props.hydrated_game_list && this.props.hydrated_game_list.gameList.length > 0) {
-      console.log('Size Game List : ' + this.props.hydrated_game_list.gameList.length);
+      /*console.log('Size Game List : ' + this.props.hydrated_game_list.gameList.length);
       console.log('Size Game DOM : ' + document.getElementById("item_list").childElementCount);
-      this.props.update_isotope(this.props.isotope_instance);
-      // }
+      console.log( this.props.isotope_instance);
+      this.props.update_isotope(this.props.isotope_instance);*/
       return false;
     }
     return true;
@@ -128,6 +137,7 @@ class ItemList extends React.Component {
   componentDidMount = () => {
     window.addEventListener("resize", this.updateDimensions);
     console.log('Did mount List');
+    //this.props.update_isotope(this.props.isotope_instance);
     /*if (this.state.first_render == true) {
       this.setState({ first_render: false });
       this.props.update_isotope(this.props.isotope_instance, true);
@@ -143,7 +153,8 @@ class ItemList extends React.Component {
     Object.entries(this.props).forEach(([key, val]) =>
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );
-
+    console.log('Did UPDATE');
+    
     /*if (this.state.first_render == true) {
       this.setState({ first_render: false });
       this.props.update_isotope(this.props.isotope_instance, true);

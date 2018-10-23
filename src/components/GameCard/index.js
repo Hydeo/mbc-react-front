@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import GameCardDialog from "../GameCardDialog";
 import LazyLoad from "react-lazyload";
+import Utils from "../../utils";
 
 const styles = theme => ({
     root: {
@@ -53,7 +54,7 @@ class GameCard extends React.Component {
             <Fragment>
                 <div className="container item_iso" style={{ width: item_width }}>
                     <LazyLoad>
-                        <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" />
+                        <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
                     <div className="overlay" />
                     <div className="info" onClick={this.show_game_details}>
@@ -120,8 +121,8 @@ class GameCard extends React.Component {
     }
 
     componentDidMount = () =>{
-        //console.log('Did mount');
-        
+            //console.log('Did mount');
+            
     }
 }
 
