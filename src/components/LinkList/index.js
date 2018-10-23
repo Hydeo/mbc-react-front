@@ -81,8 +81,8 @@ class ItemList extends React.Component {
       console.log('Should update layout');
       if (this.state.first_render == true) {
         console.log('Frist render');
-        
-        this.props.update_isotope(this.props.isotope_instance,true);
+
+        this.props.update_isotope(this.props.isotope_instance, true);
         this.setState({
           first_render: false
         });
@@ -101,7 +101,14 @@ class ItemList extends React.Component {
 
     return (
       <Fragment>
-
+        <button onClick={() => {
+          this.props.isotope_instance.arrange({
+            // item element provided as argument
+            filter: function (itemElem) {
+              return itemElem.className.includes('.1.');
+            }
+          });
+        }}>Filter</button>
         <div id="item_list" style={itemListStyle}>
           <div style={first_item_sizer} className="item_sizer" />
           <div style={item_gutter} className="item_gutter" />

@@ -27,6 +27,7 @@ const styles = theme => ({
 
 });
 
+
 class GameCard extends React.Component {
 
     constructor(props) {
@@ -52,7 +53,7 @@ class GameCard extends React.Component {
 
         return (
             <Fragment>
-                <div className="container item_iso" style={{ width: item_width }}>
+                <div className={"container item_iso "+"."+Math.floor((Math.random() * 10) + 1)+"."} style={{ width: item_width }}>
                     <LazyLoad>
                         <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
