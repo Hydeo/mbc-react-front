@@ -84,22 +84,24 @@ export const update_isotope = (iso_instance = null, force_new = false) => {
 			iso_item_list.on('arrangeComplete', function (filteredItems) {
 				console.log('Isotope arrange completed on ' +
 					filteredItems.length + ' items');
-					document.getElementById("item_list").style.opacity = "1";
-			} )
-		//}
-		dispatch({
-			type: SET_ISOTOPE,
-			payload: iso_item_list
-		})
-	}
+				document.getElementById("item_list").style.opacity = "1";
+			})
+			//}
+			dispatch({
+				type: SET_ISOTOPE,
+				payload: iso_item_list
+			})
+
+			iso_item_list.arrange();
+		}
 		else {
-	console.log("-- update_isotope -- update layout--");
-	iso_instance.reloadItems()
-	//iso_instance.layout();
-	iso_instance.arrange();
-}
-//Force check lazyload after isotope layout has been created
-forceCheck();
+			console.log("-- update_isotope -- update layout--");
+			iso_instance.reloadItems()
+			//iso_instance.layout();
+			iso_instance.arrange();
+		}
+		//Force check lazyload after isotope layout has been created
+		forceCheck();
 	}
 }
 
