@@ -13,7 +13,7 @@ import Utils from "../../utils.js";
 import LinkCard from "../LinkCards";
 import GameCard from "../GameCard";
 import GameCardDialog from "../GameCardDialog";
-
+import GameCardsFilter from "../GameCardsFilter";
 const item_gutter = {
   width: "3%"
 };
@@ -101,6 +101,7 @@ class ItemList extends React.Component {
 
     return (
       <Fragment>
+        <GameCardsFilter/>
         <button onClick={() => {
           this.props.isotope_instance.arrange({
             // item element provided as argument

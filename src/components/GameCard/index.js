@@ -48,12 +48,23 @@ class GameCard extends React.Component {
         this.props.update_active_game_popup(this.props.game_data);
     }
 
+    get_game_tags = () =>{
+        var tagString = "";
+        this.props.game_data.categories.forEach(element => {
+            tagString += " "+element+" ";
+        });
+        this.props.game_data.mechanism.forEach(element => {
+            tagString += " "+element+" ";
+        });
+        return tagString;
+    }
+
     render() {
         const { classes, game_data, item_width } = this.props;
 
         return (
             <Fragment>
-                <div className={"container item_iso "+"."+Math.floor((Math.random() * 10) + 1)+"."} style={{ width: item_width }}>
+                <div className={"container item_iso "+" "+this.get_game_tags()+" "} style={{ width: item_width }}>
                     <LazyLoad>
                         <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
