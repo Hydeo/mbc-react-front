@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-
+import AppStateInit from "../AppStateInit";
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
@@ -22,8 +22,8 @@ import './index.css';
 const App = () =>
   <Router>
     <div className="app">
+      <AppStateInit/>
       <Navigation>
-
       <hr/>
 
       <Route exact path={routes.LANDING} component={() => <LandingPage />} />
