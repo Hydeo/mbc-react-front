@@ -76,11 +76,11 @@ class ItemList extends React.Component {
 
   imgLoadedCounter = () => {
     imgLoaded++;
-    console.log('imgLaoded ' + imgLoaded);
+    //console.log('imgLaoded ' + imgLoaded);
     if (imgLoaded == this.props.hydrated_game_list.gameList.length) {
-      console.log('Should update layout');
+      //console.log('Should update layout');
       if (this.state.first_render == true) {
-        console.log('Frist render');
+        //console.log('Frist render');
 
         this.props.update_isotope(this.props.isotope_instance, true);
         this.setState({
@@ -88,7 +88,7 @@ class ItemList extends React.Component {
         });
       }
       else {
-        console.log('Not Frist render');
+        //console.log('Not Frist render');
         this.props.update_isotope(this.props.isotope_instance, true);
       }
 

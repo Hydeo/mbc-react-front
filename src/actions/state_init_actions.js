@@ -16,6 +16,4 @@ export const get_categories_by_lang = () => {
           });
         });
       };
-  
-
 };

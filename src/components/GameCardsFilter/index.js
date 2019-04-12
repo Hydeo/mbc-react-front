@@ -8,8 +8,14 @@ class GameCardsFilter extends React.Component {
 
     constructor(props) {
         super(props);
+        
+        var tags_array = props.tags.map((tag, i)=>{
+            console.log(tag);
+            return tag.tagName;
+        })
+        console.log(tags_array);
         this.state = {
-            categories: ["Strat", "Coop", "Dice", "Diplomatie", "bitchy"],
+            tags: tags_array,
             activeFilters: ""
         }
     }
@@ -74,7 +80,7 @@ class GameCardsFilter extends React.Component {
                     Filter Component
               </button>
 
-                {this.state.categories.map(
+                {this.state.tags.map(
                     (item, index) => {
                         return (this.renderChips(item));
                     }
@@ -89,10 +95,11 @@ class GameCardsFilter extends React.Component {
 
 
 
-//On recupere la tate dans les props
+//On recupere la state dans les props
 const mapStateToProps = (state, ownProps) => ({
     isotope_instance: state.collection_isotope.isotope_instance,
-    hydrated_game_list: ownProps.hydrated_game_list
+    hydrated_game_list: ownProps.hydrated_game_list,
+    tags : state.tags
 });
 
 //On injecte les actions possible au props ?

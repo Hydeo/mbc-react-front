@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import state_init from "./state_init_reducers";
+import tags from "./tag_reducers";
 import user from './user_reducers.js';
 import game_collection from "./game_collection_reducers";
 import game_library from "./game_reducer";
@@ -11,6 +12,7 @@ import i18n from './i18n_reducer';
 export default combineReducers({
   routing: routerReducer,
   state_init,
+  tags,
   user,
   game_collection,
   game_library,
