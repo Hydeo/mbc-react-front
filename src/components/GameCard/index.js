@@ -52,7 +52,7 @@ class GameCard extends React.Component {
         var tagString = "";
         this.props.game_data.tags.forEach(element => {
            // tagString += " "+element+" ";
-           tagString +=" "+element["listLocName"][this.props.lang]["locName"];
+           tagString +=" "+element["localization"][this.props.lang]["trad"];
         });
         /*this.props.game_data.mechanism.forEach(element => {
             tagString += " "+element+" ";
