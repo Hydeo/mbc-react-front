@@ -41,8 +41,7 @@ class ItemList extends React.Component {
       }
     };
     imgLoaded = 0;
-    console.log('Construct ItemList');
-
+    console.log('Construct ItemList');  
   }
 
 
@@ -98,7 +97,6 @@ class ItemList extends React.Component {
   //<div id="loadingding" style={{height:"1000px", width:"100%"}}> <h2>loading...</h2></div>
   render() {
     const { classes } = this.props;
-
     return (
       <Fragment>
         <GameCardsFilter/>
@@ -119,7 +117,7 @@ class ItemList extends React.Component {
 
               (item, index) => {
                 return (
-                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} imgLoadedCounter={this.imgLoadedCounter} />
+                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} imgLoadedCounter={this.imgLoadedCounter} lang={this.props.i18n.cur_lang}/>
                 )
               }
             )}
@@ -132,7 +130,7 @@ class ItemList extends React.Component {
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    console.log('Should rerender  - size ');
+    //console.log('Should rerender  - size ');
     if (document.getElementById("item_list").childElementCount > 3) {
       /*console.log('Size Game List : ' + this.props.hydrated_game_list.gameList.length);
       console.log('Size Game DOM : ' + document.getElementById("item_list").childElementCount);
@@ -145,7 +143,7 @@ class ItemList extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("resize", this.updateDimensions);
-    console.log('Did mount List');
+    //console.log('Did mount List');
     //this.props.update_isotope(this.props.isotope_instance);
     /*if (this.state.first_render == true) {
       this.setState({ first_render: false });
@@ -162,7 +160,7 @@ class ItemList extends React.Component {
     Object.entries(this.props).forEach(([key, val]) =>
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );
-    console.log('Did UPDATE');
+    //console.log('Did UPDATE');
 
     /*if (this.state.first_render == true) {
       this.setState({ first_render: false });
@@ -176,7 +174,8 @@ class ItemList extends React.Component {
 //On recupere la tate dans les props
 const mapStateToProps = (state, ownProps) => ({
   isotope_instance: state.collection_isotope.isotope_instance,
-  hydrated_game_list: ownProps.hydrated_game_list
+  hydrated_game_list: ownProps.hydrated_game_list,
+  i18n : state.i18n
 });
 
 //On injecte les actions possible au props ?
