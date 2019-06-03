@@ -1,31 +1,47 @@
 import React, { Fragment } from 'react';
-import {connect } from "react-redux";
-import {bindActionCreators} from "redux";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
     toggle_in_collection
-  } from "../../actions/game_collection_actions";
+} from "../../actions/game_collection_actions";
 
-class AddGameToFavorite extends React.Component{
-    constructor(props){
+class AddGameToFavorite extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
+            is_in_user_collec : false,
             active_game: this.props.active_game
-          };
+        };
     }
 
-    handleClick = () =>{
-        alert("click");
+    isGameInCollection = () =>{
+        if(this.props.game_collection != null){
+            for(var i = 0 ; i < this.props.game_collection.game_collection.gameList.length ; i++){
+                if(this.props.game_collection.game_collection.gameList[i]._id == this.state.active_game._id){
+                    return ("Yes")
+                }
+            };
+        }
+        return ("No")
+    }
+    handleClick = () => {
         this.props.toggle_in_collection(this.state.active_game);
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <Fragment>
-                <div onClick={this.handleClick}>&#9825;</div>
+                <div onClick={this.handleClick}>
+                    ={this.isGameInCollection()}
+                </div>
             </Fragment>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    game_collection: state.game_collection
+});
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
@@ -35,4 +51,4 @@ const mapDispatchToProps = dispatch =>
         dispatch
     );
 
-export default connect(null,mapDispatchToProps)(AddGameToFavorite);
+export default connect(mapStateToProps, mapDispatchToProps)(AddGameToFavorite);
