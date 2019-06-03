@@ -8,11 +8,12 @@ class GameCardsFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        
-        var tags_array = props.tags.map((tag, i)=>{
-            console.log(tag);
-            return tag.tagName;
-        })
+        if(props.tags != undefined){
+            var tags_array = props.tags.map((tag, i)=>{
+                console.log(tag);
+                return tag.tagName;
+            })
+        }
         console.log(tags_array);
         this.state = {
             tags: tags_array,

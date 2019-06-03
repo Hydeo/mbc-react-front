@@ -9,7 +9,7 @@ import {
   remove_game_from_collection
 } from "../../actions/game_collection_actions";
 
-import classnames from "classnames";
+//import classnames from "classnames";
 import LazyLoad from "react-lazyload";
 
 
@@ -102,7 +102,7 @@ class LinkCard extends React.Component {
     }
 
     return (
-      <div className={" link_item "} style={this.props.cardSize}>
+      /*<div className={" link_item "} style={this.props.cardSize}>
         <Card className={classes.card}>
           <LazyLoad className="qzd" offset={0}>
             <div>
@@ -180,7 +180,7 @@ class LinkCard extends React.Component {
           </CardActions>
         </Card>
       </div>
-    );
+    */"");
   }
 
   componentDidUpdate = () => { };
