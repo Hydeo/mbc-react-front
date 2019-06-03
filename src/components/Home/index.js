@@ -27,7 +27,7 @@ class HomePage extends Component {
     const { users } = this.state;
 
     return (
-      <div style={{backgroundColor: "black"}}>
+      <div>
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
 

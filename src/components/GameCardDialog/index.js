@@ -8,6 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import AddGameToFavorite from '../AddGameToFavorite/index.js';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import Utils from "../../utils";
 import Grid from '@material-ui/core/Grid';
@@ -19,8 +20,6 @@ const styles = theme => ({
       color : theme.palette.secondary.main,
       fontSize: "1.5em"
   }
-  
-
 });
 
 const cover = {
@@ -81,6 +80,7 @@ class ResponsiveDialog extends React.Component {
 
               <Grid container alignItems="center" spacing={16}>
                 <Grid item  xs={12} md={5}>
+                <AddGameToFavorite active_game = {this.state.active_game}/>
                   <img style={cover} src={Utils.get_game_localized_property(active_game, "imageUrl")} alt="Img not found"></img>
                 </Grid>
                 <Grid item xs={12} md={7}>
@@ -88,7 +88,6 @@ class ResponsiveDialog extends React.Component {
                     <Grid item xs={12}>
                       <Grid container justify="center">
                         <Grid item xs={6} style={alignTextItem}>
-                       
                           <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
                           <div style={marginTextItem}>2 - 4</div>
                         </Grid>
