@@ -8,6 +8,7 @@ export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
 export const ADD_GAME_TO_COLLECTION = "ADD_GAME_TO_COLLECTION";
 export const REMOVE_GAME_FROM_COLLECTION = "REMOVE_GAME_FROM_COLLECTION";
 export const CREATE_GAME_MASK = "CREATE_GAME_MASK";
+export const TOOGLE_IN_COLLECTION= "TOOGLE_IN_COLLECTION";
 
 export const get_user_game_collection = () => {
   var callback = (token, dispatch) => {
@@ -66,6 +67,20 @@ export const create_game_mask = (game_data) => {
       });
     });
   };
+  return check_token_before_query(callback);
+}
+
+export const toggle_in_collection = active_game =>{
+  var callback = (token, dispatch) => {
+  axios
+    .put(URL_API + "/GameCollection/", { token: token, gameId: active_game._id })
+    .then(request => {
+      dispatch({
+          type : TOOGLE_IN_COLLECTION,
+          active_game : active_game
+      });
+    });
+  }
   return check_token_before_query(callback);
 }
 

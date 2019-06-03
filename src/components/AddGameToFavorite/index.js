@@ -3,7 +3,7 @@ import {connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import {
     toggle_in_collection
-  } from "../../actions/game_cards_actions";
+  } from "../../actions/game_collection_actions";
 
 class AddGameToFavorite extends React.Component{
     constructor(props){
@@ -15,7 +15,7 @@ class AddGameToFavorite extends React.Component{
 
     handleClick = () =>{
         alert("click");
-        this.props.toggle_in_collection(this.state.active_game._id);
+        this.props.toggle_in_collection(this.state.active_game);
     }
 
     render(){

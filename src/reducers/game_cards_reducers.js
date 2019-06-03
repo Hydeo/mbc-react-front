@@ -1,7 +1,6 @@
 import {
     UPDATE_ACTIVE_GAME_POPUP,
-    CLOSE_GAME_POPUP,
-    TOOGLE_IN_COLLECTION
+    CLOSE_GAME_POPUP
 } from "../actions/game_cards_actions"
 
 const initialState = {
@@ -23,10 +22,7 @@ export default (state = initialState, action) => {
             open : false
         }
       
-      case TOOGLE_IN_COLLECTION:
-        return {
-          ...state
-        }
+      
         
     default : 
       return state;
