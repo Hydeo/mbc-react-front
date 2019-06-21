@@ -37,14 +37,9 @@ export default (state = initialState, action) => {
         game_collection: action.payload
       }
     case TOOGLE_IN_COLLECTION:
-      var s_game_collection = null;
-      if(state != null){
-        s_game_collection = state.game_collection;
-        s_game_collection.gameList.push(action.active_game);
-      }
       return {
         ...state,
-        game_collection : s_game_collection
+        game_collection: action.payload
       }
     default:
       return state;

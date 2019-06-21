@@ -77,7 +77,7 @@ export const toggle_in_collection = active_game =>{
     .then(request => {
       dispatch({
           type : TOOGLE_IN_COLLECTION,
-          active_game : active_game
+          payload : request.data
       });
     });
   }
