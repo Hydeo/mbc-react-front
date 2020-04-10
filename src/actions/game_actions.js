@@ -15,16 +15,9 @@ export const create_new_game = new_game => {
     age_recommended: new_game.age_recommended,
     complexity: new_game.complexity,
     type: "-1",
-    tags: [
-      { 
-        _id: "5cb096a2fb1224ca0ddc06cc" 
-      },
-      {
-        _id:"5cb0a11bfb1224ca0ddc2ea9"
-      }
-    ],
+    tags: new_game.tags,
     localization: {
-      eng: {
+      en: {
         title: new_game.title,
         description: new_game.description,
         imageUrl: new_game.url_image

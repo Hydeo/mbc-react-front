@@ -42,7 +42,8 @@ const authCondition = (authUser) => !!authUser;
 
 const mapStateToProps = state => ({
   user_state: state.user,
-  game_library : state.game_library
+  game_library : state.game_library,
+  i18n : state.i18n
 });
 
 //On injecte les actions possible au props ?

@@ -100,14 +100,6 @@ class ItemList extends React.Component {
     return (
       <Fragment>
         <GameCardsFilter/>
-        <button onClick={() => {
-          this.props.isotope_instance.arrange({
-            // item element provided as argument
-            filter: function (itemElem) {
-              return itemElem.className.includes('.1.');
-            }
-          });
-        }}>Filter</button>
         <div id="item_list" style={itemListStyle}>
           <div style={first_item_sizer} className="item_sizer" />
           <div style={item_gutter} className="item_gutter" />
