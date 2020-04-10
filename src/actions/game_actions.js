@@ -17,7 +17,7 @@ export const create_new_game = new_game => {
     type: "-1",
     tags: new_game.tags,
     localization: {
-      en: {
+      eng: {
         title: new_game.title,
         description: new_game.description,
         imageUrl: new_game.url_image

@@ -19,7 +19,7 @@ class LangSwitcher extends React.Component {
 
   onLangSwitch = (selected_lang)=> {
     if(selected_lang == "GB"){
-      selected_lang = "EN";
+      selected_lang = "ENG";
     }
     i18n.changeLanguage(selected_lang);
     this.props.update_cur_lang(selected_lang.toLowerCase());
