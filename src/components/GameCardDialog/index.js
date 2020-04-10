@@ -65,7 +65,7 @@ class ResponsiveDialog extends React.Component {
   render() {
     const { fullScreen, classes } = this.props;
     const { active_game } = this.state;
-    console.log(this.props);
+    
     if (active_game != null) {
       return (
         <div>

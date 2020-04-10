@@ -13,14 +13,16 @@ class LangSwitcher extends React.Component {
   }
   render() {
     return (
-      <ReactFlagsSelect onSelect={this.onLangSwitch} countries={["US", "FR", "DE"]} showOptionLabel={false} showSelectedLabel={false} defaultCountry="FR" placeholder=""/>
+      <ReactFlagsSelect onSelect={this.onLangSwitch} countries={["GB", "FR", "DE"]} customLabels={{"US": "EN"}} showOptionLabel={false} showSelectedLabel={false} defaultCountry="FR" placeholder=""/>
     );
   }
 
-  onLangSwitch = (selectedLang)=> {
-    console.log(selectedLang);
-    i18n.changeLanguage(selectedLang);
-    this.props.update_cur_lang(selectedLang.toLowerCase());
+  onLangSwitch = (selected_lang)=> {
+    if(selected_lang == "GB"){
+      selected_lang = "ENG";
+    }
+    i18n.changeLanguage(selected_lang);
+    this.props.update_cur_lang(selected_lang.toLowerCase());
   }
 }
 

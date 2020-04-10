@@ -50,7 +50,9 @@ class CreateGame extends Component {
       time_to_play: 0,
       complexity: 0,
       url_image: "https://via.placeholder.com/300x300",
-      description: ""
+      description: "",
+      tags_view :[],
+      tags : {}
     };
   }
 
@@ -60,8 +62,18 @@ class CreateGame extends Component {
     });
   };
 
+  handleTagsChange = name =>event =>{
+
+    var tags_objects =  event.target.value.map((e)=>{
+      return {"_id" : e}
+    })
+     this.setState({
+      "tags_view" : event.target.value,
+      "tags": tags_objects
+    });
+  }
+
   validate = () =>{
-    //TODO validation
     return true;
   }
   
@@ -74,6 +86,15 @@ class CreateGame extends Component {
 
   render() {
     const { classes } = this.props;
+
+    const tags_c = this.props.tags.map(function(e){
+      return(
+        <option value={e._id}>{e.localization[this.cur_lang].trad}</option>
+      )
+    },this.props.i18n)
+
+
+
     return (
       <Fragment>
         <div>
@@ -203,6 +224,26 @@ class CreateGame extends Component {
                     </Select>
                   </FormControl>
 
+                  
+
+                  <Grid item md={9} xs={10}>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel htmlFor="tags">
+                        Tags
+                      </InputLabel>
+                      <Select
+                        value={this.state.tags_view}
+                        onChange={this.handleTagsChange()}
+                        multiple 
+                        inputProps={{
+                          name: "tags",
+                          id: "tags"
+                        }}
+                      >
+                        {tags_c}
+                      </Select>
+                    </FormControl>
+                  </Grid>
                   <Grid item md={9} xs={10}>
                     <TextField
                       id="description"
@@ -237,8 +278,9 @@ class CreateGame extends Component {
   }
 }
 
-const mapStateToProps = sate =>({
-
+const mapStateToProps = state =>({
+    tags : state.tags,
+    i18n : state.i18n
 })
 
 const mapDispatchToProps = dispatch =>

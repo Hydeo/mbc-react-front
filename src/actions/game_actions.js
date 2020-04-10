@@ -15,8 +15,7 @@ export const create_new_game = new_game => {
     age_recommended: new_game.age_recommended,
     complexity: new_game.complexity,
     type: "-1",
-    categories: ["Strat", "Coop"],
-    mechanism: ["Dice", "Diplomatie", "bitchy"],
+    tags: new_game.tags,
     localization: {
       eng: {
         title: new_game.title,

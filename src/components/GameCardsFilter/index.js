@@ -8,33 +8,22 @@ class GameCardsFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        if(props.tags != undefined){
-            var tags_array = props.tags.map((tag, i)=>{
-                console.log(tag);
-                return tag.tagName;
-            })
-        }
-        console.log(tags_array);
         this.state = {
-            tags: tags_array,
             activeFilters: ""
         }
     }
 
-    onChipClick = filterName => () => {
+    onChipClick = filter_value => () => {
 
         var newFilters = this.state.activeFilters;
-        if (this.state.activeFilters.includes("." + filterName)) {
-            newFilters = newFilters.replace("." + filterName, "");
+        if (this.state.activeFilters.includes("." + filter_value)) {
+            newFilters = newFilters.replace("." + filter_value, "");
         }
         else {
-            newFilters += "." + filterName;
+            newFilters += "." + filter_value;
         }
-        console.log(newFilters);
 
         var splitFilters = newFilters.substring(1,newFilters.length).split(".");
-
-        console.log(splitFilters);
         
         this.props.isotope_instance.arrange({
             // item element provided as argument
@@ -56,37 +45,29 @@ class GameCardsFilter extends React.Component {
         this.setState({ activeFilters: newFilters });
     }
 
-    renderChips = (filterName) => {
+    renderChips = (filter_name,filter_value) => {
+        // We use filter_name = localized and filter_value = english in hope that changing the language won't re-render the 
+        // isotope grid
         return (
             <Chip
-                label={filterName}
+                label={filter_name}
                 href="#chip"
-                onClick={this.onChipClick(filterName)}
+                onClick={this.onChipClick(filter_value)}
                 clickable
             />
         )
     }
 
     render() {
+
+        const filters_chip_renderer = this.props.tags.map(function(e, index){
+                return this.renderChips(e.localization[this.cur_lang].trad,e.tagName);
+        }
+        ,{"cur_lang":this.props.i18n.cur_lang,"renderChips":this.renderChips})
+
         return (
             <Fragment>
-                <button onClick={() => {
-                    this.props.isotope_instance.arrange({
-                        // item element provided as argument
-                        filter: function (itemElem) {
-                            return itemElem.className.includes('.1.');
-                        }
-                    });
-                }}>
-                    Filter Component
-              </button>
-
-                {this.state.tags.map(
-                    (item, index) => {
-                        return (this.renderChips(item));
-                    }
-                )}
-
+                {filters_chip_renderer}
             </Fragment>
 
         );
@@ -100,7 +81,8 @@ class GameCardsFilter extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
     isotope_instance: state.collection_isotope.isotope_instance,
     hydrated_game_list: ownProps.hydrated_game_list,
-    tags : state.tags
+    tags : state.tags,
+    "i18n" : state.i18n
 });
 
 //On injecte les actions possible au props ?

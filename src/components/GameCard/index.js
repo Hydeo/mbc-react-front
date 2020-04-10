@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import GameCardDialog from "../GameCardDialog";
 import LazyLoad from "react-lazyload";
+import Chip from '@material-ui/core/Chip';
 import Utils from "../../utils";
 
 const styles = theme => ({
@@ -48,17 +49,26 @@ class GameCard extends React.Component {
         this.props.update_active_game_popup(this.props.game_data);
     }
 
-    get_game_tags = () =>{
-        var tagString = "";
+    get_game_filter_tags = () =>{
+        var tag_string = "";
         this.props.game_data.tags.forEach(element => {
-           // tagString += " "+element+" ";
-           tagString +=" "+element["localization"][this.props.lang]["trad"];
+            //For the filters, we use the english version of the tags, whatever is the current lang
+           tag_string +=" "+element["localization"]["eng"]["trad"];
         });
-        /*this.props.game_data.mechanism.forEach(element => {
-            tagString += " "+element+" ";
-        });*/
-        console.log(tagString);
-        return tagString;
+        return tag_string;
+    }
+
+     renderTagsChips = (filter_name) => {
+        return this.props.game_data.tags.map(function(e){
+            return (
+                <Chip
+                    label={e.localization[this.cur_lang].trad}
+                    href="#chip"
+                    clickable
+                />
+            )
+        },this.props.i18n)
+        
     }
 
     render() {
@@ -66,9 +76,9 @@ class GameCard extends React.Component {
 
         return (
             <Fragment>
-                <div className={"container item_iso "+" "+this.get_game_tags()+" "} style={{ width: item_width }}>
+                <div className={"container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
                     <LazyLoad>
-                        <img className="cover" src={game_data.localization.eng.imageUrl} alt="qzd" onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
+                        <img className="cover" src={Utils.get_game_localized_property(game_data,"imageUrl")} alt={Utils.get_game_localized_property(game_data,"title")} onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
                     <div className="overlay" />
                     <div className="info" onClick={this.show_game_details}>
@@ -78,7 +88,7 @@ class GameCard extends React.Component {
                                 <Grid container
                                     justify="center">
                                     <Grid item>
-                                        {game_data.localization.eng.title}
+                                        {Utils.get_game_localized_property(game_data,"title")}
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -122,7 +132,7 @@ class GameCard extends React.Component {
                                         <img width="25" height="25" src="/images/icons/categories.svg" alt="Kiwi standing on oval"></img>
                                     </Grid>
                                     <Grid item xs={10} style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
-                                        qzd - zqd qzd - qzd -dfdvdrvdrv - srfdazdq - qzd qzddrgdr - sfrhsiuhf - qiedjiosejfio - uqhdqdz - iquzdhiozq - qkzdjizqjd - qzjdizqjd  - qjkzdhqzh - jqzdihqzd - oiqjzdizqd
+                                        {this.renderTagsChips()}
                             </Grid>
                                 </Grid>
                             </Grid>
@@ -144,6 +154,10 @@ GameCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = state => ({
+  i18n : state.i18n
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -153,4 +167,4 @@ const mapDispatchToProps = dispatch =>
   );
 
 
-export default withStyles(styles)(connect(null,mapDispatchToProps)(GameCard));
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(GameCard));
