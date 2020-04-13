@@ -8,6 +8,8 @@ import game_library from "./game_reducer";
 import collection_isotope from "./basic_reducersOLD";
 import game_cards from './game_cards_reducers'
 import i18n from './i18n_reducer';
+import loading_reducer from './loading_reducer';
+import error_reducer from './error_reducer';
 
 export default combineReducers({
   routing: routerReducer,
@@ -18,5 +20,7 @@ export default combineReducers({
   game_library,
   collection_isotope,
   game_cards,
-  i18n
+  i18n,
+  loading_reducer,
+  error_reducer
 })

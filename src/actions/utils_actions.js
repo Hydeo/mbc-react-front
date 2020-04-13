@@ -10,7 +10,10 @@ export const check_token_before_query = callback => {
       return firebase.auth.onAuthStateChanged(user => {
         if (user) {
           dispatch(auth_user(user));
-          user.getIdToken().then(token => callback(token, dispatch));
+
+          user.getIdToken()
+          .then(token => callback(token, dispatch));
+
         } else {
           dispatch(sign_out_user());
         }
@@ -25,4 +28,32 @@ export const update_cur_lang = (lang) =>{
       payload : lang
     });
   };
+}
+
+export const loading_request_start = (request_name) =>{
+    return dispatch => {
+     dispatch(
+      {
+        type: request_name+'_REQUEST'
+      })
+    }
+}
+
+export const loading_request_success = (request_name) =>{
+    return dispatch => {
+     dispatch(
+      {
+        type: request_name+'_SUCCESS'
+      })
+    }
+}
+
+export const loading_request_failure = (request_name,error) =>{
+    return dispatch => {
+     dispatch(
+      {
+        type: request_name+'_FAILURE',
+        payload : error
+      })
+    }
 }

@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import{
   create_new_game 
 } from '../../actions/game_actions';
+import { createLoadingSelector } from '../../selectors/selectors';
+
 
 import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -93,14 +95,12 @@ class CreateGame extends Component {
       )
     },this.props.i18n)
 
-
-
     return (
       <Fragment>
         <div>
           <div>
             <h1>🏁 React Final Form</h1>
-            <h2>Material UI Example</h2>
+            <h2>Is Fetching : {this.props.isFetching ? "Yes" : "No"} </h2>
             <a href="https://github.com/erikras/react-final-form#-react-final-form">
               Read Docs
             </a>
@@ -263,6 +263,7 @@ class CreateGame extends Component {
           <Grid container justify="flex-end">
             <Grid item md={3} xs={10}>
               <Button
+                disabled = {this.props.isFetching}
                 onClick={this.onSubmitGame}
                 variant="contained"
                 color="primary"
@@ -278,10 +279,13 @@ class CreateGame extends Component {
   }
 }
 
+const loadingSelector = createLoadingSelector(['CREATE_NEW_GAME']);
 const mapStateToProps = state =>({
     tags : state.tags,
-    i18n : state.i18n
+    i18n : state.i18n,
+    isFetching: loadingSelector(state.loading_reducer)
 })
+
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

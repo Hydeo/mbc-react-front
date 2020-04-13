@@ -138,10 +138,8 @@ export const verif_auth = () => {
 
 
 export const promies_thunk = () => {
-  console.log('pqs Done!');
   return dispatch => {
     firebase.auth.onAuthStateChanged(user => {
-      console.log(user)
       if (user) {
         return dispatch(()=>{
           dispatch(auth_user(user));

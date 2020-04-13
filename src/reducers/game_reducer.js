@@ -1,9 +1,15 @@
-import { GET_GAME_LIBRARY } from "../actions/game_actions";
+import { 
+  GET_GAME_LIBRARY,
+  CREATE_NEW_GAME
+} from "../actions/game_actions";
 
 const initialState = null;
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'CREATE_NEW_GAME_SUCCESS':
+    return{...state}
+    break;
     case GET_GAME_LIBRARY:
       return {
         ...state,

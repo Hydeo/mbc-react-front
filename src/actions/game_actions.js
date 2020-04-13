@@ -1,7 +1,11 @@
 import axios from "axios";
 import { conf_dev } from "../config";
 
-import { check_token_before_query } from "./utils_actions";
+import { 
+  check_token_before_query,
+  loading_request_start,
+  loading_request_success,
+  loading_request_failure } from "./utils_actions";
 
 export const URL_API = conf_dev.url_api;
 export const CREATE_NEW_GAME = "CREATE_NEW_GAME";
@@ -26,14 +30,19 @@ export const create_new_game = new_game => {
   };
 
   var callback = (token, dispatch) => {
-    axios
+    dispatch(loading_request_start(CREATE_NEW_GAME));
+    return axios
       .post(URL_API + "/game/", { token: token, new_game: new_game_profile })
       .then(request => {
+        dispatch(loading_request_success(CREATE_NEW_GAME));
         dispatch({
           type: CREATE_NEW_GAME,
           payload: request.data
         });
-      });
+      })
+      .catch(error =>{
+        dispatch(loading_request_failure(CREATE_NEW_GAME,error));
+      })
   };
 
   return check_token_before_query(callback);
