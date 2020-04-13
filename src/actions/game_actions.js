@@ -34,17 +34,18 @@ export const create_new_game = new_game => {
     return axios
       .post(URL_API + "/game/", { token: token, new_game: new_game_profile })
       .then(request => {
-        dispatch(loading_request_success(CREATE_NEW_GAME));
+        //SetTimout to non desired double-click, better enforcement could be made 
+        //on the form e.g: desable button until modification is made or redirect
+        setTimeout(()=>{dispatch(loading_request_success(CREATE_NEW_GAME));}, 300);
         dispatch({
           type: CREATE_NEW_GAME,
           payload: request.data
         });
       })
       .catch(error =>{
-        dispatch(loading_request_failure(CREATE_NEW_GAME,error));
+         setTimeout(()=>{dispatch(loading_request_failure(CREATE_NEW_GAME,error))}, 300);
       })
   };
-
   return check_token_before_query(callback);
 };
 
