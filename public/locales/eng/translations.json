@@ -12,5 +12,9 @@
     "sign_in" : "Sign In",
     "create_game" : "Add Game",
     "game_library" : "Game Library"
+  },
+  "create_game" : {
+    "title" : "Create Game Submission",
+    "instructions" : "PLEASE READ THE (not yet done) GUIDE BEFORE SUBMITTING ANY DATA!\n Also, please check that it has not already been added to the current submission queue. "
   }
 }

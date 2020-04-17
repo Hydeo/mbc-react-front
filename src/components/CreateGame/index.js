@@ -5,7 +5,7 @@ import{
   create_new_game 
 } from '../../actions/game_actions';
 import { createLoadingSelector } from '../../selectors/selectors';
-
+import { I18n, Trans } from "react-i18next";
 
 import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -96,21 +96,14 @@ class CreateGame extends Component {
     },this.props.i18n)
 
     return (
+    <I18n ns="translations">
+    {(t, { i18n }) => (
       <Fragment>
         <div>
           <div>
-            <h1>🏁 React Final Form</h1>
+            <h1>🎲 {t("create_game.title")} 🎲</h1>
             <h2>Is Fetching : {this.props.isFetching ? "Yes" : "No"} </h2>
-            <a href="https://github.com/erikras/react-final-form#-react-final-form">
-              Read Docs
-            </a>
-            <p>
-              This example demonstrates using{" "}
-              <a href="https://material-ui.com/api/form-control/#formcontrol">
-                Material UI
-              </a>{" "}
-              form controls.
-            </p>
+            <p>{t("create_game.instructions")}</p>
           </div>
 
           <Grid container justify="center" spacing={8}>
@@ -275,6 +268,8 @@ class CreateGame extends Component {
           </Grid>
         </div>
       </Fragment>
+      )}
+      </I18n>
     );
   }
 }
