@@ -7,10 +7,7 @@ import {
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import GameCardDialog from "../GameCardDialog";
 import LazyLoad from "react-lazyload";
 import Chip from '@material-ui/core/Chip';
 import Utils from "../../utils";

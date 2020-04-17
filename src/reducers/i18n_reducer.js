@@ -11,9 +11,7 @@ export default (state = initialState, action) => {
           ...state,
           cur_lang : action.payload
         }
-      break;
 
-    
     default : 
       return state;
     }

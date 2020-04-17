@@ -7,7 +7,6 @@ import {
 } from "../../actions/game_collection_actions";
 
 import withAuthorization from '../Session/withAuthorization';
-import { db } from '../../firebase';
 
 import LinkList from "../LinkList";
 
@@ -24,8 +23,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { users } = this.state;
-
+    //const { users } = this.state;
     return (
       <div>
         <h1>Home</h1>

@@ -10,7 +10,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_TAG:
       return action.payload.data;
-      break;
 
     default:
       return state;
