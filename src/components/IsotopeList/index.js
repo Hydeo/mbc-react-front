@@ -20,13 +20,13 @@ const item_gutter = {
 
 const first_item_sizer = { width: Utils.calculateIsotopeItemWidthPx(3) + "px" };
 
-const itemListStyle = {
+const IsotopeListStyle = {
   opacity: 0
 }
 
 var imgLoaded = 0;
 
-class ItemList extends React.Component {
+class IsotopeList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ class ItemList extends React.Component {
       }
     };
     imgLoaded = 0;
-    console.log('Construct ItemList');  
+    console.log('Construct IsotopeList');  
   }
 
 
@@ -100,7 +100,7 @@ class ItemList extends React.Component {
     return (
       <Fragment>
         <GameCardsFilter/>
-        <div id="item_list" style={itemListStyle}>
+        <div id="item_list" style={IsotopeListStyle}>
           <div style={first_item_sizer} className="item_sizer" />
           <div style={item_gutter} className="item_gutter" />
 
@@ -183,4 +183,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ItemList);
+)(IsotopeList);
