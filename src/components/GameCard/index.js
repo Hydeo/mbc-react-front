@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import {connect } from "react-redux";
-import {bindActionCreators} from "redux";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
     update_active_game_popup
-  } from "../../actions/game_cards_actions";
+} from "../../actions/game_cards_actions";
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -33,11 +33,17 @@ class GameCard extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            open: false
+            a_chip_height: 32,
+            open: false,
+            tag_chips_container_height: "100%"
         }
+        this.myRef = React.createRef();
     }
+
     handleClickOpen = () => {
+
         this.setState({ open: true });
     };
 
@@ -49,17 +55,17 @@ class GameCard extends React.Component {
         this.props.update_active_game_popup(this.props.game_data);
     }
 
-    get_game_filter_tags = () =>{
+    get_game_filter_tags = () => {
         var tag_string = "";
         this.props.game_data.tags.forEach(element => {
             //For the filters, we use the english version of the tags, whatever is the current lang
-           tag_string +=" "+element["localization"]["eng"]["trad"];
+            tag_string += " " + element["localization"]["eng"]["trad"];
         });
         return tag_string;
     }
 
-     renderTagsChips = (filter_name) => {
-        return this.props.game_data.tags.map(function(e){
+    renderTagsChips = (filter_name) => {
+        return this.props.game_data.tags.map(function(e) {
             return (
                 <Chip
                     label={e.localization[this.cur_lang].trad}
@@ -67,8 +73,20 @@ class GameCard extends React.Component {
                     clickable
                 />
             )
-        },this.props.i18n)
-        
+        }, this.props.i18n)
+
+    }
+
+    tagsChipContainerSetHeight = () => {
+        //Very dirty way to make sure we don't cut a tag chip in the midle 
+        setTimeout(() => {
+            if (typeof this.myRef !== 'undefined' && this.myRef.current != null) {
+                var nb_lines_available_for_chips = Math.floor(this.myRef.current.offsetHeight / this.state.a_chip_height);
+                nb_lines_available_for_chips = nb_lines_available_for_chips < 1 ? 1 : nb_lines_available_for_chips;
+                console.log(Utils.get_game_localized_property(this.props.game_data, "title") + "_" + this.myRef.current.offsetHeight);
+                this.setState({ tag_chips_container_height: nb_lines_available_for_chips * this.state.a_chip_height })
+            }
+        }, 400);
     }
 
     render() {
@@ -127,13 +145,13 @@ class GameCard extends React.Component {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid container wrap="nowrap" spacing={0} style={{ maxHeight: "30%" }}>
+                                <Grid container wrap="nowrap" spacing={0} style={{ maxHeight: "30%"}}>
                                     <Grid item xs={2} className={classes.alignTextItem}>
                                         <img width="25" height="25" src="/images/icons/categories.svg" alt="Kiwi standing on oval"></img>
                                     </Grid>
-                                    <Grid item xs={10} style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                                    <Grid ref={this.myRef} className={"TagsChips"} item xs={10} style={{ overflow: "hidden", height : this.state.tag_chips_container_height}}>
                                         {this.renderTagsChips()}
-                            </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
 
@@ -144,10 +162,11 @@ class GameCard extends React.Component {
         );
     }
 
-    componentDidMount = () =>{
-            //console.log('Did mount');
-            
+    componentDidMount = () => {
+        this.tagsChipContainerSetHeight()
     }
+
+
 }
 
 GameCard.propTypes = {
@@ -155,16 +174,15 @@ GameCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  i18n : state.i18n
+    i18n: state.i18n
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-        update_active_game_popup
-    },
-    dispatch
-  );
+    bindActionCreators({
+            update_active_game_popup
+        },
+        dispatch
+    );
 
 
-export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(GameCard));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(GameCard));
