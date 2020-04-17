@@ -91,7 +91,7 @@ class CreateGame extends Component {
 
     const tags_c = this.props.tags.map(function(e){
       return(
-        <option value={e._id}>{e.localization[this.cur_lang].trad}</option>
+        <option value={e._id} key={e._id}>{e.localization[this.cur_lang].trad}</option>
       )
     },this.props.i18n)
 
@@ -155,7 +155,7 @@ class CreateGame extends Component {
                 </Fragment>
               </Grid>
 
-              <Grid md={9} xs={10}>
+              <Grid item md={9} xs={10}>
                 <Fragment>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="age_recommended">

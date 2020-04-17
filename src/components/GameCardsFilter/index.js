@@ -51,6 +51,7 @@ class GameCardsFilter extends React.Component {
         return (
             <Chip
                 label={filter_name}
+                key={filter_name}
                 href="#chip"
                 onClick={this.onChipClick(filter_value)}
                 clickable

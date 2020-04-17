@@ -65,9 +65,10 @@ class GameCard extends React.Component {
     }
 
     renderTagsChips = (filter_name) => {
-        return this.props.game_data.tags.map(function(e) {
+        return this.props.game_data.tags.map(function(e,index) {
             return (
                 <Chip
+                    key={index}
                     label={e.localization[this.cur_lang].trad}
                     href="#chip"
                     clickable
@@ -83,7 +84,6 @@ class GameCard extends React.Component {
             if (typeof this.myRef !== 'undefined' && this.myRef.current != null) {
                 var nb_lines_available_for_chips = Math.floor(this.myRef.current.offsetHeight / this.state.a_chip_height);
                 nb_lines_available_for_chips = nb_lines_available_for_chips < 1 ? 1 : nb_lines_available_for_chips;
-                console.log(Utils.get_game_localized_property(this.props.game_data, "title") + "_" + this.myRef.current.offsetHeight);
                 this.setState({ tag_chips_container_height: nb_lines_available_for_chips * this.state.a_chip_height })
             }
         }, 400);

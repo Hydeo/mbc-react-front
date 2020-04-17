@@ -44,6 +44,8 @@ const styleLogoNavBar = {
   }
 };
 
+const typo_variant = "subtitle1";
+
 export const authNavbarListItems = (
   <I18n ns="translations">
     {(t, { i18n }) => (
@@ -56,7 +58,7 @@ export const authNavbarListItems = (
             <ListItemText
               disableTypography
               primary={
-                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                   {t("navigation.landing")}
                 </Typography>
               }
@@ -72,7 +74,7 @@ export const authNavbarListItems = (
             <ListItemText
               disableTypography
               primary={
-                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                   {t("navigation.my_collection")}
                 </Typography>
               }
@@ -88,7 +90,7 @@ export const authNavbarListItems = (
             <ListItemText
               disableTypography
               primary={
-                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                   {t("navigation.create_game")}
                 </Typography>
               }
@@ -117,7 +119,7 @@ export const authNavbarListItems = (
             <ListItemText
               disableTypography
               primary={
-                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                   {t("navigation.game_library")}
                 </Typography>
               }
@@ -133,7 +135,7 @@ export const authNavbarListItems = (
             <ListItemText
               disableTypography
               primary={
-                <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                   {t("navigation.my_account")}
                 </Typography>
               }
@@ -211,7 +213,7 @@ export const nonAuthDrawerListItems = (
               <ListItemText
                 disableTypography
                 primary={
-                  <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                  <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                     {t("navigation.landing")}
                   </Typography>
                 }
@@ -235,7 +237,7 @@ export const nonAuthDrawerListItems = (
               <ListItemText
                 disableTypography
                 primary={
-                  <Typography variant="subheading" style={{ color: "#FFFFFF" }}>
+                  <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
                     {t("navigation.sign_in")}
                   </Typography>
                 }
