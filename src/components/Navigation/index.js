@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import {connect } from "react-redux";
+import { Link, withRouter  } from "react-router-dom";
 
 import { I18n, Trans } from "react-i18next";
 
@@ -19,9 +20,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import GameCard from "../GameCard"
 import {
-  authDrawerListItems,
+  AuthDrawerListItems,
   nonAuthDrawerListItems,
-  authNavbarListItems
+  AuthNavbarListItems
 } from "./navigationItems";
 
 import Grid from '@material-ui/core/Grid';
@@ -98,6 +99,8 @@ class Navigation extends React.Component {
               {authUser =>
                 authUser ? (
                   <NavigationAuth
+                    userDisplayName = {this.props.user_state.user_authed.displayName}
+                    userPhotoURL = {this.props.user_state.user_authed.photoURL}
                     classes={classes}
                     width={width}
                     theme={theme}
@@ -128,15 +131,17 @@ class Navigation extends React.Component {
 }
 
 const NavigationAuth = props => {
-  const { classes, width, theme, handleDrawerToggle, mobileOpen } = props;
+  const { classes, width, theme, handleDrawerToggle, mobileOpen, userDisplayName, userPhotoURL } = props;
   return (
     <Fragment>
       <AppBar className={classes.toolbar}>
         <Toolbar>
           {isWidthUp("sm", width) ? (
-            <AuthWideScreenNavigation classes={classes} />
+            <AuthWideScreenNavigation classes={classes} userDisplayName={userDisplayName} userPhotoURL={userPhotoURL}/>
           ) : (
               <SmallScreenNavigation
+                userDisplayName={userDisplayName}
+                userPhotoURL={userPhotoURL}
                 classes={classes}
                 handleDrawerToggle={handleDrawerToggle}
               />
@@ -144,6 +149,8 @@ const NavigationAuth = props => {
         </Toolbar>
       </AppBar>
       <AuthDrawer
+        userDisplayName={userDisplayName}
+        userPhotoURL={userPhotoURL}
         theme={theme}
         classes={classes}
         mobileOpen={mobileOpen}
@@ -180,8 +187,8 @@ const NavigationNonAuth = props => {
 };
 
 const AuthWideScreenNavigation = props => {
-  const { classes } = props;
-  return <Fragment>{authNavbarListItems}</Fragment>;
+  const { classes, userDisplayName, userPhotoURL } = props;
+  return <Fragment><AuthNavbarListItems userDisplayName={userDisplayName} userPhotoURL={userPhotoURL}/></Fragment>;
 };
 
 const NonAuthWideScreenNavigation = props => {
@@ -210,7 +217,7 @@ const SmallScreenNavigation = props => {
 };
 
 const AuthDrawer = props => {
-  const { classes, theme, handleDrawerToggle, mobileOpen } = props;
+  const { classes, theme, handleDrawerToggle, mobileOpen, userDisplayName, userPhotoURL} = props;
   return (
     <Drawer
       variant="temporary"
@@ -224,7 +231,7 @@ const AuthDrawer = props => {
         keepMounted: true // Better open performance on mobile.
       }}
     >
-      <List>{authDrawerListItems}</List>
+      <List><AuthDrawerListItems userDisplayName={userDisplayName} userPhotoURL={userPhotoURL}/></List>
     </Drawer>
   );
 };
@@ -259,4 +266,8 @@ NavigationNonAuth.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withWidth()(withStyles(styles, { withTheme: true })(Navigation));
+const mapStateToProps = state => ({
+  user_state: state.user,
+});
+
+export default withWidth()(withStyles(styles, { withTheme: true })(withRouter(connect(mapStateToProps,null)(Navigation))));

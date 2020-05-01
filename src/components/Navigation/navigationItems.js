@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import LangSwitcher from "./langSwitcher";
 
+import Avatar from "@material-ui/core/Avatar";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -46,7 +47,9 @@ const styleLogoNavBar = {
 
 const typo_variant = "subtitle1";
 
-export const authNavbarListItems = (
+export const AuthNavbarListItems = props => {
+  const { userDisplayName, userPhotoURL} = props;
+  return (
   <I18n ns="translations">
     {(t, { i18n }) => (
       <Fragment>
@@ -130,13 +133,13 @@ export const authNavbarListItems = (
         <Link style={styleLink} to={routes.ACCOUNT}>
           <ListItem style={styleListItem} button>
             <ListItemIcon>
-              <AccountCircleIcon style={{ color: "white" }} color={"inherit"} />
+              <Avatar alt="Avatar" src={userPhotoURL} />
             </ListItemIcon>
             <ListItemText
               disableTypography
               primary={
                 <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
-                  {t("navigation.my_account")}
+                  {userDisplayName}
                 </Typography>
               }
             />
@@ -152,46 +155,48 @@ export const authNavbarListItems = (
     )}
   </I18n>
 );
+}
+export const AuthDrawerListItems = props =>{
+  const { userDisplayName, userPhotoURL} = props;
+  return(
+    <I18n ns="translations">
+      {(t, { i18n }) => (
+        <Fragment>
+          <Link to={routes.LANDING}>
+            <ListItem style={styleListItem} button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("navigation.landing")} />
+            </ListItem>
+          </Link>
 
-export const authDrawerListItems = (
-  <I18n ns="translations">
-    {(t, { i18n }) => (
-      <Fragment>
-        <Link to={routes.LANDING}>
+          <Link to={routes.HOME}>
+            <ListItem style={styleListItem} button>
+              <ListItemIcon>
+                <AppsIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("navigation.my_collection")} />
+            </ListItem>
+          </Link>
+
+          <Link to={routes.ACCOUNT}>
+            <ListItem style={styleListItem} button>
+              <ListItemIcon>
+                <Avatar alt="Avatar" src={userPhotoURL} />
+              </ListItemIcon>
+              <ListItemText primary={userDisplayName} />
+            </ListItem>
+          </Link>
+
           <ListItem style={styleListItem} button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("navigation.landing")} />
+            <SignOutButton />
           </ListItem>
-        </Link>
-
-        <Link to={routes.HOME}>
-          <ListItem style={styleListItem} button>
-            <ListItemIcon>
-              <AppsIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("navigation.my_collection")} />
-          </ListItem>
-        </Link>
-
-        <Link to={routes.ACCOUNT}>
-          <ListItem style={styleListItem} button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("navigation.my_account")} />
-          </ListItem>
-        </Link>
-
-        <ListItem style={styleListItem} button>
-          <SignOutButton />
-        </ListItem>
-      </Fragment>
-    )}
-  </I18n>
-);
-
+        </Fragment>
+      )}
+    </I18n>
+  );
+}
 /*This one is used for wide & mobile thanks to the Hidden*/
 
 export const nonAuthDrawerListItems = (
