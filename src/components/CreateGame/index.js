@@ -19,6 +19,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Button from "@material-ui/core/Button";
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
@@ -49,9 +51,10 @@ class CreateGame extends Component {
       age_recommended: 0,
       nb_player_min: 0,
       nb_player_max: 0,
-      time_to_play: 0,
+      time_to_play_min: 0,
+      time_to_play_max: 0,
       complexity: 0,
-      url_image: "https://via.placeholder.com/300x300",
+      url_image: "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png",
       description: "",
       tags_view :[],
       tags : {}
@@ -85,6 +88,18 @@ class CreateGame extends Component {
     }
   }
 
+  handlePlayingTimeChange = (event,newValue)=>{
+    this.setState({
+      time_to_play_min : newValue[0],
+      time_to_play_max : newValue[1]
+    });
+  }
+  handleNumberOfPlayerChange = (event,newValue)=>{
+    this.setState({
+      nb_player_min : newValue[0],
+      nb_player_max : newValue[1]
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -128,36 +143,19 @@ class CreateGame extends Component {
                 <TextField
                   id="url_image"
                   label="Url Cover"
+                  fullWidth={true} 
                   className={classes.textField}
                   value={this.state.url_image}
                   onChange={this.handleChange("url_image")}
                   margin="normal"
                 />
               </Grid>
-              <Grid item md={9} xs={10}>
-                <Fragment>
-                  <TextField
-                    id="time_to_play"
-                    label="Time to Play"
-                    className={classes.textField}
-                    value={this.state.time_to_play}
-                    onChange={this.handleChange("time_to_play")}
-                    margin="normal"
-                  />
-                  <TextField
-                    id="complexity"
-                    label="Complexity"
-                    className={classes.textField}
-                    value={this.state.complexity}
-                    onChange={this.handleChange("complexity")}
-                    margin="normal"
-                  />
-                </Fragment>
-              </Grid>
 
               <Grid item md={9} xs={10}>
                 <Fragment>
-                  <FormControl className={classes.formControl}>
+                  <FormControl
+                    fullWidth={true} 
+                    lassName={classes.formControl}>
                     <InputLabel htmlFor="age_recommended">
                       Recommended Age
                     </InputLabel>
@@ -177,50 +175,10 @@ class CreateGame extends Component {
                     </Select>
                   </FormControl>
 
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="nb_player_min">
-                      Minimum players
-                    </InputLabel>
-                    <Select
-                      native
-                      value={this.state.nb_player_min}
-                      onChange={this.handleChange("nb_player_min")}
-                      inputProps={{
-                        name: "nb_player_min",
-                        id: "nb_player_min"
-                      }}
-                    >
-                      <option value="" />
-                      <option value={10}>Ten</option>
-                      <option value={20}>Twenty</option>
-                      <option value={30}>Thirty</option>
-                    </Select>
-                  </FormControl>
-
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="nb_player_max">
-                      Maximun players
-                    </InputLabel>
-                    <Select
-                      native
-                      value={this.state.nb_player_max}
-                      onChange={this.handleChange("nb_player_max")}
-                      inputProps={{
-                        name: "nb_player_max",
-                        id: "nb_player_max"
-                      }}
-                    >
-                      <option value="" />
-                      <option value={10}>Ten</option>
-                      <option value={20}>Twenty</option>
-                      <option value={30}>Thirty</option>
-                    </Select>
-                  </FormControl>
-
-                  
-
                   <Grid item md={9} xs={10}>
-                    <FormControl className={classes.formControl}>
+                    <FormControl 
+                      fullWidth={true} 
+                      className={classes.formControl}>
                       <InputLabel htmlFor="tags">
                         Tags
                       </InputLabel>
@@ -247,6 +205,40 @@ class CreateGame extends Component {
                       multiline={true}
                       fullWidth
                       margin="normal"
+                    />
+                  </Grid>
+                  <Grid>
+                    <Typography id="discrete-slider" gutterBottom>
+                      Playing Time
+                    </Typography>
+                    <Slider
+                      defaultValue={[20,30]}
+                      getAriaValueText={(value)=>{return "${values}min"}}
+                      aria-labelledby="discrete-slider"
+                      valueLabelDisplay="auto"
+                      valueLabelDisplay="on"
+                      onChangeCommitted={this.handlePlayingTimeChange}
+                      step={10}
+                      marks
+                      min={10}
+                      max={240}
+                    />
+                  </Grid>
+                  <Grid>
+                    <Typography id="discrete-slider" gutterBottom>
+                      Number of Players
+                    </Typography>
+                    <Slider
+                      defaultValue={[1,4]}
+                      getAriaValueText={(value)=>{return "${values}min"}}
+                      aria-labelledby="discrete-slider"
+                      valueLabelDisplay="auto"
+                      valueLabelDisplay="on"
+                      onChangeCommitted={this.handleNumberOfPlayerChange}
+                      step={1}
+                      marks
+                      min={1}
+                      max={10}
                     />
                   </Grid>
                 </Fragment>

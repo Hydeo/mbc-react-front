@@ -122,7 +122,7 @@ class ResponsiveDialog extends React.Component {
                         </Grid>
                         <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
-                          <div style={marginTextItem}>{active_game.time_to_play}</div>
+                          <div style={marginTextItem}>{active_game.time_to_play_min} - {active_game.time_to_play_max}</div>
                         </Grid>
                         <Grid item md={12}>
                           <Grid container>
@@ -160,7 +160,7 @@ class ResponsiveDialog extends React.Component {
       );
     }
     else {
-      return (<div>No Game Info</div>)
+      return (<div></div>)
     }
   }
 }

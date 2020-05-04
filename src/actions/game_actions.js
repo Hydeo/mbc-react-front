@@ -15,7 +15,8 @@ export const create_new_game = new_game => {
   var new_game_profile = {
     nb_player_min: new_game.nb_player_min,
     nb_player_max: new_game.nb_player_max,
-    time_to_play: new_game.time_to_play,
+    time_to_play_max: new_game.time_to_play_min,
+    time_to_play_min: new_game.time_to_play_max,
     age_recommended: new_game.age_recommended,
     complexity: new_game.complexity,
     type: "-1",

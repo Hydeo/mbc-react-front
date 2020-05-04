@@ -138,7 +138,7 @@ class GameCard extends React.Component {
                                         </Grid>
                                         <Grid item className={classes.alignTextItem}>
                                             {/*TODO time to play need to be a range*/} 
-                                            {game_data.time_to_play}
+                                            {game_data.time_to_play_min} - {game_data.time_to_play_max}
                                     <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
                                         </Grid>
                                     </Grid>
