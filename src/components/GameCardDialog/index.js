@@ -12,6 +12,7 @@ import AddGameToFavorite from '../AddGameToFavorite/index.js';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import Utils from "../../utils";
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -45,6 +46,7 @@ class ResponsiveDialog extends React.Component {
     super(props);
     this.state = {
       open: this.props.open,
+      cur_lang : "eng",
       active_game: null
     };
     
@@ -58,14 +60,28 @@ class ResponsiveDialog extends React.Component {
   componentWillReceiveProps(props) {
     this.setState({
       open: props.game_cards.open,
+      cur_lang : props.game_cards.cur_lang,
       active_game: props.game_cards.active_game
     })
   }
 
+  renderTagsChips = () => {
+        return this.state.active_game.tags.map(function(e,index) {
+            return (
+                <Chip
+                    key={index}
+                    label={e.localization[this.cur_lang].trad}
+                    href="#chip"
+                    clickable
+                />
+            )
+        }, this.props.i18n)
+
+    }
+
   render() {
     const { fullScreen, classes } = this.props;
     const { active_game } = this.state;
-    
     if (active_game != null) {
       return (
         <div>
@@ -89,19 +105,19 @@ class ResponsiveDialog extends React.Component {
                       <Grid container justify="center">
                         <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
-                          <div style={marginTextItem}>2 - 4</div>
+                          <div style={marginTextItem}>{active_game.nb_player_min} - {active_game.nb_player_max}</div>
                         </Grid>
                         <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
-                          <div style={marginTextItem}>12+</div>
+                          <div style={marginTextItem}>{active_game.age_recommended}+</div>
                         </Grid>
                         <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/complexity.svg" alt="Kiwi standing on oval"></img>
-                          <div style={marginTextItem}>3.5</div>
+                          <div style={marginTextItem}>{active_game.complexity}</div>
                         </Grid>
                         <Grid item xs={6} style={alignTextItem}>
                           <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
-                          <div style={marginTextItem}>40-80</div>
+                          <div style={marginTextItem}>{active_game.time_to_play}</div>
                         </Grid>
                         <Grid item md={12}>
                           <Grid container>
@@ -109,8 +125,7 @@ class ResponsiveDialog extends React.Component {
                                 <img width="25" height="25" src="/images/icons/categories.svg" alt="Kiwi standing on oval"></img>
                             </Grid>
                             <Grid item xs={10}   style={{overflow : "hidden",textOverflow: "ellipsis"}}>
-                                 qzd - zqd qzd - qzd -dfdvdrvdrv - srfdazdq - qzd qzddrgdr - sfrhsiuhf - qiedjiosejfio - uqhdqdz - iquzdhiozq - qkzdjizqjd - qzjdizqjd  - qjkzdhqzh - jqzdihqzd - oiqjzdizqd
-                                
+                              {this.renderTagsChips()}
                             </Grid>
                           </Grid>
                         </Grid>
@@ -150,7 +165,8 @@ ResponsiveDialog.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  game_cards : state.game_cards
+  game_cards : state.game_cards,
+  "i18n" : state.i18n
 });
 
 //On injecte les actions possible au props ?

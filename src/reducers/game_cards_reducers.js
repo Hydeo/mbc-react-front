@@ -11,10 +11,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
       case UPDATE_ACTIVE_GAME_POPUP:
-        return {
-          active_game : action.payload,
-          open : true
-        }
+        return {...action.payload}
     
       case CLOSE_GAME_POPUP :
         return{

@@ -10,7 +10,6 @@ import SilentCatch from "../ErrorHandling/SilentCatch";
 
 import { conf_dev } from "../../config";
 import Utils from "../../utils.js";
-import LinkCard from "../LinkCards";
 import GameCard from "../GameCard";
 import GameCardDialog from "../GameCardDialog";
 import GameCardsFilter from "../GameCardsFilter";

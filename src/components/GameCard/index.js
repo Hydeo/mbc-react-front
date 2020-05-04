@@ -49,7 +49,7 @@ class GameCard extends React.Component {
     };
 
     show_game_details = () => {
-        this.props.update_active_game_popup(this.props.game_data);
+        this.props.update_active_game_popup({"active_game":this.props.game_data, open:true});
     }
 
     get_game_filter_tags = () => {
@@ -88,7 +88,6 @@ class GameCard extends React.Component {
 
     render() {
         const { classes, game_data, item_width } = this.props;
-
         return (
             <Fragment>
                 <div className={"container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
@@ -116,11 +115,12 @@ class GameCard extends React.Component {
                                     >
                                         <Grid item className={classes.alignTextItem}>
                                             <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
-                                            2 - 4
+                                           {/*TODO nb players to play need to be a range*/}
+                                           {game_data.nb_player_min} - {game_data.nb_player_max}
                                 </Grid>
                                         <Grid item className={classes.alignTextItem}>
                                             <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
-                                            12+
+                                            {game_data.age_recommended}
                                 </Grid>
                                     </Grid>
                                 </Grid>
@@ -133,11 +133,12 @@ class GameCard extends React.Component {
                                         alignItems="flex-end"
                                     >
                                         <Grid item className={classes.alignTextItem}>
-                                            3.5
+                                            {game_data.complexity}
                                     <img width="25" height="25" src="/images/icons/complexity.svg" alt="Kiwi standing on oval"></img>
                                         </Grid>
                                         <Grid item className={classes.alignTextItem}>
-                                            40-80
+                                            {/*TODO time to play need to be a range*/} 
+                                            {game_data.time_to_play}
                                     <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
                                         </Grid>
                                     </Grid>
