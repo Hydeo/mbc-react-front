@@ -14,6 +14,10 @@ import Utils from "../../utils";
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
+import {
+    update_active_game_popup
+} from "../../actions/game_cards_actions";
+
 
 const styles = theme => ({
   titleColor: {
@@ -55,6 +59,7 @@ class ResponsiveDialog extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.update_active_game_popup({"active_game":this.props.game_data, open:false});
   };
 
   componentWillReceiveProps(props) {
@@ -170,13 +175,13 @@ const mapStateToProps = state => ({
 });
 
 //On injecte les actions possible au props ?
-/*const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      update
+      update_active_game_popup
     },
     dispatch
-  );*/
+  );
 
 
-export default withMobileDialog()(withStyles(styles)(connect(mapStateToProps,null)(ResponsiveDialog)));
+export default withMobileDialog()(withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(ResponsiveDialog)));
