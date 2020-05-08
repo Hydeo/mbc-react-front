@@ -6,7 +6,6 @@ import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { update_isotope, set_isotope } from "../../actions/basic_actions";
-import SilentCatch from "../ErrorHandling/SilentCatch";
 
 import { conf_dev } from "../../config";
 import Utils from "../../utils.js";
