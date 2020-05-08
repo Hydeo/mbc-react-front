@@ -80,7 +80,7 @@ class GameCardsFilter extends React.Component {
 
 //On recupere la state dans les props
 const mapStateToProps = (state, ownProps) => ({
-    isotope_instance: state.collection_isotope.isotope_instance,
+    isotope_instance: state.isotope.isotope_instance,
     hydrated_game_list: ownProps.hydrated_game_list,
     tags : state.tags,
     "i18n" : state.i18n

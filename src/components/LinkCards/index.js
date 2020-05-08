@@ -188,7 +188,7 @@ class LinkCard extends React.Component {
 
 //On recupere la tate dans les props
 const mapStateToProps = state => ({
-  isotope_instance: state.collection_isotope.isotope_instance,
+  isotope_instance: state.isotope.isotope_instance,
   i18n: state.i18n
 });
 

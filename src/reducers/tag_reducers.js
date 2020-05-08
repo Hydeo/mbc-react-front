@@ -2,9 +2,7 @@ import {
   GET_ALL_TAG
 } from "../actions/tag_actions";
 
-const initialState = {
-  tags: []
-};
+const initialState = []
 
 export default (state = initialState, action) => {
   switch (action.type) {

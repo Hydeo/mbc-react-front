@@ -13,7 +13,7 @@ export const SET_ISOTOPE = 'SET_ISOTOPE'
 
 //export const URL_API = "https://my-link-list.herokuapp.com";
 export const URL_API = conf_dev.url_api;
-
+/*
 export const get_list_links = (list_name) => {
 	//Redux Thunk will inject dispatch here
 	return dispatch => {
@@ -63,7 +63,7 @@ export const delete_link = (idLink) => {
 			)
 	}
 }
-
+*/
 export const update_isotope = (iso_instance = null, force_new = false) => {
 	return dispatch => {
 		document.getElementById("item_list").style.opacity = "0";
