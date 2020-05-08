@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { update_isotope, set_isotope } from "../../actions/basic_actions";
+import { update_isotope, set_isotope } from "../../actions/isotope_actions";
 import Chip from '@material-ui/core/Chip';
 
 class GameCardsFilter extends React.Component {

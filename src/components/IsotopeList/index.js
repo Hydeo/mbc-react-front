@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { update_isotope, set_isotope } from "../../actions/basic_actions";
+import { update_isotope, set_isotope } from "../../actions/isotope_actions";
 
 import { conf_dev } from "../../config";
 import Utils from "../../utils.js";

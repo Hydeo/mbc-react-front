@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as routes from "../../constants/routes";
-import { update_isotope, delete_link } from "../../actions/basic_actions";
+import { update_isotope, delete_link } from "../../actions/isotope_actions";
 import {
   add_game_to_collection,
   remove_game_from_collection

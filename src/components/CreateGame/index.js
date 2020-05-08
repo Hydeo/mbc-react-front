@@ -273,7 +273,7 @@ const loadingSelector = createLoadingSelector(['CREATE_NEW_GAME']);
 const mapStateToProps = state =>({
     tags : state.tags,
     i18n : state.i18n,
-    isFetching: loadingSelector(state.loading_reducer)
+    isFetching: loadingSelector(state.loading)
 })
 
 

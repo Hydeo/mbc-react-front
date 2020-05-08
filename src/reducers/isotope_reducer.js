@@ -4,7 +4,7 @@ ADD_LINK,
 DELETE_LINK,
 UPDATE_ISOTOPE,
 SET_ISOTOPE
-} from '../actions/basic_actions';
+} from '../actions/isotope_actions';
 
 const initialState = {
 	test_action : 0,
