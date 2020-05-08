@@ -43,9 +43,12 @@ const styles = theme => ({
   }
 });
 
+const default_cover_url = "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png";
+
 class CreateGame extends Component {
+
   constructor(props) {
-    super(props);
+    super(props);  
     this.state = {
       title: "",
       age_recommended: 0,
@@ -54,7 +57,7 @@ class CreateGame extends Component {
       time_to_play_min: 0,
       time_to_play_max: 0,
       complexity: 0,
-      url_image: "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png",
+      url_image: "",
       description: "",
       tags_view :[],
       tags : {}
@@ -125,7 +128,7 @@ class CreateGame extends Component {
             <Grid item md={3} xs={10}>
               <img
                 style={{ maxWidth: "100%" }}
-                src={this.state.url_image}
+                src={this.state.url_image == "" ? default_cover_url : this.state.url_image}
                 alt="BoardGame Picture"
               />
             </Grid>
