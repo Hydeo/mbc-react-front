@@ -9,7 +9,6 @@ import { firebase } from '../firebase';
 
 
 const get_authentificated_user = () => {
-  console.log('in fonction chelou');
   var user_authed = null;
   /*firebase.auth.onAuthStateChanged(authUser => {
     if(authUser){

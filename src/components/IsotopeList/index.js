@@ -39,7 +39,7 @@ class IsotopeList extends React.Component {
       }
     };
     imgLoaded = 0;
-    console.log('Construct IsotopeList');  
+   
   }
 
 
@@ -73,11 +73,10 @@ class IsotopeList extends React.Component {
 
   imgLoadedCounter = () => {
     imgLoaded++;
-    //console.log('imgLaoded ' + imgLoaded);
+   
     if (imgLoaded == this.props.hydrated_game_list.gameList.length) {
-      //console.log('Should update layout');
+      
       if (this.state.first_render == true) {
-        //console.log('Frist render');
 
         this.props.update_isotope(this.props.isotope_instance, true);
         this.setState({
@@ -85,7 +84,6 @@ class IsotopeList extends React.Component {
         });
       }
       else {
-        //console.log('Not Frist render');
         this.props.update_isotope(this.props.isotope_instance, true);
       }
 
@@ -120,12 +118,8 @@ class IsotopeList extends React.Component {
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    //console.log('Should rerender  - size ');
+  
     if (document.getElementById("item_list").childElementCount > 3) {
-      /*console.log('Size Game List : ' + this.props.hydrated_game_list.gameList.length);
-      console.log('Size Game DOM : ' + document.getElementById("item_list").childElementCount);
-      console.log( this.props.isotope_instance);
-      this.props.update_isotope(this.props.isotope_instance);*/
       return false;
     }
     return true;
@@ -133,12 +127,6 @@ class IsotopeList extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener("resize", this.updateDimensions);
-    //console.log('Did mount List');
-    //this.props.update_isotope(this.props.isotope_instance);
-    /*if (this.state.first_render == true) {
-      this.setState({ first_render: false });
-      this.props.update_isotope(this.props.isotope_instance, true);
-    }*/
   };
 
   componentWillUnmount() {
@@ -150,14 +138,6 @@ class IsotopeList extends React.Component {
     Object.entries(this.props).forEach(([key, val]) =>
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );
-    //console.log('Did UPDATE');
-
-    /*if (this.state.first_render == true) {
-      this.setState({ first_render: false });
-      this.props.update_isotope(this.props.isotope_instance, true);
-    } else {
-      this.props.update_isotope(this.props.isotope_instance);
-    }*/
   };
 }
 

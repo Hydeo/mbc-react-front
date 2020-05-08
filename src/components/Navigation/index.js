@@ -198,7 +198,6 @@ const NonAuthWideScreenNavigation = props => {
 
 const SmallScreenNavigation = props => {
   const { classes, handleDrawerToggle } = props;
-  console.log("smallscreen");
   return (
     <Fragment>
       <IconButton

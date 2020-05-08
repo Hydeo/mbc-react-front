@@ -31,7 +31,6 @@ class GameCardsFilter extends React.Component {
                 var itemClassName = itemElem.className;
                 var showItem = true;
                 for(var i = 0 ; i < splitFilters.length ; i++){
-                   //console.log(filter +"-"+itemClassName.includes(filter)+ "=>"+  itemClassName);
                     if (itemClassName.includes(splitFilters[i]) == false){
                         showItem = false;
                         break;
