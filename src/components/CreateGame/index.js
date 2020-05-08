@@ -21,19 +21,27 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import Button from "@material-ui/core/Button";
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const styles = theme => ({
     root: {
         display: "flex",
         flexWrap: "wrap"
     },
+
+    divSpacer : {
+      height : theme.spacing.unit*4
+    },
+
     sliderMargin: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit
     },
+
     selectEmpty: {
         marginTop: theme.spacing.unit * 2
     },
+
     button: {
         margin: theme.spacing.unit
     }
@@ -73,11 +81,11 @@ class CreateGame extends Component {
         super(props);
         this.state = {
             title: "",
-            age_recommended: 0,
-            nb_player_min: 0,
-            nb_player_max: 0,
-            time_to_play_min: 0,
-            time_to_play_max: 0,
+            age_recommended: 5,
+            nb_player_min: 1,
+            nb_player_max: 4,
+            time_to_play_min: 10,
+            time_to_play_max: 30,
             complexity: 0,
             url_image: "",
             description: "",
@@ -92,13 +100,11 @@ class CreateGame extends Component {
         });
     };
 
-    handleTagsChange = name => event => {
-
-        var tags_objects = event.target.value.map((e) => {
-            return { "_id": e }
+    handleTagsChange = (event,newValues) => {
+        var tags_objects = newValues.map((e) => {
+            return { "_id": e.id }
         })
         this.setState({
-            "tags_view": event.target.value,
             "tags": tags_objects
         });
     }
@@ -108,7 +114,8 @@ class CreateGame extends Component {
     }
 
     onSubmitGame = () => {
-        if (this.validate()) {
+      console.log(this.state);
+        if (this.validate()) {        
             this.props.create_new_game(this.state);
         }
     }
@@ -123,6 +130,12 @@ class CreateGame extends Component {
         this.setState({
             nb_player_min: newValue[0],
             nb_player_max: newValue[1]
+        });
+    }
+
+    handleAgeRecommandedChange = (event, newValue)=>{
+        this.setState({
+            age_recommended: newValue
         });
     }
 
@@ -143,9 +156,9 @@ class CreateGame extends Component {
     render() {
         const { classes } = this.props;
 
-        const tags_c = this.props.tags.map(function(e) {
+        const tags_dico = this.props.tags.map(function(e) {
             return (
-                <option value={e._id} key={e._id}>{e.localization[this.cur_lang].trad}</option>
+                {title: e.localization[this.cur_lang].trad, id : e._id}
             )
         }, this.props.i18n)
 
@@ -174,6 +187,7 @@ class CreateGame extends Component {
                       <TextField
                         id="title"
                         label="Board Game Name"
+                        fullWidth
                         className={classes.textField}
                         value={this.state.title}
                         onChange={this.handleChange("title")}
@@ -190,24 +204,25 @@ class CreateGame extends Component {
                         margin="normal"
                       />
                       
-                      <InputLabel htmlFor="tags">
-                        Tags
-                      </InputLabel>
-                      <Select
-                        fullWidth
-                        value={this.state.tags_view}
-                        onChange={this.handleTagsChange()}
-                        multiple 
-                        inputProps={{
-                          name: "tags",
-                          id: "tags"
-                        }}
-                      >
-                        {tags_c}
-                      </Select>     
+                      
+                      <Autocomplete
+                        multiple
+                        id="tags-outlined"
+                        options={tags_dico}
+                        getOptionLabel={(option) => option.title}
+                        filterSelectedOptions
+                        onChange={this.handleTagsChange}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Board Game Tags"
+                            placeholder="Favorites"
+                          />
+                        )}
+                      />
 
                    
-                      
+                      <div className={classes.divSpacer}></div>
                       <Typography id="discrete-slider" gutterBottom>
                         Recommended Age
                       </Typography>
@@ -216,7 +231,7 @@ class CreateGame extends Component {
                         defaultValue={this.state.age_recommended}
                         aria-labelledby="discrete-slider"
                         valueLabelDisplay="auto"
-                        onChangeCommitted={this.handleChange("age_recommended")}
+                        onChangeCommitted={this.handleAgeRecommandedChange}
                         step={null}
                         marks = {recommended_age_marks}
                         min = {recommended_age_marks[0].value}
@@ -228,7 +243,7 @@ class CreateGame extends Component {
                       </Typography>
                       <Slider
                         className={classes.sliderMargin}
-                        defaultValue={[20,30]}
+                        defaultValue={[this.state.time_to_play_min,this.state.time_to_play_max]}
                         getAriaValueText={(value)=>{return "${values}min"}}
                         aria-labelledby="discrete-slider"
                         valueLabelDisplay="auto"
@@ -244,7 +259,7 @@ class CreateGame extends Component {
                       </Typography>
                       <Slider
                         className={classes.sliderMargin}
-                        defaultValue={[1,4]}
+                        defaultValue={[this.state.nb_player_min,this.state.nb_player_min]}
                         getAriaValueText={(value)=>{return "${values}min"}}
                         aria-labelledby="discrete-slider"
                         valueLabelDisplay="auto"
