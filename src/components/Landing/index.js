@@ -4,6 +4,7 @@ import GameLibrary from '../GameLibrary';
 
 import { withStyles } from '@material-ui/core/styles';
 import flags_img from "../../assets/landing/flags.png";
+import together_img from "../../assets/landing/together.png";
 
 const styles = theme => ({
     landingRoot:{
@@ -54,6 +55,14 @@ const styles = theme => ({
     languagesBlock: {
     	'&::-webkit-mask-image':'-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))',
     	maskImage: 'linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))'
+    },
+    playTogetherBlock:{
+    	backgroundImage: `url(${together_img})`,
+    	backgroundRepeat: "no-repeat",
+    	backgroundSize: "cover",
+    	"& > div":{
+    		maxWidth : "40%"
+    	}
     }
 });
 
@@ -96,6 +105,15 @@ class LandingPage extends React.Component {
 			    	</div>
 			    </div>
 
+			    <div className={classes.presentationBlock, classes.playTogetherBlock}>
+			    	<div>
+				    	<h2>Lorem ipsum dolor sit</h2>
+				    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a vulputate tellus, ac ullamcorper ante. Mauris eget condimentum purus. Ut vitae iaculis mauris. Aenean dictum dignissim odio, et ornare sapien vehicula vulputate. Aenean vitae lacus nunc. Nunc pellentesque, lorem sed tempor hendrerit, enim mi cursus sapien, non vulputate magna quam ac lorem. Nam eget eros vel nibh sollicitudin tempus eget vel mi. Etiam convallis sodales elit, ut faucibus velit iaculis ac. Suspendisse sit amet risus quis mi suscipit viverra eget quis massa. In nec tristique felis. Cras viverra elit in enim mattis vestibulum.</p>
+				    	<p>Maecenas ac mi ipsum. Donec eget justo ultrices, scelerisque orci dapibus, volutpat felis. Vivamus tempor ipsum a massa blandit varius. Sed nisl ante, facilisis vel velit sed, venenatis malesuada sapien. Ut ut consectetur neque. Nam iaculis libero a lectus ullamcorper volutpat non a lacus. Morbi malesuada, neque in malesuada placerat, nisi turpis lobortis nulla, ullamcorper pharetra enim nisl vel ante. Donec est tortor, efficitur a quam nec, gravida ultricies nulla.</p>
+				    	<p>Maecenas ac mi ipsum. Donec eget justo ultrices, scelerisque orci dapibus, volutpat felis. Vivamus tempor ipsum a massa blandit varius. Sed nisl ante, facilisis vel velit sed, venenatis malesuada sapien. Ut ut consectetur neque. Nam iaculis libero a lectus ullamcorper volutpat non a lacus. Morbi malesuada, neque in malesuada placerat, nisi turpis lobortis nulla, ullamcorper pharetra enim nisl vel ante. Donec est tortor, efficitur a quam nec, gravida ultricies nulla.</p>
+			    	</div>
+			    	
+			    </div>
 			    
 		  	</div>
 	  );
