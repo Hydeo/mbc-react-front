@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
 import AppStateInit from "../AppStateInit";
 import ErrorBoundary from '../ErrorHandling';
+import Footer from '../Footer';
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
@@ -17,30 +18,50 @@ import GameLibraryPage from '../GameLibrary';
 import CreateMaskPage from '../MaskEditor';
 import withAuthentication from '../Session/withAuthentication';
 import * as routes from '../../constants/routes';
+import { withStyles } from '@material-ui/core/styles';
 
 import './index.css';
 
-const App = () =>
-  <Router>
-    <div className="app">
-      <AppStateInit/>
-      <Navigation>
-        <hr/>
-          <ErrorBoundary>
-            <Route exact path={routes.LANDING} component={() => <LandingPage />} />
-            <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
-            <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-            <Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
-            <Route exact path={routes.CREATE_GAME} component={() => <CreateGamePage/>} />
-            <Route exact path={routes.HOME} component={() => <HomePage />} />
-            <Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
-            <Route exact path={routes.GAME_LIBRARY} component={() => <GameLibraryPage />} />
-            <Route exact path={routes.CREATE_MASK} component={(props) => <CreateMaskPage {...props}/>} />
-          </ErrorBoundary>
-        <hr/>
-      </Navigation>
-      <span>Found in <a href="https://roadtoreact.com/course-details?courseId=TAMING_THE_STATE">Taming the State in React</a></span> | <span>Star the <a href="https://github.com/rwieruch/react-firebase-authentication">Repository</a></span> | <span>Receive a <a href="https://www.getrevue.co/profile/rwieruch">Developer's Newsletter</a></span>
-    </div>
-  </Router>
+const styles = theme => ({
+    appContainer: {
+      position: "relative",
+      minHeight: "100vh"
+    },
+    contentWrap:{
+      paddingBottom: "10rem" /*Footer padding*/
+    }
 
-export default withAuthentication(App);
+});
+
+class App extends React.Component{
+  render() {
+    const {classes} = this.props;
+    return(
+      <Router>
+        <div className={classes.appContainer}>
+          <div className={classes.contentWrap}>
+            <AppStateInit/>
+            <Navigation>
+              <hr/>
+                <ErrorBoundary>
+                  <Route exact path={routes.LANDING} component={() => <LandingPage />} />
+                  <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
+                  <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+                  <Route exact path={routes.PASSWORD_FORGET} component={() => <PasswordForgetPage />} />
+                  <Route exact path={routes.CREATE_GAME} component={() => <CreateGamePage/>} />
+                  <Route exact path={routes.HOME} component={() => <HomePage />} />
+                  <Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
+                  <Route exact path={routes.GAME_LIBRARY} component={() => <GameLibraryPage />} />
+                  <Route exact path={routes.CREATE_MASK} component={(props) => <CreateMaskPage {...props}/>} />
+                </ErrorBoundary>
+              <hr/>
+            </Navigation>
+          </div>
+          <Footer/>
+        </div>
+      </Router>
+      );
+  }
+}
+
+export default withAuthentication(withStyles(styles)(App));
