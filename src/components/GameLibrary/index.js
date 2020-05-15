@@ -27,11 +27,8 @@ class GameLibrary extends Component {
     render() {
         return (
             <div>
-        <h1>Home</h1>
-        <p>The Home Page is accessible by all the users .</p>
-        <IsotopeList hydrated_game_list={this.props.game_library}/>
-      </div>
-
+                <IsotopeList hydrated_game_list={this.props.game_library}/>
+            </div>
         );
     }
 }
