@@ -45,6 +45,11 @@ const styles = theme => ({
 
     button: {
         margin: theme.spacing.unit
+    },
+
+    image_container :{
+        display: "flex",
+        alignItems: "center"
     }
 });
 
@@ -202,7 +207,7 @@ class CreateGame extends Component {
               </div>
 
               <Grid container justify="center" spacing={8}>
-                <Grid item md={3} xs={10}>
+                <Grid item md={3} xs={10} className={classes.image_container}>
                   <img
                     style={{ maxWidth: "100%" }}
                     src={this.state.url_image == "" ? default_cover_url : this.state.url_image}
