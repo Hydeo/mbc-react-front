@@ -22,6 +22,7 @@ import Button from "@material-ui/core/Button";
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Utils from "../../utils";
 
 const styles = theme => ({
     root: {
@@ -89,8 +90,13 @@ class CreateGame extends Component {
             complexity: 0,
             url_image: "",
             description: "",
+            tags: {},
+
             tags_view: [],
-            tags: {}
+            error_title : false,
+            error_url_image :false,
+            error_tags : false,
+
         };
     }
 
@@ -110,7 +116,29 @@ class CreateGame extends Component {
     }
 
     validate = () => {
-        return true;
+        var status = true;
+        var state_errors = {
+            error_title : false,
+            error_tags : false,
+            error_url_image : false
+        };
+
+        if(this.state.title == ""){
+            state_errors.error_title = true; 
+            status = false;
+        }
+        if(Object.keys(this.state.tags).length == 0){
+            state_errors.error_tags = true;
+            status = false;
+        }
+        if(!Utils.is_url(this.state.url_image)){
+           state_errors.error_url_image = true;
+           status = false;
+        }
+
+        this.setState({...state_errors})
+
+        return status;
     }
 
     onSubmitGame = () => {
@@ -192,6 +220,7 @@ class CreateGame extends Component {
                         value={this.state.title}
                         onChange={this.handleChange("title")}
                         margin="normal"
+                        error = {this.state.error_title}
                       />
 
                       <TextField
@@ -202,6 +231,7 @@ class CreateGame extends Component {
                         value={this.state.url_image}
                         onChange={this.handleChange("url_image")}
                         margin="normal"
+                        error = {this.state.error_url_image}
                       />
                       
                       
@@ -212,11 +242,13 @@ class CreateGame extends Component {
                         getOptionLabel={(option) => option.title}
                         filterSelectedOptions
                         onChange={this.handleTagsChange}
+                        
                         renderInput={(params) => (
                           <TextField
                             {...params}
                             label="Board Game Tags"
                             placeholder="Favorites"
+                            error = {this.state.error_tags}
                           />
                         )}
                       />
