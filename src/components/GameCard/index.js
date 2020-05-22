@@ -53,12 +53,15 @@ class GameCard extends React.Component {
     }
 
     get_game_filter_tags = () => {
-        var tag_string = "";
-        this.props.game_data.tags.forEach(element => {
-            //For the filters, we use the english version of the tags, whatever is the current lang
-            tag_string += " " + element["localization"]["eng"]["trad"];
-        });
-        return tag_string;
+        if(this.props.game_data.tags){
+            var tag_string = "";
+            this.props.game_data.tags.forEach(element => {
+                //For the filters, we use the english version of the tags, whatever is the current lang
+                tag_string += " " + element["localization"]["eng"]["trad"];
+            });
+            return tag_string;
+        }
+        return "";
     }
 
     renderTagsChips = (filter_name) => {

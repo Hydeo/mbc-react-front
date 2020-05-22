@@ -25,9 +25,9 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Utils from "../../utils";
 
 export const MODES_CRUD_GAME_VIEW = {
-    "CREATE" : 1,
-    "UPDATE" : 2,
-    "CUSTOMISE" : 3
+    "CREATE" : "CREATE",
+    "UPDATE" : "UPDATE",
+    "CUSTOMISE" : "CUSTOMISE"
 }
 
 const styles = theme => ({
@@ -90,7 +90,8 @@ class CreateGame extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+
+        var init_state = {
             title: "",
             age_recommended: 5,
             nb_player_min: 1,
@@ -107,9 +108,51 @@ class CreateGame extends Component {
             error_url_image :false,
             error_tags : false,
 
+            tags_dico : this.generateTagDico(),
             //Creation or Edition
-            mode : MODES_CRUD_GAME_VIEW.hasOwnProperty(props.mode) ? props.mode : "CREATE"     
+            mode : MODES_CRUD_GAME_VIEW.hasOwnProperty(props.mode) ? props.mode : "CREATE",
+            cur_lang : "eng"  
+        }
+
+        //If we receive a game as prop to modify it
+        if(props.mode && props.mode == MODES_CRUD_GAME_VIEW.CUSTOMISE && this.props.propGame){
+            init_state = {
+                ...init_state,
+                ...this.propsGameToSate(props.propGame,init_state)
+            }
+        }
+
+        this.state = {
+            ...init_state
         };
+    }
+
+    propsGameToSate = (propGame,initState)=>{
+        var pre_selected_tags = initState.tags_dico.filter((e)=>{
+            for(var i = 0 ; i < propGame.tags.length ; i++){
+                if(e.id == propGame.tags[i]._id)
+                    return true;
+            }
+            return false;
+        });
+        var prop_game_loaded = 
+        {
+            "title" : Utils.get_game_localized_property(propGame, "title"),
+            "url_image" : Utils.get_game_localized_property(propGame, "imageUrl"),
+            "tags_view" : pre_selected_tags,
+            ...propGame
+        }
+
+        return prop_game_loaded;
+    }
+
+    generateTagDico = () =>{
+        var tags_dico = this.props.tags.map(function(e) {
+            return (
+                {title: e.localization[this.cur_lang].trad, id : e._id}
+            )
+        }, this.props.i18n)
+        return tags_dico;
     }
 
     handleChange = name => event => {
@@ -193,14 +236,14 @@ class CreateGame extends Component {
         return marks_array;
     }
 
+    componentDidMount = () =>{
+        
+    }
+    
     render() {
         const { classes } = this.props;
 
-        const tags_dico = this.props.tags.map(function(e) {
-            return (
-                {title: e.localization[this.cur_lang].trad, id : e._id}
-            )
-        }, this.props.i18n)
+       
 
         return (
           <I18n ns="translations">
@@ -251,16 +294,15 @@ class CreateGame extends Component {
                       <Autocomplete
                         multiple
                         id="tags-outlined"
-                        options={tags_dico}
+                        options={this.state.tags_dico}
                         getOptionLabel={(option) => option.title}
                         filterSelectedOptions
                         onChange={this.handleTagsChange}
-                        
+                        defaultValue = {this.state.tags_view}
                         renderInput={(params) => (
                           <TextField
                             {...params}
                             label="Board Game Tags"
-                            placeholder="Favorites"
                             error = {this.state.error_tags}
                           />
                         )}

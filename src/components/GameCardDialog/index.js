@@ -146,7 +146,7 @@ class ResponsiveDialog extends React.Component {
         const { fullScreen, classes } = this.props;
         const { active_game } = this.state;
         return (
-            <CreateGame mode={"CUSTOMISE"}/>
+            <CreateGame mode={"CUSTOMISE"} propGame = {active_game}/>
         );
     }
 
