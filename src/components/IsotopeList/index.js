@@ -36,7 +36,8 @@ class IsotopeList extends React.Component {
       details_dialog_state: {
         game_data: null,
         open: false
-      }
+      },
+      editable_items : props.editable_items ? true : false
     };
     imgLoaded = 0;
    
@@ -105,11 +106,20 @@ class IsotopeList extends React.Component {
 
               (item, index) => {
                 return (
-                  <GameCard key={index} game_data={item} item_width={first_item_sizer} set_active_game={this.set_active_game_details_dialog} isotope_update={this.update_isotope} imgLoadedCounter={this.imgLoadedCounter} lang={this.props.i18n.cur_lang}/>
+                  <GameCard 
+                    key={index} 
+                    game_data={item} 
+                    item_width={first_item_sizer} 
+                    set_active_game={this.set_active_game_details_dialog} 
+                    isotope_update={this.update_isotope} 
+                    imgLoadedCounter={this.imgLoadedCounter} 
+                    lang={this.props.i18n.cur_lang}
+                    editable_games={this.props}
+                  />
                 )
               }
             )}
-          <GameCardDialog active_game={this.state.details_dialog_state.active_game} open={this.state.details_dialog_state.open} />
+          <GameCardDialog active_game={this.state.details_dialog_state.active_game} open={this.state.details_dialog_state.open} editable={this.state.editable_items}/>
         </div>
       </Fragment>
     );

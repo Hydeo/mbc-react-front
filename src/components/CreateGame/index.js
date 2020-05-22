@@ -33,7 +33,6 @@ const styles = theme => ({
     divSpacer : {
       height : theme.spacing.unit*4
     },
-
     sliderMargin: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit
@@ -46,7 +45,6 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit
     },
-
     image_container :{
         display: "flex",
         alignItems: "center"
@@ -80,7 +78,6 @@ const recommended_age_marks = [{
     }
 ];
 
-
 class CreateGame extends Component {
 
     constructor(props) {
@@ -101,7 +98,6 @@ class CreateGame extends Component {
             error_title : false,
             error_url_image :false,
             error_tags : false,
-
         };
     }
 
