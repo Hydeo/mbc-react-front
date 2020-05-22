@@ -30,7 +30,7 @@ class HomePage extends Component {
         <p>The Home Page is accessible by every signed in user.</p>
 
         {/*!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>*/}
-        <IsotopeList hydrated_game_list={this.props.user_games.game_collection} editable_items={true} />
+        <IsotopeList hydrated_game_list={this.props.user_games.game_collection} editable_items={true}/>
       </div>
      
     );  

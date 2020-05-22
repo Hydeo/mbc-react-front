@@ -24,6 +24,12 @@ import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Utils from "../../utils";
 
+export const MODES_CRUD_GAME_VIEW = {
+    "CREATE" : 1,
+    "UPDATE" : 2,
+    "CUSTOMISE" : 3
+}
+
 const styles = theme => ({
     root: {
         display: "flex",
@@ -47,11 +53,13 @@ const styles = theme => ({
     },
     image_container :{
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
 
 const default_cover_url = "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png";
+
 const recommended_age_marks = [{
         value: 5,
         label: '5+',
@@ -98,6 +106,9 @@ class CreateGame extends Component {
             error_title : false,
             error_url_image :false,
             error_tags : false,
+
+            //Creation or Edition
+            mode : MODES_CRUD_GAME_VIEW.hasOwnProperty(props.mode) ? props.mode : "CREATE"     
         };
     }
 
@@ -200,17 +211,18 @@ class CreateGame extends Component {
                 <h1>🎲 {t("create_game.title")} 🎲</h1>
                 <h2>Is Fetching : {this.props.isFetching ? "Yes" : "No"} </h2>
                 <p>{t("create_game.instructions")}</p>
+                <p>Current Mode : {this.state.mode}</p>
               </div>
 
-              <Grid container justify="center" spacing={8}>
-                <Grid item md={3} xs={10} className={classes.image_container}>
+              <Grid container justify="center">
+                <Grid item md={5} xs={10} className={classes.image_container}>
                   <img
                     style={{ maxWidth: "100%" }}
                     src={this.state.url_image == "" ? default_cover_url : this.state.url_image}
                     alt="BoardGame Picture"
                   />
                 </Grid>
-
+                <Grid item md={1} xs={0}/>
                 <Grid item md={5} xs={10}>
                   
                       <TextField
