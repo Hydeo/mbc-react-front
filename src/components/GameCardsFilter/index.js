@@ -65,7 +65,7 @@ class GameCardsFilter extends React.Component {
         var renderChips = this.renderChips;
         const filters_chip_renderer = Utils.objectMap(
             this.props.tags,
-            (e, index)=>{
+            (e, key, index, context)=>{
                 return this.renderChips(e.localization[this.props.i18n.cur_lang].trad,e.tagName);
             }
         );

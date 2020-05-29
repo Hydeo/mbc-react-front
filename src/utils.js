@@ -94,7 +94,7 @@ class Utils {
     static objectMap = (obj, fn, context) =>
         Object.fromEntries(
             Object.entries(obj).map(
-                ([k, v], i) => [k, fn(v, k, i)]
+                ([k, v], i) => [k, fn(v, k, i, context)]
             )
         )
 }

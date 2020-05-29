@@ -147,12 +147,23 @@ class CreateGame extends Component {
     }
 
     generateTagDico = () =>{
-        var tags_dico = this.props.tags.map(function(e) {
+        var tags_dico = Utils.objectMap(
+            this.props.game_tags,
+            function(e,key,index,context){
+                return (
+                    {title: context.game_tags[e._id].localization[context.i18n.cur_lang].trad, id : e._id}
+                )
+            },
+            this.props);
+
+        return Object.values(tags_dico);
+
+        /*var tags_dico = this.props.tags.map(function(e) {
             return (
                 {title: e.localization[this.cur_lang].trad, id : e._id}
             )
         }, this.props.i18n)
-        return tags_dico;
+        return tags_dico;*/
     }
 
     handleChange = name => event => {
@@ -389,7 +400,7 @@ class CreateGame extends Component {
 
 const loadingSelector = createLoadingSelector(['CREATE_NEW_GAME']);
 const mapStateToProps = state => ({
-    tags: state.tags,
+    game_tags: state.tags,
     i18n: state.i18n,
     isFetching: loadingSelector(state.loading)
 })
