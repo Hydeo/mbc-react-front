@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 import {
     create_new_game
 } from '../../actions/game_actions';
+import {
+    create_game_mask
+} from '../../actions/game_collection_actions';
 import { createLoadingSelector } from '../../selectors/selectors';
 import { I18n, Trans } from "react-i18next";
 
@@ -92,6 +95,7 @@ class CreateGame extends Component {
         super(props);
 
         var init_state = {
+            gameId : null,
             title: "",
             age_recommended: 5,
             nb_player_min: 1,
@@ -99,13 +103,13 @@ class CreateGame extends Component {
             time_to_play_min: 10,
             time_to_play_max: 30,
             complexity: 0,
-            url_image: "",
+            imageUrl: "",
             description: "",
             tags: {},
 
             tags_view: [],
             error_title : false,
-            error_url_image :false,
+            error_imageUrl :false,
             error_tags : false,
 
             tags_dico : this.generateTagDico(),
@@ -136,11 +140,12 @@ class CreateGame extends Component {
             return false;
         });
         var prop_game_loaded = 
-        {
+        {   
+            ...propGame,
             "title" : Utils.get_game_localized_property(propGame, "title"),
-            "url_image" : Utils.get_game_localized_property(propGame, "imageUrl"),
+            "imageUrl" : Utils.get_game_localized_property(propGame, "imageUrl"),
             "tags_view" : pre_selected_tags,
-            ...propGame
+            
         }
 
         return prop_game_loaded;
@@ -186,7 +191,7 @@ class CreateGame extends Component {
         var state_errors = {
             error_title : false,
             error_tags : false,
-            error_url_image : false
+            error_imageUrl : false
         };
 
         if(this.state.title == ""){
@@ -197,8 +202,8 @@ class CreateGame extends Component {
             state_errors.error_tags = true;
             status = false;
         }
-        if(!Utils.is_url(this.state.url_image)){
-           state_errors.error_url_image = true;
+        if(!Utils.is_url(this.state.imageUrl)){
+           state_errors.error_imageUrl = true;
            status = false;
         }
 
@@ -209,8 +214,20 @@ class CreateGame extends Component {
 
     onSubmitGame = () => {
       console.log(this.state);
-        if (this.validate()) {        
-            this.props.create_new_game(this.state);
+        if (this.validate()) {
+            switch(this.state.mode){
+                case MODES_CRUD_GAME_VIEW["CREATE"]:
+                    this.props.create_new_game(this.state);
+                break;
+
+                case MODES_CRUD_GAME_VIEW["CUSTOMISE"]:
+                    this.props.create_game_mask(this.state);
+                break;
+
+                default:
+                    alert("Unknown Mode");
+                break;
+            }       
         }
     }
 
@@ -269,13 +286,12 @@ class CreateGame extends Component {
                 <Grid item md={5} xs={10} className={classes.image_container}>
                   <img
                     style={{ maxWidth: "100%" }}
-                    src={this.state.url_image == "" ? default_cover_url : this.state.url_image}
+                    src={this.state.imageUrl == "" ? default_cover_url : this.state.imageUrl}
                     alt="BoardGame Picture"
                   />
                 </Grid>
                 <Grid item md={1} xs={0}/>
                 <Grid item md={5} xs={10}>
-                  
                       <TextField
                         id="title"
                         label="Board Game Name"
@@ -288,14 +304,14 @@ class CreateGame extends Component {
                       />
 
                       <TextField
-                        id="url_image"
+                        id="imageUrl"
                         label="Board Game Image URL"
                         fullWidth={true} 
                         className={classes.textField}
-                        value={this.state.url_image}
-                        onChange={this.handleChange("url_image")}
+                        value={this.state.imageUrl}
+                        onChange={this.handleChange("imageUrl")}
                         margin="normal"
-                        error = {this.state.error_url_image}
+                        error = {this.state.error_imageUrl}
                       />
                       
                       
@@ -386,7 +402,7 @@ class CreateGame extends Component {
                     color="primary"
                     className={classes.button}
                   >
-                    Create Game
+                    {this.state.mode} Game
                   </Button>
                 </Grid>
               </Grid>
@@ -408,7 +424,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
-            create_new_game
+            create_new_game,
+            create_game_mask
         },
         dispatch
     );
