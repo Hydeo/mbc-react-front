@@ -104,7 +104,14 @@ class IsotopeList extends React.Component {
           {!!this.props.hydrated_game_list &&
             this.props.hydrated_game_list.gameList.map(
 
-              (item, index) => {
+              function(item, index){
+               
+                if(this.props.hydrated_game_list.hasOwnProperty("gameMask")){
+                  if(this.props.hydrated_game_list.gameMask.hasOwnProperty(item._id)){
+                    Utils.apply_game_mask(item,this.props.hydrated_game_list.gameMask[item._id]);
+                  } 
+                }
+                
                 return (
                   <GameCard 
                     key={index} 
@@ -118,7 +125,7 @@ class IsotopeList extends React.Component {
                   />
                 )
               }
-            )}
+            ,this)}
           <GameCardDialog active_game={this.state.details_dialog_state.active_game} open={this.state.details_dialog_state.open} editable={this.state.editable_items}/>
         </div>
       </Fragment>

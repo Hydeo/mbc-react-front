@@ -30,7 +30,7 @@ import Utils from "../../utils";
 export const MODES_CRUD_GAME_VIEW = {
     "CREATE" : "CREATE",
     "UPDATE" : "UPDATE",
-    "CUSTOMISE" : "CUSTOMISE"
+    "EDIT" : "EDIT"
 }
 
 const styles = theme => ({
@@ -119,7 +119,7 @@ class CreateGame extends Component {
         }
 
         //If we receive a game as prop to modify it
-        if(props.mode && props.mode == MODES_CRUD_GAME_VIEW.CUSTOMISE && this.props.propGame){
+        if(props.mode && props.mode == MODES_CRUD_GAME_VIEW.EDIT && this.props.propGame){
             init_state = {
                 ...init_state,
                 ...this.propsGameToSate(props.propGame,init_state)
@@ -220,7 +220,7 @@ class CreateGame extends Component {
                     this.props.create_new_game(this.state);
                 break;
 
-                case MODES_CRUD_GAME_VIEW["CUSTOMISE"]:
+                case MODES_CRUD_GAME_VIEW["EDIT"]:
                     this.props.create_game_mask(this.state);
                 break;
 

@@ -1,7 +1,7 @@
 import { conf_dev } from './config';
 import i18n from "i18next";
 
-const list_owner_private_properties = ["comment", "price", "rating"]
+const list_owner_private_properties = ["comment", "price", "rating","imageUrl","title"]
 
 class Utils {
 
@@ -64,6 +64,12 @@ class Utils {
             throw new Error('Localization is missing');
         }
 
+        //If we go through that means we have a custom values set by the owner, it overrides the normal localized value
+        if(list_owner_private_properties.includes(property)){
+        	if(game_data.hasOwnProperty(property)){
+        		return game_data[property];
+        	}
+        }
         //If current user lang is not supported by the game, eng is chosen by default.
         var cur_lang = game_data.localization.hasOwnProperty(i18n.language.toLowerCase()) ? i18n.language.toLowerCase() : "eng";
         if (game_data.localization[cur_lang].hasOwnProperty(property)) {
@@ -75,12 +81,11 @@ class Utils {
 
 
 
-    static apply_game_mask = (game_data, game_mask) => {
-
+    static apply_game_mask(game_data, game_mask){
         Object.keys(game_data).forEach(property_name => {
-            if (game_mask.hasOwnProperty(property_name)) {
+            if (game_mask.override.hasOwnProperty(property_name) && game_mask.override[property_name] != null) {
                 game_data[property_name] =
-                    game_mask[property_name];
+                    game_mask.override[property_name];
             }
         });
 
