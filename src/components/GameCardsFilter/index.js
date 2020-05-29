@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { update_isotope, set_isotope } from "../../actions/isotope_actions";
 import Chip from '@material-ui/core/Chip';
+import Utils from "../../utils";
 
 class GameCardsFilter extends React.Component {
 
@@ -60,14 +61,18 @@ class GameCardsFilter extends React.Component {
 
     render() {
 
-        const filters_chip_renderer = this.props.tags.map(function(e, index){
-                return this.renderChips(e.localization[this.cur_lang].trad,e.tagName);
-        }
-        ,{"cur_lang":this.props.i18n.cur_lang,"renderChips":this.renderChips})
+        var cur_lang = this.props.i18n.cur_lang;
+        var renderChips = this.renderChips;
+        const filters_chip_renderer = Utils.objectMap(
+            this.props.tags,
+            (e, index)=>{
+                return this.renderChips(e.localization[this.props.i18n.cur_lang].trad,e.tagName);
+            }
+        );
 
         return (
             <Fragment>
-                {filters_chip_renderer}
+                {Object.values(filters_chip_renderer)}
             </Fragment>
 
         );

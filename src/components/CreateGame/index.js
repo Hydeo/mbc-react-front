@@ -242,9 +242,6 @@ class CreateGame extends Component {
     
     render() {
         const { classes } = this.props;
-
-       
-
         return (
           <I18n ns="translations">
         {(t, { i18n }) => (

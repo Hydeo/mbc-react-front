@@ -55,9 +55,9 @@ class GameCard extends React.Component {
     get_game_filter_tags = () => {
         if(this.props.game_data.tags){
             var tag_string = "";
-            this.props.game_data.tags.forEach(element => {
+            this.props.game_data.tags.forEach(t => {
                 //For the filters, we use the english version of the tags, whatever is the current lang
-                tag_string += " " + element["localization"]["eng"]["trad"];
+                tag_string += " " + this.props.game_tags[t._id]["localization"]["eng"]["trad"];
             });
             return tag_string;
         }
@@ -175,7 +175,8 @@ GameCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    i18n: state.i18n
+    i18n: state.i18n,
+    game_tags : state.tags
 });
 
 const mapDispatchToProps = dispatch =>

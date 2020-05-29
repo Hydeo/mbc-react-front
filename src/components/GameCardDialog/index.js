@@ -223,12 +223,12 @@ class ResponsiveDialog extends React.Component {
             return (
                 <Chip
                     key={index}
-                    label={e.localization[this.cur_lang].trad}
+                    label={this.game_tags[e._id].localization[this.i18n.cur_lang].trad}
                     href="#chip"
                     clickable
                 />
             )
-        }, this.props.i18n)
+        }, this.props)
 
     }
 
@@ -240,6 +240,7 @@ ResponsiveDialog.propTypes = {
 
 const mapStateToProps = state => ({
     game_cards: state.game_cards,
+    game_tags: state.tags,
     "i18n": state.i18n
 });
 
