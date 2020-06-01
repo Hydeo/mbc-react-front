@@ -12,6 +12,7 @@ import LazyLoad from "react-lazyload";
 import Chip from '@material-ui/core/Chip';
 import Utils from "../../utils";
 
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -30,7 +31,6 @@ class GameCard extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             a_chip_height: 32,
             open: false,

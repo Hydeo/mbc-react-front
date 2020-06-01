@@ -1,3 +1,4 @@
+//@flow
 import React, { Component } from 'react';
 
 import {connect } from "react-redux";
@@ -9,12 +10,27 @@ import {
 import withAuthorization from '../Session/withAuthorization';
 
 import IsotopeList from "../IsotopeList";
+import GameEntity from '../../entities/Game.js';
 
-class HomePage extends Component {
+
+type Props = {
+  user_games: {
+    game_collection : {}
+  },
+  user_state: {
+    user_authed: {
+      uid:number
+    }
+  },
+  get_user_game_collection : (uid:number) => mixed
+};
+
+
+class HomePage extends Component<Props,{}> {
   constructor(props) {
     super(props);
     this.state = {
-      users: {}
+      
     };  
   }
 
@@ -36,17 +52,6 @@ class HomePage extends Component {
     );  
   }
 }
-
-const UserList = ({ users }) =>
-  <div>
-    <h2>List of Usernames of Users</h2>
-    <p>(Saved on Sign Up in Firebase Database)</p>
-
-    {Object.keys(users).map(key =>
-      <div key={key}>{users[key].username}</div>
-    )}
-  </div>
-
 
 const authCondition = (authUser) => !!authUser;
 
