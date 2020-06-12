@@ -5,7 +5,8 @@ import i18n from "i18next";
 
 class Game extends BaseGame{
 
-    constructor(_id: string, nb_player_min: number, nb_player_max: number, time_to_play_min: number, time_to_play_max: number, age_recommended: number, complexity: number, tags: Array < TagEntity >, localization : { [string] : { "title" : string, "description" : string, "imageUrl" : string } }   ) {
+    constructor(_id: string, nb_player_min: number, nb_player_max: number, time_to_play_min: number, time_to_play_max: number, age_recommended: number, complexity: number, tags: Array < TagEntity >, localization : { [string] : { "title" : string, "description" : string, "imageUrl" : string } }   ) 
+    {
         super();
         this._id = _id;
         this.nb_player_min = nb_player_min;

@@ -24,6 +24,33 @@ class BaseGame {
 
     }
 
+    getId(): string {
+    return this._id;
+}
+
+getNbPlayerMin(): number {
+    return this.nb_player_min;
+}
+
+getNbPlayerMax(): number {
+    return this.nb_player_max;
+}
+
+getTimeToPlayMin(): number {
+    return this.time_to_play_min;
+}
+getTimeToPlayMax(): number {
+    return this.time_to_play_max;
+}
+
+getAgeRecommended(): number {
+    return this.age_recommended;
+}
+
+getComplexity(): number {
+    return this.complexity;
+}
+
     getTitle() : string{
         let title = this.getLocalizedProperty("title");
         return title == null ? "Unknown Title" : title;
@@ -54,6 +81,19 @@ class BaseGame {
         catch(e){
             return 'eng';
         }
+    }
+
+    toString() : string{
+        return this.getId() 
+        + " | " + this.getTitle()
+        + " | " + this.getDescription()
+        + " | " + this.getImageUrl()
+        + " | " + this.getNbPlayerMin()  
+        + " | " + this.getNbPlayerMax()  
+        + " | " + this.getTimeToPlayMin() 
+        + " | " + this.getTimeToPlayMax() 
+        + " | " + this.getAgeRecommended()  
+        + " | " + this.getComplexity() 
     }
 
 }

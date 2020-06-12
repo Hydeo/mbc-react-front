@@ -57,6 +57,8 @@ class Utils {
         return item_width
     }
 
+
+    //DEPRECIATED
     static get_game_localized_property = (game_data, property) => {
 
         //Check if localisation really exists : 
@@ -80,7 +82,7 @@ class Utils {
 
 
 
-
+    //DEPRECIATED
     static apply_game_mask(game_data, game_mask){
         Object.keys(game_data).forEach(property_name => {
             if (game_mask.override.hasOwnProperty(property_name) && game_mask.override[property_name] != null) {

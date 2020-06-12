@@ -6,6 +6,8 @@ import {
   TOOGLE_IN_COLLECTION
 } from "../actions/game_collection_actions"
 
+import {yolo} from '../entities/Game/GameTest.js';
+
 const initialState = {
   game_collection: null
 }
@@ -14,6 +16,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_GAME_COLLECTION:
+
+
+
+      yolo(action.payload);
+
+
+
+
 
       return {
         ...state,
