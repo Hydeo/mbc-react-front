@@ -7,6 +7,7 @@ import Game from './Game';
 
 
 export function yolo(data: { gameList: [] }) {
+
     console.log("/////////////////////////////////////////////////////////////");
     console.log(data);
     console.log("/////////////////////////////////////////////////////////////");
@@ -23,9 +24,9 @@ export function yolo(data: { gameList: [] }) {
         //If current game game has a mask in current collection
         if (this.gameMask.hasOwnProperty(e._id)) {
             g = new GameMaskDecorator(g, this.gameMask[e._id].override);
-            g = new GameAdditionalFieldsDecorator(g,this.gameMask[e._id]);
+            g = new GameAdditionalFieldsDecorator(g, this.gameMask[e._id]);
         }
-        
+
         gameArray.push(
             g
         );
@@ -33,30 +34,21 @@ export function yolo(data: { gameList: [] }) {
     }, data)
 
     console.log(gameArray);
+
     gameArray.forEach(function(e, index) {
-        console.log(e.toString());
+        console.log("--------------");
+        console.log(e.getId());
+        console.log(e.getTitle());
+        console.log(e.getDescription());
+        console.log(e.getImageUrl());
+        console.log(e.getAgeRecommended());
+        console.log(e.getNbPlayerMin());
+        console.log(e.getNbPlayerMax());
+        console.log(e.getTimeToPlayMin());
+        console.log(e.getTimeToPlayMax());
+        console.log(e.getComplexity());
+        console.log(e.hasAdditionnalFields());
     })
 
-
-    /*
-    var ng = new Game("idString", 4 ,1,10,30,5,0,[new TagEntity("5cb0a11bfb1224ca0ddc2ea9","",{eng : {lang:"eng",trad:"tagTrad"}})],
-    	{
-    		"eng" : {"title" : "This is a title en","description" : "description en ","imageUrl" : "imageUrl en"},
-    		"fr" : {"title" : "This is a title fr ","description" : "description fr","imageUrl" : "imageUrl fr"}
-    	}
-    );
-
-    console.log(ng);
-    console.log(ng.getTitle());
-    console.log(ng.getDescription());
-    console.log(ng.getImageUrl());
-
-    var ng = new GameMaskDecorator(ng,"-");
-    console.log(ng);
-    console.log(ng.getTitle());
-    console.log(ng.getDescription());
-    console.log(ng.getImageUrl());*/
-
-    console.log("/////////////////////////////////////////////////////////////");
     console.log("/////////////////////////////////////////////////////////////");
 }
