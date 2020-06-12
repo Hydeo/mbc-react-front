@@ -7,13 +7,13 @@ class GameMaskDecorator extends BaseGameDecorator {
 
     override: BaseGame;
 
-    constructor(baseGame: BaseGame, override) {
+    constructor(baseGame: BaseGame, override : BaseGame) {
         super(baseGame);
         this.loadOverride(override)
     }
 
 
-    loadOverride(o): BaseGame {
+    loadOverride(o : BaseGame) {
         this.override = new Game(
             o._id,
             o.nb_player_min,
@@ -51,6 +51,7 @@ class GameMaskDecorator extends BaseGameDecorator {
         }
         return this.baseGame.getTimeToPlayMin();
     }
+
     getTimeToPlayMax(): number {
         if (this.override.getTimeToPlayMax() != null) {
             return this.override.getTimeToPlayMax();
@@ -96,6 +97,13 @@ class GameMaskDecorator extends BaseGameDecorator {
         } else {
             return this.baseGame.getImageUrl();
         }
+    }
+
+    toString(): string{
+    	return this.baseGame.toString()
+    	+ "\nOverride:\n"
+    	+ this.override.toString()
+    	+"\n";
     }
 
 }

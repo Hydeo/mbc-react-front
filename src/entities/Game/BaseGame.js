@@ -12,61 +12,61 @@ class BaseGame {
     age_recommended: number;
     complexity: number;
     tags: Array < TagEntity > ;
-    localization : {
-        [string] /*lang*/ : {
-            "title" : string,
-            "description" : string,
-            "imageUrl" : string
+    localization: {
+        [string] /*lang*/: {
+            "title": string,
+            "description": string,
+            "imageUrl": string
         }
     }
 
-    constructor(){
+    constructor() {
 
     }
 
     getId(): string {
-    return this._id;
-}
+        return this._id;
+    }
 
-getNbPlayerMin(): number {
-    return this.nb_player_min;
-}
+    getNbPlayerMin(): number {
+        return this.nb_player_min;
+    }
 
-getNbPlayerMax(): number {
-    return this.nb_player_max;
-}
+    getNbPlayerMax(): number {
+        return this.nb_player_max;
+    }
 
-getTimeToPlayMin(): number {
-    return this.time_to_play_min;
-}
-getTimeToPlayMax(): number {
-    return this.time_to_play_max;
-}
+    getTimeToPlayMin(): number {
+        return this.time_to_play_min;
+    }
+    getTimeToPlayMax(): number {
+        return this.time_to_play_max;
+    }
 
-getAgeRecommended(): number {
-    return this.age_recommended;
-}
+    getAgeRecommended(): number {
+        return this.age_recommended;
+    }
 
-getComplexity(): number {
-    return this.complexity;
-}
+    getComplexity(): number {
+        return this.complexity;
+    }
 
-    getTitle() : string{
+    getTitle(): string {
         let title = this.getLocalizedProperty("title");
         return title == null ? "Unknown Title" : title;
     }
 
-    getDescription() : string {
+    getDescription(): string {
         let description = this.getLocalizedProperty("description");
         return description == null ? "" : description;
     }
 
-     getImageUrl() : string {
+    getImageUrl(): string {
         let imageUrl = this.getLocalizedProperty("imageUrl");
         return imageUrl == null ? "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png" : imageUrl;
     }
 
-    getLocalizedProperty(property:string) : string {
+    getLocalizedProperty(property: string): string {
         let gameLang = this.localization.hasOwnProperty(this.geti18nLang()) ? this.geti18nLang() : 'eng';
         if (this.localization[gameLang].hasOwnProperty(property)) {
             return this.localization[gameLang][property];
@@ -74,26 +74,31 @@ getComplexity(): number {
         return "";
     }
 
-    geti18nLang() : string {
-        try{
+    geti18nLang(): string {
+        try {
             return i18n.language.toLowerCase();
-        }
-        catch(e){
+        } catch (e) {
             return 'eng';
         }
     }
 
-    toString() : string{
-        return this.getId() 
-        + " | " + this.getTitle()
-        + " | " + this.getDescription()
-        + " | " + this.getImageUrl()
-        + " | " + this.getNbPlayerMin()  
-        + " | " + this.getNbPlayerMax()  
-        + " | " + this.getTimeToPlayMin() 
-        + " | " + this.getTimeToPlayMax() 
-        + " | " + this.getAgeRecommended()  
-        + " | " + this.getComplexity() 
+    hasAdditionnalFields(): bool{
+        return false;
+    }
+
+    toString(): string {
+        return "Base:\n"+
+            "Id: " + this.getId() +
+            " | Title: " + this.getTitle() +
+            " | Description: " + this.getDescription() +
+            " | ImageUrl: " + this.getImageUrl() +
+            " | PlayerMin: " + this.getNbPlayerMin() +
+            " | PlayerMax: " + this.getNbPlayerMax() +
+            " | TimeMin: " + this.getTimeToPlayMin() +
+            " | TimeMax: " + this.getTimeToPlayMax() +
+            " | Age: " + this.getAgeRecommended() +
+            " | Complexity: " + this.getComplexity()
+            + "\n";
     }
 
 }

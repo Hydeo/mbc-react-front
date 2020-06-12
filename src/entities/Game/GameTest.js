@@ -1,6 +1,7 @@
 //@flow	
 import TagEntity from '../Tag';
 import GameMaskDecorator from './GameMaskDecorator';
+import GameAdditionalFieldsDecorator from './GameAdditionalFieldsDecorator';
 import Game from './Game';
 
 
@@ -22,8 +23,9 @@ export function yolo(data: { gameList: [] }) {
         //If current game game has a mask in current collection
         if (this.gameMask.hasOwnProperty(e._id)) {
             g = new GameMaskDecorator(g, this.gameMask[e._id].override);
+            g = new GameAdditionalFieldsDecorator(g,this.gameMask[e._id]);
         }
-
+        
         gameArray.push(
             g
         );
