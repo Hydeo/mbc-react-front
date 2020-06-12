@@ -10,7 +10,7 @@ import {
 import withAuthorization from '../Session/withAuthorization';
 
 import IsotopeList from "../IsotopeList";
-import GameEntity from '../../entities/Game.js';
+import GameEntity from '../../entities/Game/GameTest.js';
 
 
 type Props = {

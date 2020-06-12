@@ -1,25 +1,12 @@
 // @flow
-import TagEntity from './Tag';
+import TagEntity from '../Tag';
+import BaseGame from './BaseGame';
+import i18n from "i18next";
 
-class Game {
-
-    _id: string
-    nb_player_min: number;
-    nb_player_max: number;
-    time_to_play_min: number;
-    time_to_play_max: number;
-    age_recommended: number;
-    complexity: number;
-    tags: Array < TagEntity > ;
-    localization : {
-        [string] /*lang*/ : {
-            "title" : string,
-            "description" : string,
-            "imageUrl" : string
-        }
-    }
+class Game extends BaseGame{
 
     constructor(_id: string, nb_player_min: number, nb_player_max: number, time_to_play_min: number, time_to_play_max: number, age_recommended: number, complexity: number, tags: Array < TagEntity >, localization : { [string] : { "title" : string, "description" : string, "imageUrl" : string } }   ) {
+        super();
         this._id = _id;
         this.nb_player_min = nb_player_min;
         this.nb_player_max = nb_player_max;
@@ -32,7 +19,5 @@ class Game {
     }
 
 }
-console.log("$$$$$");
-console.log(new Game("idString", 4 ,1,10,30,5,0,[new TagEntity("5cb0a11bfb1224ca0ddc2ea9")], {"eng" : {"title" : "title","description" : "description","imageUrl" : "url"}} ));
-console.log("$$$$$");
+
 export default Game;

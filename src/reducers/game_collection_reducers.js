@@ -14,6 +14,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_GAME_COLLECTION:
+
       return {
         ...state,
         game_collection: action.payload
