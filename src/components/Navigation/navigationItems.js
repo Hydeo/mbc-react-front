@@ -226,6 +226,22 @@ export const nonAuthDrawerListItems = (
             </Hidden>
           </ListItem>
         </Link>
+        
+        <Link style={styleLink} to={routes.GAME_LIBRARY}>
+          <ListItem style={styleListItem} button>
+            <ListItemIcon>
+              <AppsIcon style={{ color: "white" }} color={"inherit"} />
+            </ListItemIcon>
+            <ListItemText
+              disableTypography
+              primary={
+                <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
+                  {t("navigation.game_library")}
+                </Typography>
+              }
+            />
+          </ListItem>
+        </Link>
 
         <Link to={routes.SIGN_IN}>
           <ListItem style={styleListItem} button>
