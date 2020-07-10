@@ -106,11 +106,11 @@ class IsotopeList extends React.Component {
 
               function(item, index){
                
-                if(this.props.hydrated_game_list.hasOwnProperty("gameMask")){
+                /*if(this.props.hydrated_game_list.hasOwnProperty("gameMask")){
                   if(this.props.hydrated_game_list.gameMask.hasOwnProperty(item._id)){
                     Utils.apply_game_mask(item,this.props.hydrated_game_list.gameMask[item._id]);
                   } 
-                }
+                }*/
                 
                 return (
                   <GameCard 
