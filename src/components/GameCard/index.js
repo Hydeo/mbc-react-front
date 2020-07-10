@@ -106,7 +106,7 @@ class GameCard extends React.Component {
             <Fragment>
                 <div className={"container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
                     <LazyLoad>
-                        <img className="cover" src={game_data.getImageUrl()} alt={Utils.get_game_localized_property(game_data,"title")} onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
+                        <img className="cover" src={game_data.getImageUrl()} alt={game_data.getTitle()} onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
                     <div className="overlay" />
                     <div className="info" onClick={this.show_game_details}>
@@ -116,7 +116,7 @@ class GameCard extends React.Component {
                                 <Grid container
                                     justify="center">
                                     <Grid item>
-                                        {Utils.get_game_localized_property(game_data,"title")}
+                                        {game_data.getTitle()}
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -130,11 +130,11 @@ class GameCard extends React.Component {
                                         <Grid item className={classes.alignTextItem}>
                                             <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
                                            {/*TODO nb players to play need to be a range*/}
-                                           {game_data.nb_player_min} - {game_data.nb_player_max}
+                                           {game_data.getNbPlayerMin()} - {game_data.getNbPlayerMax()}
                                 </Grid>
                                         <Grid item className={classes.alignTextItem}>
                                             <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
-                                            {game_data.age_recommended}
+                                            {game_data.getAgeRecommended()}
                                 </Grid>
                                     </Grid>
                                 </Grid>
@@ -147,12 +147,12 @@ class GameCard extends React.Component {
                                         alignItems="flex-end"
                                     >
                                         <Grid item className={classes.alignTextItem}>
-                                            {game_data.complexity}
+                                            {game_data.getComplexity()}
                                     <img width="25" height="25" src="/images/icons/complexity.svg" alt="Kiwi standing on oval"></img>
                                         </Grid>
                                         <Grid item className={classes.alignTextItem}>
                                             {/*TODO time to play need to be a range*/} 
-                                            {game_data.time_to_play_min} - {game_data.time_to_play_max}
+                                            {game_data.getTimeToPlayMin()} - {game_data.getTimeToPlayMax()}
                                     <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
                                         </Grid>
                                     </Grid>

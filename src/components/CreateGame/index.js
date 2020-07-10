@@ -134,7 +134,7 @@ class CreateGame extends Component {
     propsGameToSate = (propGame,initState)=>{
         var pre_selected_tags = initState.tags_dico.filter((e)=>{
             for(var i = 0 ; i < propGame.tags.length ; i++){
-                if(e.id == propGame.tags[i]._id)
+                if(e.id == propGame.tags[i].getId())
                     return true;
             }
             return false;

@@ -17,6 +17,10 @@ class Tag {
     	this.localization = localization;
     }
 
+    getId(){
+        return this._id._id;
+    }
+    
     getTrad(lang:string = "eng"){
         if(this.localization.hasOwnProperty(lang)){
            return this.localization[lang]["trad"];
