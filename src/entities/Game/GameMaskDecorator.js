@@ -5,7 +5,7 @@ import Game from './Game';
 
 class GameMaskDecorator extends BaseGameDecorator {
 
-    override: BaseGame;
+    baseGame: BaseGame;
 
     constructor(baseGame: BaseGame, override : BaseGame) {
         super(baseGame);
@@ -14,7 +14,7 @@ class GameMaskDecorator extends BaseGameDecorator {
 
 
     loadOverride(o : BaseGame) {
-        this.override = new Game(
+        this.baseGame = new Game(
             o._id,
             o.nb_player_min,
             o.nb_player_max,
@@ -32,68 +32,68 @@ class GameMaskDecorator extends BaseGameDecorator {
     }
 
     getNbPlayerMin(): number {
-        if (this.override.getNbPlayerMin() != null) {
-            return this.override.getNbPlayerMin();
+        if (this.baseGame.getNbPlayerMin() != null) {
+            return this.baseGame.getNbPlayerMin();
         }
         return this.baseGame.getNbPlayerMin();
     }
 
     getNbPlayerMax(): number {
-        if (this.override.getNbPlayerMax() != null) {
-            return this.override.getNbPlayerMax();
+        if (this.baseGame.getNbPlayerMax() != null) {
+            return this.baseGame.getNbPlayerMax();
         }
         return this.baseGame.getNbPlayerMax();
     }
 
     getTimeToPlayMin(): number {
-        if (this.override.getTimeToPlayMin() != null) {
-            return this.override.getTimeToPlayMin();
+        if (this.baseGame.getTimeToPlayMin() != null) {
+            return this.baseGame.getTimeToPlayMin();
         }
         return this.baseGame.getTimeToPlayMin();
     }
 
     getTimeToPlayMax(): number {
-        if (this.override.getTimeToPlayMax() != null) {
-            return this.override.getTimeToPlayMax();
+        if (this.baseGame.getTimeToPlayMax() != null) {
+            return this.baseGame.getTimeToPlayMax();
         }
 
         return this.baseGame.getTimeToPlayMax();
     }
 
     getAgeRecommended(): number {
-        if (this.override.getAgeRecommended() != null) {
-            return this.override.getAgeRecommended();
+        if (this.baseGame.getAgeRecommended() != null) {
+            return this.baseGame.getAgeRecommended();
         }
         return this.baseGame.getAgeRecommended();
     }
 
     getComplexity(): number {
-        if (this.override.getComplexity() != null) {
-            return this.override.getComplexity();
+        if (this.baseGame.getComplexity() != null) {
+            return this.baseGame.getComplexity();
         }
         return this.baseGame.getComplexity();
     }
 
 
     getTitle() {
-        if (this.override.getTitle() != null) {
-            return this.override.getTitle();
+        if (this.baseGame.getTitle() != null) {
+            return this.baseGame.getTitle();
         } else {
             return this.baseGame.getTitle();
         }
     }
 
     getDescription() {
-        if (this.override.getDescription() != null) {
-            return this.override.getDescription();
+        if (this.baseGame.getDescription() != null) {
+            return this.baseGame.getDescription();
         } else {
             return this.baseGame.getDescription();
         }
     }
 
     getImageUrl() {
-        if (this.override.getImageUrl() != null) {
-            return this.override.getImageUrl();
+        if (this.baseGame.getImageUrl() != null) {
+            return this.baseGame.getImageUrl();
         } else {
             return this.baseGame.getImageUrl();
         }
@@ -102,7 +102,7 @@ class GameMaskDecorator extends BaseGameDecorator {
     toString(): string{
     	return this.baseGame.toString()
     	+ "\nOverride:\n"
-    	+ this.override.toString()
+    	+ this.baseGame.toString()
     	+"\n";
     }
 
