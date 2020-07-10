@@ -65,7 +65,7 @@ class GameCard extends React.Component {
     }
 
     renderTagsChips = (filter_name) => {
-        return this.props.game_data.tags.map(function(e,index) {
+        return (this.props.game_data.getTags()).map(function(e,index) {
             try{
                 return (
                     <Chip

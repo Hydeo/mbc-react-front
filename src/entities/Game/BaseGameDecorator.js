@@ -14,6 +14,10 @@ class BaseGameDecorator extends BaseGame {
         return this.baseGame.getId();
     }
 
+    getTags() : Array < TagEntity>{
+        return this.baseGame.getTags();
+    }
+
     getNbPlayerMin(): number {
         return this.baseGame.getNbPlayerMin();
     }

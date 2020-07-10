@@ -25,7 +25,7 @@ export const create_new_game = new_game => {
       eng: {
         title: new_game.title,
         description: new_game.description,
-        imageUrl: new_game.url_image
+        imageUrl: new_game.imageUrl
       }
     }
   };

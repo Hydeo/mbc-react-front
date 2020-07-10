@@ -1,6 +1,7 @@
 // @flow
 import TagEntity from '../Tag';
 import i18n from "i18next";
+import { conf_dev } from "../../config";
 
 class BaseGame {
 
@@ -26,6 +27,10 @@ class BaseGame {
 
     getId(): string {
         return this._id;
+    }
+
+    getTags() : Array < TagEntity>{
+        return this.tags;
     }
 
     getNbPlayerMin(): number {
@@ -63,15 +68,17 @@ class BaseGame {
 
     getImageUrl(): string {
         let imageUrl = this.getLocalizedProperty("imageUrl");
-        return imageUrl == null ? "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png" : imageUrl;
+        return imageUrl == null ? conf_dev.url_fallback_img : imageUrl;
     }
 
     getLocalizedProperty(property: string): string {
-        let gameLang = this.localization.hasOwnProperty(this.geti18nLang()) ? this.geti18nLang() : 'eng';
-        if (this.localization[gameLang].hasOwnProperty(property)) {
-            return this.localization[gameLang][property];
+        if(this.localization != null){
+            let gameLang = this.localization.hasOwnProperty(this.geti18nLang()) ? this.geti18nLang() : 'eng';
+            if (this.localization[gameLang].hasOwnProperty(property)) {
+                return this.localization[gameLang][property];
+            }
         }
-        return "";
+        return null;
     }
 
     geti18nLang(): string {

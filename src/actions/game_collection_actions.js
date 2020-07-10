@@ -64,7 +64,16 @@ export const create_game_mask = (game_data) => {
         var _gd = {}
         fields.forEach((e) => {
             if (game_data.hasOwnProperty(e)) {
-                _gd[e] = game_data[e];
+                if(e == "tags"){
+                    let tagIdArray = [];
+                    game_data[e].forEach((c)=>{
+                        tagIdArray.push({_id :c.getId()});
+                    });
+                    _gd[e] = tagIdArray;
+                }
+                else{
+                    _gd[e] = game_data[e];
+                }
             }
         })
         return _gd;

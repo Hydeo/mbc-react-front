@@ -6,7 +6,7 @@ import Game from './Game';
 
 
 
-export function yolo(data: []) {
+export function yolo(data: [], maskData:[] = null) {
 
     console.log("/////////////////////////////////////////////////////////////");
     console.log(data);
@@ -23,16 +23,16 @@ export function yolo(data: []) {
 	        );
 
 	        //If current game game has a mask in current collection
-	        if (this.gameMask != null && this.gameMask.hasOwnProperty(e._id)) {
-	            g = new GameMaskDecorator(g, this.gameMask[e._id].override);
-	            g = new GameAdditionalFieldsDecorator(g, this.gameMask[e._id]);
+	        if (this != null && this.hasOwnProperty(e._id)) {
+	            g = new GameMaskDecorator(g, this[e._id].override);
+	            g = new GameAdditionalFieldsDecorator(g, this[e._id]);
 	        }
 
 	        gameArray.push(
 	            g
 	        );
 
-	    }, data)
+	    }, maskData)
 
 	    console.log(gameArray);
 	    console.log("/////////////////////////////////////////////////////////////");
