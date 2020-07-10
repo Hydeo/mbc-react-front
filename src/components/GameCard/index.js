@@ -66,14 +66,25 @@ class GameCard extends React.Component {
 
     renderTagsChips = (filter_name) => {
         return this.props.game_data.tags.map(function(e,index) {
-            return (
-                <Chip
-                    key={index}
-                    label={e.localization[this.cur_lang].trad}
-                    href="#chip"
-                    clickable
-                />
-            )
+            try{
+                return (
+                    <Chip
+                        key={index}
+                        label={e.localization[this.cur_lang].trad}
+                        href="#chip"
+                        clickable
+                    />
+                )
+            }catch(error){
+                return (
+                    <Chip
+                        key={index}
+                        label={e._id}
+                        href="#chip"
+                        clickable
+                    />
+                )
+            }
         }, this.props.i18n)
 
     }
