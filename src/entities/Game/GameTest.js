@@ -23,7 +23,7 @@ export function yolo(data: { gameList: [] }) {
 	        );
 
 	        //If current game game has a mask in current collection
-	        if (this.gameMask.hasOwnProperty(e._id)) {
+	        if (this.gameMask != null && this.gameMask.hasOwnProperty(e._id)) {
 	            g = new GameMaskDecorator(g, this.gameMask[e._id].override);
 	            g = new GameAdditionalFieldsDecorator(g, this.gameMask[e._id]);
 	        }
