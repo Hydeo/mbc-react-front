@@ -27,5 +27,3 @@ yarn-error.log*
 *.log
 
 src/test.html
-
-src/config.js
