@@ -53,4 +53,6 @@ export function yolo(data: { gameList: [] }) {
 
 	    console.log("/////////////////////////////////////////////////////////////");
 	}
+
+	return gameArray;
 }

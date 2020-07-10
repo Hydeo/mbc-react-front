@@ -223,7 +223,7 @@ class ResponsiveDialog extends React.Component {
             return (
                 <Chip
                     key={index}
-                    label={this.game_tags[e._id].localization[this.i18n.cur_lang].trad}
+                    label={e.getTrad(this.i18n.cur_lang)}
                     href="#chip"
                     clickable
                 />

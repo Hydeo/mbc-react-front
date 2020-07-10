@@ -17,13 +17,9 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_GAME_COLLECTION:
 
-
-
-      yolo(action.payload);
-
-
-
-
+      let gameArray = yolo(action.payload);
+      action.payload["gameList"] = gameArray;
+      console.log(action.payload);
 
       return {
         ...state,

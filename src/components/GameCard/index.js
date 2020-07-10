@@ -57,7 +57,7 @@ class GameCard extends React.Component {
             var tag_string = "";
             this.props.game_data.tags.forEach(t => {
                 //For the filters, we use the english version of the tags, whatever is the current lang
-                tag_string += " " + this.props.game_tags[t._id]["localization"]["eng"]["trad"];
+                tag_string += " " + t.getTrad();
             });
             return tag_string;
         }
@@ -106,7 +106,7 @@ class GameCard extends React.Component {
             <Fragment>
                 <div className={"container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
                     <LazyLoad>
-                        <img className="cover" src={Utils.get_game_localized_property(game_data,"imageUrl")} alt={Utils.get_game_localized_property(game_data,"title")} onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
+                        <img className="cover" src={game_data.getImageUrl()} alt={Utils.get_game_localized_property(game_data,"title")} onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
                     <div className="overlay" />
                     <div className="info" onClick={this.show_game_details}>

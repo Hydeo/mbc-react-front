@@ -16,6 +16,13 @@ class Tag {
     	this.tagName = tagName;
     	this.localization = localization;
     }
+
+    getTrad(lang:string = "eng"){
+        if(this.localization.hasOwnProperty(lang)){
+           return this.localization[lang]["trad"];
+        }
+        return this.localization["eng"]["trad"];
+    }
 }
 
 export default Tag;
