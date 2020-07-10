@@ -26,6 +26,7 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Utils from "../../utils";
+import { conf_dev } from "../../config";
 
 export const MODES_CRUD_GAME_VIEW = {
     "CREATE" : "CREATE",
@@ -60,8 +61,6 @@ const styles = theme => ({
         justifyContent: "center"
     }
 });
-
-const default_cover_url = "https://tof.cx/images/2020/05/04/b1aced89d62e6505d1f141655b5964e7.png";
 
 const recommended_age_marks = [{
         value: 5,
@@ -134,7 +133,7 @@ class CreateGame extends Component {
     propsGameToSate = (propGame,initState)=>{
         var pre_selected_tags = initState.tags_dico.filter((e)=>{
             for(var i = 0 ; i < propGame.tags.length ; i++){
-                if(e.id == propGame.tags[i]._id)
+                if(e.id == propGame.tags[i].getId())
                     return true;
             }
             return false;
@@ -286,7 +285,7 @@ class CreateGame extends Component {
                 <Grid item md={5} xs={10} className={classes.image_container}>
                   <img
                     style={{ maxWidth: "100%" }}
-                    src={this.state.imageUrl == "" ? default_cover_url : this.state.imageUrl}
+                    src={this.state.imageUrl == "" ? conf_dev.url_fallback_img : this.state.imageUrl}
                     alt="BoardGame Picture"
                   />
                 </Grid>

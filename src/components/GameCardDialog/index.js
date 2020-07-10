@@ -115,7 +115,7 @@ class ResponsiveDialog extends React.Component {
                   >
                     <DialogTitle id="responsive-dialog-title" disableTypography={true} className={classes.titleColor}>
                       <div className={classes.verticalCenter}>
-                        {Utils.get_game_localized_property(active_game, "title")}
+                        {active_game.getTitle()}
                         {this.state.editable && 
                             <IconButton  className={classes.flexPushRight} onClick={this.handleToggleViewMode} color="secondary" aria-label="upload picture" component="span">
                               <EditIcon />
@@ -146,7 +146,7 @@ class ResponsiveDialog extends React.Component {
         const { fullScreen, classes } = this.props;
         const { active_game } = this.state;
         return (
-            <CreateGame mode={"CUSTOMISE"} propGame = {active_game}/>
+            <CreateGame mode={this.state.mode} propGame = {active_game}/>
         );
     }
 
@@ -158,7 +158,7 @@ class ResponsiveDialog extends React.Component {
                 <Grid container alignItems="center" spacing={16}>
                     <Grid item  xs={12} md={5}>
                     <AddGameToFavorite active_game = {this.state.active_game}/>
-                        <img className={classes.cover} src={Utils.get_game_localized_property(active_game, "imageUrl")} alt="Img not found"></img>
+                        <img className={classes.cover} src={active_game.getImageUrl()} alt="Img not found"></img>
                     </Grid>
                     <Grid item xs={12} md={7}>
                       <Grid container>
@@ -170,15 +170,15 @@ class ResponsiveDialog extends React.Component {
                             </Grid>
                             <Grid item xs={6}className={classes.alignTextItem}>
                               <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
-                              <div className={classes.marginTextItem}>{active_game.age_recommended}+</div>
+                              <div className={classes.marginTextItem}>{active_game.getAgeRecommended()}+</div>
                             </Grid>
                             <Grid item xs={6} className={classes.alignTextItem}>
                               <img width="25" height="25" src="/images/icons/complexity.svg" alt="Kiwi standing on oval"></img>
-                              <div className={classes.marginTextItem}>{active_game.complexity}</div>
+                              <div className={classes.marginTextItem}>{active_game.getComplexity()}</div>
                             </Grid>
                             <Grid item xs={6} className={classes.alignTextItem}>
                               <img width="25" height="25" src="/images/icons/time.svg" alt="Kiwi standing on oval"></img>
-                              <div className={classes.marginTextItem}>{active_game.time_to_play_min} - {active_game.time_to_play_max}</div>
+                              <div className={classes.marginTextItem}>{active_game.getTimeToPlayMin()} - {active_game.getTimeToPlayMax()}</div>
                             </Grid>
                             <Grid item md={12}>
                               <Grid container>
@@ -200,7 +200,7 @@ class ResponsiveDialog extends React.Component {
                 Description:
                 </DialogContentText>
                 <DialogContentText >
-                        { Utils.get_game_localized_property(active_game, "description") } 
+                        { active_game.getDescription() } 
                 </DialogContentText>
             </Fragment>
         )
@@ -223,7 +223,7 @@ class ResponsiveDialog extends React.Component {
             return (
                 <Chip
                     key={index}
-                    label={this.game_tags[e._id].localization[this.i18n.cur_lang].trad}
+                    label={e.getTrad(this.i18n.cur_lang)}
                     href="#chip"
                     clickable
                 />
