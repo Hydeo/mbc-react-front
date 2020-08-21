@@ -19,7 +19,6 @@ export const create_new_game = new_game => {
     time_to_play_min: new_game.time_to_play_max,
     age_recommended: new_game.age_recommended,
     complexity: new_game.complexity,
-    type: "-1",
     tags: new_game.tags,
     localization: {
       eng: {

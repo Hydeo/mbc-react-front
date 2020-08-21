@@ -2,7 +2,7 @@
 
 class Tag {
 
-    _id: {_id: string};
+    _id: string;
     tagName : string;
     localization : {
     	[string] /*lang*/ : {
@@ -12,13 +12,13 @@ class Tag {
     } 
 
     constructor(_id:string, tagName : string, localization : { [string] /*lang*/ : { "lang" : string, "trad" : string } }) {
-    	this._id = {_id};
+    	this._id = _id;
     	this.tagName = tagName;
     	this.localization = localization;
     }
 
     getId(){
-        return this._id._id;
+        return this._id;
     }
     
     getTrad(lang:string = "eng"){
