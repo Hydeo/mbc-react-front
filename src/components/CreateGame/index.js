@@ -132,8 +132,8 @@ class CreateGame extends Component {
 
     propsGameToSate = (propGame,initState)=>{
         var pre_selected_tags = initState.tags_dico.filter((e)=>{
-            for(var i = 0 ; i < propGame.tags.length ; i++){
-                if(e.id == propGame.tags[i].getId())
+            for(var i = 0 ; i < propGame.getTags().length ; i++){
+                if(e.id == propGame.getTags()[i].getId())
                     return true;
             }
             return false;
@@ -141,8 +141,8 @@ class CreateGame extends Component {
         var prop_game_loaded = 
         {   
             ...propGame,
-            "title" : Utils.get_game_localized_property(propGame, "title"),
-            "imageUrl" : Utils.get_game_localized_property(propGame, "imageUrl"),
+            "title" : propGame.getTitle(),
+            "imageUrl" : propGame.getImageUrl(),
             "tags_view" : pre_selected_tags,
             
         }
