@@ -89,7 +89,7 @@ export const create_game_mask = (game_data) => {
     var callback = (token, dispatch) => {
         var data = {
             token: token,
-            gameId : game_data._id,
+            gameId : game_data.game.getId(),
             gameMask:{
               ...game_mask
             }

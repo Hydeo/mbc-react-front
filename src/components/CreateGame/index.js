@@ -9,6 +9,7 @@ import {
 } from '../../actions/game_collection_actions';
 import { createLoadingSelector } from '../../selectors/selectors';
 import { I18n, Trans } from "react-i18next";
+import _ from 'lodash';
 
 import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -29,9 +30,9 @@ import Utils from "../../utils";
 import { conf_dev } from "../../config";
 
 export const MODES_CRUD_GAME_VIEW = {
-    "CREATE" : "CREATE",
-    "UPDATE" : "UPDATE",
-    "EDIT" : "EDIT"
+    "CREATE": "CREATE",
+    "UPDATE": "UPDATE",
+    "EDIT": "EDIT"
 }
 
 const styles = theme => ({
@@ -40,12 +41,12 @@ const styles = theme => ({
         flexWrap: "wrap"
     },
 
-    divSpacer : {
-      height : theme.spacing.unit*4
+    divSpacer: {
+        height: theme.spacing.unit * 4
     },
     sliderMargin: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit
     },
 
     selectEmpty: {
@@ -55,7 +56,7 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit
     },
-    image_container :{
+    image_container: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
@@ -88,13 +89,15 @@ const recommended_age_marks = [{
     }
 ];
 
+//TODO: separate creation and edition 
+
 class CreateGame extends Component {
 
     constructor(props) {
         super(props);
 
         var init_state = {
-            gameId : null,
+            game: null,
             title: "",
             age_recommended: 5,
             nb_player_min: 1,
@@ -107,21 +110,22 @@ class CreateGame extends Component {
             tags: {},
 
             tags_view: [],
-            error_title : false,
-            error_imageUrl :false,
-            error_tags : false,
+            error_title: false,
+            error_imageUrl: false,
+            error_tags: false,
 
-            tags_dico : this.generateTagDico(),
+            tags_dico: this.generateTagDico(),
             //Creation or Edition
-            mode : MODES_CRUD_GAME_VIEW.hasOwnProperty(props.mode) ? props.mode : "CREATE",
-            cur_lang : "eng"  
+            mode: MODES_CRUD_GAME_VIEW.hasOwnProperty(props.mode) ? props.mode : "CREATE",
+            cur_lang: "eng"
         }
 
         //If we receive a game as prop to modify it
-        if(props.mode && props.mode == MODES_CRUD_GAME_VIEW.EDIT && this.props.propGame){
+        if (props.mode && props.mode == MODES_CRUD_GAME_VIEW.EDIT && this.props.propGame) {
             init_state = {
                 ...init_state,
-                ...this.propsGameToSate(props.propGame,init_state)
+                game : props.propGame,
+                ...this.propsGameToSate(props.propGame, init_state)
             }
         }
 
@@ -130,44 +134,34 @@ class CreateGame extends Component {
         };
     }
 
-    propsGameToSate = (propGame,initState)=>{
-        var pre_selected_tags = initState.tags_dico.filter((e)=>{
-            for(var i = 0 ; i < propGame.getTags().length ; i++){
-                if(e.id == propGame.getTags()[i].getId())
+    propsGameToSate = (propGame, initState) => {
+
+        var pre_selected_tags = initState.tags_dico.filter((e) => {
+            for (var i = 0; i < propGame.getTags().length; i++) {
+                if (e.id == propGame.getTags()[i].getId())
                     return true;
             }
             return false;
         });
-        var prop_game_loaded = 
-        {   
-            ...propGame,
-            "title" : propGame.getTitle(),
-            "imageUrl" : propGame.getImageUrl(),
-            "tags_view" : pre_selected_tags,
-            
-        }
 
+        var prop_game_loaded = {
+            ...propGame,
+            "title": propGame.getTitle(),
+            "imageUrl": propGame.getImageUrl(),
+            "tags_view": pre_selected_tags,
+            "tags": this.mapSelectedTags(pre_selected_tags)
+        }
         return prop_game_loaded;
     }
 
-    generateTagDico = () =>{
-        var tags_dico = Utils.objectMap(
+    generateTagDico = () => {
+        var tags_dico = _.map(
             this.props.game_tags,
-            function(e,key,index,context){
-                return (
-                    {title: context.game_tags[e._id].localization[context.i18n.cur_lang].trad, id : e._id}
-                )
-            },
-            this.props);
-
+            _.bind(function(e, key, index, context) {
+                return ({ title: this.game_tags[e.getId()].getTrad(this.i18n.cur_lang), id: e.getId() })
+            }, this.props)
+        );
         return Object.values(tags_dico);
-
-        /*var tags_dico = this.props.tags.map(function(e) {
-            return (
-                {title: e.localization[this.cur_lang].trad, id : e._id}
-            )
-        }, this.props.i18n)
-        return tags_dico;*/
     }
 
     handleChange = name => event => {
@@ -176,10 +170,16 @@ class CreateGame extends Component {
         });
     };
 
-    handleTagsChange = (event,newValues) => {
-        var tags_objects = newValues.map((e) => {
-            return { "_id": e.id }
-        })
+    mapSelectedTags = (v) => {
+        return _.map(v,
+            _.bind((e) => {
+                return this.props.game_tags[e.id];
+            }, this.props)
+        )
+    }
+
+    handleTagsChange = (event, newValues) => {
+        var tags_objects = this.mapSelectedTags(newValues);
         this.setState({
             "tags": tags_objects
         });
@@ -188,45 +188,45 @@ class CreateGame extends Component {
     validate = () => {
         var status = true;
         var state_errors = {
-            error_title : false,
-            error_tags : false,
-            error_imageUrl : false
+            error_title: false,
+            error_tags: false,
+            error_imageUrl: false
         };
 
-        if(this.state.title == ""){
-            state_errors.error_title = true; 
+        if (this.state.title == "") {
+            state_errors.error_title = true;
             status = false;
         }
-        if(Object.keys(this.state.tags).length == 0){
+        if (Object.keys(this.state.tags).length == 0) {
             state_errors.error_tags = true;
             status = false;
         }
-        if(!Utils.is_url(this.state.imageUrl)){
-           state_errors.error_imageUrl = true;
-           status = false;
+        if (!Utils.is_url(this.state.imageUrl)) {
+            state_errors.error_imageUrl = true;
+            status = false;
         }
 
-        this.setState({...state_errors})
+        this.setState({ ...state_errors })
 
         return status;
     }
 
     onSubmitGame = () => {
-      console.log(this.state);
+        console.log(this.state);
         if (this.validate()) {
-            switch(this.state.mode){
+            switch (this.state.mode) {
                 case MODES_CRUD_GAME_VIEW["CREATE"]:
                     this.props.create_new_game(this.state);
-                break;
+                    break;
 
                 case MODES_CRUD_GAME_VIEW["EDIT"]:
                     this.props.create_game_mask(this.state);
-                break;
+                    break;
 
                 default:
                     alert("Unknown Mode");
-                break;
-            }       
+                    break;
+            }
         }
     }
 
@@ -243,7 +243,7 @@ class CreateGame extends Component {
         });
     }
 
-    handleAgeRecommandedChange = (event, newValue)=>{
+    handleAgeRecommandedChange = (event, newValue) => {
         this.setState({
             age_recommended: newValue
         });
@@ -263,14 +263,14 @@ class CreateGame extends Component {
         return marks_array;
     }
 
-    componentDidMount = () =>{
-        
+    componentDidMount = () => {
+
     }
-    
+
     render() {
         const { classes } = this.props;
         return (
-          <I18n ns="translations">
+            <I18n ns="translations">
         {(t, { i18n }) => (
           <Fragment>
             <div>
@@ -409,7 +409,7 @@ class CreateGame extends Component {
           </Fragment>
           )}
         </I18n>
-      );
+        );
     }
 }
 

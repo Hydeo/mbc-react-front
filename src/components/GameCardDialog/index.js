@@ -166,7 +166,7 @@ class ResponsiveDialog extends React.Component {
                           <Grid container justify="center">
                             <Grid item xs={6} className={classes.alignTextItem}>
                               <img width="25" height="25" src="/images/icons/nbPlayer.svg" alt="Kiwi standing on oval"></img>
-                              <div className={classes.marginTextItem}>{active_game.nb_player_min} - {active_game.nb_player_max}</div>
+                              <div className={classes.marginTextItem}>{active_game.getNbPlayerMin()} - {active_game.getNbPlayerMax()}</div>
                             </Grid>
                             <Grid item xs={6}className={classes.alignTextItem}>
                               <img width="25" height="25" src="/images/icons/age.svg" alt="Kiwi standing on oval"></img>
@@ -223,7 +223,7 @@ class ResponsiveDialog extends React.Component {
             return (
                 <Chip
                     key={index}
-                    label={e.getTrad(this.i18n.cur_lang)}
+                    label={this.game_tags[e.getId()].getTrad(this.i18n.cur_lang)}
                     href="#chip"
                     clickable
                 />

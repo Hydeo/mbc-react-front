@@ -70,7 +70,7 @@ class GameCard extends React.Component {
                 return (
                     <Chip
                         key={index}
-                        label={e.localization[this.cur_lang].trad}
+                        label={this.game_tags[e.getId()].getTrad(this.i18n.cur_lang)}
                         href="#chip"
                         clickable
                     />
@@ -79,13 +79,13 @@ class GameCard extends React.Component {
                 return (
                     <Chip
                         key={index}
-                        label={e._id}
+                        label={e.getId()}
                         href="#chip"
                         clickable
                     />
                 )
             }
-        }, this.props.i18n)
+        }, this.props)
 
     }
 
@@ -106,7 +106,9 @@ class GameCard extends React.Component {
             <Fragment>
                 <div className={"container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
                     <LazyLoad>
-                        <img className="cover" src={game_data.getImageUrl()} alt={game_data.getTitle()} onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
+                        <img className="cover" src={game_data.getImageUrl()} alt={
+                            game_data.getTitle()
+                        } onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
                     <div className="overlay" />
                     <div className="info" onClick={this.show_game_details}>

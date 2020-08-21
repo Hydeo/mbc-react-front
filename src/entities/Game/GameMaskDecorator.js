@@ -2,6 +2,7 @@
 import BaseGameDecorator from './BaseGameDecorator';
 import BaseGame from './BaseGame';
 import Game from './Game';
+import Tag from '../Tag';
 import { conf_dev } from "../../config";
 class GameMaskDecorator extends BaseGameDecorator {
 
@@ -14,6 +15,10 @@ class GameMaskDecorator extends BaseGameDecorator {
 
 
     loadOverride(o : BaseGame) {
+        var tagArray = [];
+        o.tags.forEach((v,i)=>{
+            tagArray.push(new Tag(v._id,null,null));
+        })
         this.override = new Game(
             o._id,
             o.nb_player_min,
@@ -22,13 +27,17 @@ class GameMaskDecorator extends BaseGameDecorator {
             o.time_to_play_max,
             o.age_recommended,
             o.complexity,
-            o.tags,
+            tagArray,
             o.localization
         )
     }
 
     getId(): string {
         return this.baseGame.getId();
+    }
+
+    getTags() : Array < TagEntity>{
+        return this.override.tags;
     }
 
     getNbPlayerMin(): number {
@@ -75,13 +84,13 @@ class GameMaskDecorator extends BaseGameDecorator {
     }
 
 
-    getTitle() {
+    /*getTitle() {
         if (this.override.getTitle() != null) {
             return this.override.getTitle();
         } else {
             return this.baseGame.getTitle();
         }
-    }
+    }*/
 
     getDescription() {
         if (this.override.getDescription() != null) {
