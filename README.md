@@ -1,39 +1,31 @@
-# react-firebase-authentication
+# MyBoardGameList (Great Placeholder isn't it ?)
 
-[![Build Status](https://travis-ci.org/rwieruch/react-firebase-authentication.svg?branch=master)](https://travis-ci.org/rwieruch/react-firebase-authentication) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/)
+This project aim at providing some a usefull set of tools for boardgame cafe.
+These are poping all around the world but when one wants to know what games are available, a phone call is almost always the only solution. 
+Some have personal website with unreliable game list. And you'll almost never know what happening there unless you check their facebook is they have one. 
 
-* Found in [Taming the State in React](https://roadtoreact.com/course-details?courseId=TAMING_THE_STATE)
-* [Live](https://react-firebase-authentication.wieruch.com/)
-* [Tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/)
+To try to make the world a better place, i'm buildingto build something to solve that.
 
 ## Features
 
-* uses:
-  * only React (create-react-app)
-  * firebase 5.0.0
-  * react-router 4.2.0
-  * no Redux/MobX
-  * [React's 16.3 context API](https://reactjs.org/blog/2018/03/29/react-v-16-3.html)
-* features:
-  * Sign In
-  * Sign Up
-  * Sign Out
-  * Password Forget
-  * Password Change
-  * Protected Routes with Authorization
-  * Database: Users
-
-## Installation
-
-* `git clone git@github.com:rwieruch/react-firebase-authentication.git`
-* `cd react-firebase-authentication`
-* `npm install`
-* `npm start`
-* visit http://localhost:3000/
-* Use your own Firebase Credentials
-
-### Use your own Firebase Credentials
-
-* visit https://firebase.google.com/ and create a Firebase App
-* copy and paste your Credentials from your Firebase App into src/firebase/firebase.js
-* activate Email/Password Sign-In Method in your Firebase App
+  * Good looking
+  * Public / Private lists
+  * Doesn't need any acount to access public lists
+  * Filters and straitforward informations (this is not boardgamegeek)
+  * Search
+  * Multilingual
+  * Visibility with cafe visible on a map
+  * Sell games
+  * Create events
+  
+## Tech
+  * React
+  * Redux
+  * Firebase
+  * Material-UI
+  * Flow
+  * Lot of time
+  
+  ![s](https://i.ibb.co/10x1QQP/Capture.png)
+  
+  ![s](public/images/readme/borntogif-min.gif)
