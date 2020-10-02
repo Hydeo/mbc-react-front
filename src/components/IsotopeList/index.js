@@ -94,6 +94,7 @@ class IsotopeList extends React.Component {
   //<div id="loadingding" style={{height:"1000px", width:"100%"}}> <h2>loading...</h2></div>
   render() {
     const { classes } = this.props;
+
     return (
       <Fragment>
         <GameCardsFilter/>
@@ -150,8 +151,8 @@ class IsotopeList extends React.Component {
     window.removeEventListener("resize", this.updateDimensions);
   }
 
-  componentDidUpdate = (prevProps, prevState, snapshot) => {
-
+  componentDidUpdate = (prevProps) => {
+    alert("Iso Updated");
     Object.entries(this.props).forEach(([key, val]) =>
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );

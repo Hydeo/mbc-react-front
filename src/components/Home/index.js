@@ -37,6 +37,9 @@ class HomePage extends Component<Props,{}> {
   }
 
   render() {
+    try{
+     alert("render Home with "+this.props.user_games.game_collection.gameList.length);
+    }catch(e){}
     //const { users } = this.state;
     return (
       <div>

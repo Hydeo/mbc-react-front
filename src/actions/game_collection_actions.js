@@ -21,7 +21,6 @@ export const get_user_game_collection = () => {
     return check_token_before_query(callback);
 };
 
-
 /*
 export const add_game_to_collection = game_id => {
     var callback = (token, dispatch) => {
@@ -50,6 +49,7 @@ export const remove_game_from_collection = game_id => {
 
 export const create_game_mask = (game_data) => {
     var game_mask = {}
+    //TODO : Replace these fields by the properties of Game objects
     var base_fields = ["nb_player_min", "nb_player_max", "time_to_play_max", "time_to_play_min", "age_recommended", "complexity", "tags"];
     var custom_fields = ["price", "comment", "rating", "title", "imageUrl"];
     game_data["price"] = "100";
