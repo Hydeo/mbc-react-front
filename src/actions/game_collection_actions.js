@@ -108,7 +108,7 @@ export const create_game_mask = (game_data) => {
 export const toggle_in_collection = active_game => {
     var callback = (token, dispatch) => {
         axios
-            .put(URL_API + "/GameCollection/", { token: token, gameId: active_game._id })
+            .put(URL_API + "/GameCollection/", { token: token, gameId: active_game.getId() })
             .then(request => {
                 dispatch({
                     type: TOOGLE_IN_COLLECTION,
