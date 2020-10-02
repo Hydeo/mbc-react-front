@@ -1,58 +1,56 @@
 import GameCollection from "../entities/GameCollection/GameCollection";
 
 import {
-  GET_USER_GAME_COLLECTION,
-  ADD_GAME_TO_COLLECTION,
-  REMOVE_GAME_FROM_COLLECTION,
-  CREATE_GAME_MASK,
-  TOOGLE_IN_COLLECTION
+    GET_USER_GAME_COLLECTION,
+    ADD_GAME_TO_COLLECTION,
+    REMOVE_GAME_FROM_COLLECTION,
+    CREATE_GAME_MASK,
+    TOOGLE_IN_COLLECTION
 } from "../actions/game_collection_actions"
 
-import {yolo} from '../entities/Game/GameTest.js';
+import { yolo } from '../entities/Game/GameTest.js';
 
 const initialState = {
-  game_collection: null
+    game_collection: null
 }
 
 
 export default (state = initialState, action) => {
-  switch (action.type) {
-    case GET_USER_GAME_COLLECTION:
+    switch (action.type) {
+        case GET_USER_GAME_COLLECTION:
+            return {
+                ...state,
+                game_collection: new GameCollection("thisIsAnId", true, action.payload)
+            }
 
-      let gameArray =action.payload;
-      action.payload["gameList"] = gameArray;
-      let gc = new GameCollection("thisIsAnId",true,gameArray);
-      console.log(gc);
+            /*
+            case ADD_GAME_TO_COLLECTION:
+              return {
+                ...state,
+                game_collection: action.payload
+              }
+            */
+            /*
+            case REMOVE_GAME_FROM_COLLECTION:
+              return {
+                ...state,
+                game_collection: action.payload
+                //Trim the removed game from game_collection, but first we have to sort the "each time i mount the list i request it" issue
+              }
+            */
 
-      return {
-        ...state,
-        game_collection: action.payload
-      }
-
-    case ADD_GAME_TO_COLLECTION:
-      return {
-        ...state,
-        game_collection: action.payload
-      }
-
-    case REMOVE_GAME_FROM_COLLECTION:
-      return {
-        ...state,
-        game_collection: action.payload
-        //Trim the removed game from game_collection, but first we have to sort the "each time i mount the list i request it" issue
-      }
-    case CREATE_GAME_MASK:
-      return {
-        ...state,
-        game_collection: action.payload
-      }
-    case TOOGLE_IN_COLLECTION:
-      return {
-        ...state,
-        game_collection: action.payload
-      }
-    default:
-      return state;
-  }
+        case CREATE_GAME_MASK:
+            return {
+                ...state,
+                game_collection: new GameCollection("thisIsAnId", true, action.payload)
+            }
+        case TOOGLE_IN_COLLECTION:
+            return {
+                ...state,
+                game_collection: new GameCollection("thisIsAnId", true, action.payload)
+            }
+        default:
+            return state;
+    }
 
 }
