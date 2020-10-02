@@ -1,8 +1,9 @@
 import axios from "axios";
 import { conf_dev } from "../config";
-
+import Utils from "../utils";
 import { check_token_before_query } from "./utils_actions";
 
+//----- Action Names --
 export const URL_API = conf_dev.url_api;
 export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
 export const ADD_GAME_TO_COLLECTION = "ADD_GAME_TO_COLLECTION";
@@ -15,7 +16,7 @@ export const get_user_game_collection = () => {
         axios.post(URL_API + "/GameCollection/", { token: token }).then(request => {
             dispatch({
                 type: GET_USER_GAME_COLLECTION,
-                payload: request.data
+                payload: Utils.init_game_collection(request.data.gameList,request.data.gameMask,request.data)
             });
         });
     };

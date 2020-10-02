@@ -3,6 +3,7 @@ import {
   CREATE_NEW_GAME
 } from "../actions/game_actions";
 import {yolo} from '../entities/Game/GameTest.js';
+import Utils from "../utils";
 
 const initialState = null;
 
@@ -13,7 +14,7 @@ export default (state = initialState, action) => {
     break;
     case GET_GAME_LIBRARY:
 
-      let gameArray = yolo(action.payload.data);
+      let gameArray = action.payload;
       action.payload["gameList"] = gameArray;
 
       return {

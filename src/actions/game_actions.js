@@ -1,5 +1,6 @@
 import axios from "axios";
 import { conf_dev } from "../config";
+import Utils from "../utils";
  
 import { 
   check_token_before_query,
@@ -54,7 +55,7 @@ export const get_game_library = () => {
     return axios.get(URL_API + "/game").then(request => {
       dispatch({
         type: GET_GAME_LIBRARY,
-        payload: request
+        payload: Utils.init_game_collection(request.data)
       });
     });
   };

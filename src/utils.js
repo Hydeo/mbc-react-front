@@ -1,6 +1,13 @@
 import { conf_dev } from './config';
 import i18n from "i18next";
 
+//----- Entities -----
+import TagEntity from './entities/Tag';
+import GameMaskDecorator from './entities/Game/GameMaskDecorator';
+import GameAdditionalFieldsDecorator from './entities/Game/GameAdditionalFieldsDecorator';
+import Game from './entities/Game/Game';
+
+
 const list_owner_private_properties = ["comment", "price", "rating","imageUrl","title"]
 
 class Utils {
@@ -55,6 +62,35 @@ class Utils {
         if ((list_container_width - occupied_width) < 4)
             return item_width - nb_item;
         return item_width
+    }
+
+
+    //TODO : Create a GameCollection entity and put that there
+    static init_game_collection(data, maskData = null){ 
+        let gameArray = [];
+        if(data != null){   
+            data.forEach(function(e, index) {
+                //Init all Games Object from the server response
+                let g = new Game(e._id, e.nb_player_min, e.nb_player_max, e.time_to_play_min, e.time_to_play_max, e.age_recommended, e.complexity,
+                    e.tags.map((t) => {
+                        return new TagEntity(t._id, t.tagName, t.localization)
+                    }), e.localization
+                );
+
+                //If current game game has a mask in current collection
+                if (this != null && this.hasOwnProperty(e._id)) {
+                    g = new GameMaskDecorator(g, this[e._id].override);
+                    g = new GameAdditionalFieldsDecorator(g, this[e._id]);
+                }
+
+                gameArray.push(
+                    g
+                );
+
+            }, maskData)
+        }
+
+        return gameArray;
     }
 
 
