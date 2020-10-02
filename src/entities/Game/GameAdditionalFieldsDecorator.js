@@ -8,11 +8,16 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
     price: ? number;
     comment: ? string;
     rating: ? number;
+    title: ?string;
 
     constructor(baseGame: BaseGame, additionalFields) {
         super(baseGame);
-        this.price = this.comment = this.rating = null;
+        this.initProperties();
         this.loadAdditionalFields(additionalFields);
+    }
+
+    initProperties(){
+        this.price = this.comment = this.rating = this.title = null;
     }
 
     loadAdditionalFields(additionalFields) {
@@ -61,6 +66,15 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
             return this.rating;
         }
         return null;
+    }
+
+    getTitle(){
+        if(this.title != null){
+            return this.title;
+        }
+        else{
+            return this.baseGame.getTitle();
+        }
     }
 
     toString(): string {

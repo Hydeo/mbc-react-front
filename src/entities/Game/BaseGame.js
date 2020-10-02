@@ -58,7 +58,7 @@ class BaseGame {
 
     getTitle(): string {
         let title = this.getLocalizedProperty("title");
-        return title == null ? "Unknown Title" : title;
+        return title == null ? null : title;
     }
 
     getDescription(): string {

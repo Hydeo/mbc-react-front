@@ -84,13 +84,13 @@ class GameMaskDecorator extends BaseGameDecorator {
     }
 
 
-    /*getTitle() {
+    getTitle() {
         if (this.override.getTitle() != null) {
             return this.override.getTitle();
         } else {
             return this.baseGame.getTitle();
         }
-    }*/
+    }
 
     getDescription() {
         if (this.override.getDescription() != null) {
