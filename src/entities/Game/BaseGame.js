@@ -57,18 +57,15 @@ class BaseGame {
     }
 
     getTitle(): string {
-        let title = this.getLocalizedProperty("title");
-        return title == null ? null : title;
+        return this.getLocalizedProperty("title");
     }
 
     getDescription(): string {
-        let description = this.getLocalizedProperty("description");
-        return description == null ? "" : description;
+        return  this.getLocalizedProperty("description");
     }
 
     getImageUrl(): string {
-        let imageUrl = this.getLocalizedProperty("imageUrl");
-        return imageUrl == null ? conf_dev.url_fallback_img : imageUrl;
+        return this.getLocalizedProperty("imageUrl") ? this.getLocalizedProperty("imageUrl") : conf_dev.url_fallback_img ;
     }
 
     getLocalizedProperty(property: string): string {
@@ -78,7 +75,7 @@ class BaseGame {
                 return this.localization[gameLang][property];
             }
         }
-        return null;
+        return "";
     }
 
     geti18nLang(): string {

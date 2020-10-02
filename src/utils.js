@@ -66,9 +66,10 @@ class Utils {
 
 
     //TODO : Create a GameCollection entity and put that there
-    static init_game_collection(data, maskData = null){ 
+    //@flow
+    static init_game_collection(data, maskData: [] = []){ 
         let gameArray = [];
-        if(data != null){   
+        if(data != null && data.length > 0){   
             data.forEach(function(e, index) {
                 //Init all Games Object from the server response
                 let g = new Game(e._id, e.nb_player_min, e.nb_player_max, e.time_to_play_min, e.time_to_play_max, e.age_recommended, e.complexity,

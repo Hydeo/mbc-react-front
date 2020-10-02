@@ -2,7 +2,7 @@
 import BaseGameDecorator from './BaseGameDecorator';
 import BaseGame from './BaseGame';
 import Game from './Game';
-import Tag from '../Tag';
+import TagEntity from '../Tag';
 import { conf_dev } from "../../config";
 class GameMaskDecorator extends BaseGameDecorator {
 
@@ -17,7 +17,7 @@ class GameMaskDecorator extends BaseGameDecorator {
     loadOverride(o : BaseGame) {
         var tagArray = [];
         o.tags.forEach((v,i)=>{
-            tagArray.push(new Tag(v._id,null,null));
+            tagArray.push(new TagEntity(v._id));
         })
         this.override = new Game(
             o._id,
@@ -85,7 +85,7 @@ class GameMaskDecorator extends BaseGameDecorator {
 
 
     getTitle() {
-        if (this.override.getTitle() != null) {
+        if (this.override.getTitle()) {
             return this.override.getTitle();
         } else {
             return this.baseGame.getTitle();

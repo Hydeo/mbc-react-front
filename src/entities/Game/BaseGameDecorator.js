@@ -1,5 +1,6 @@
 //@flow
 import BaseGame from './BaseGame';
+import TagEntity from '../Tag';
 
 class BaseGameDecorator extends BaseGame {
 
@@ -14,7 +15,7 @@ class BaseGameDecorator extends BaseGame {
         return this.baseGame.getId();
     }
 
-    getTags() : Array < TagEntity>{
+    getTags() : Array <TagEntity>{
         return this.baseGame.getTags();
     }
 

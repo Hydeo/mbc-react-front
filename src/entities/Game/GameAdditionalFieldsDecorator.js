@@ -10,19 +10,22 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
     rating: ? number;
     title: ?string;
 
+    // $FlowFixMe
     constructor(baseGame: BaseGame, additionalFields) {
         super(baseGame);
-        this.initProperties();
+        this.initAdditionalFields();
         this.loadAdditionalFields(additionalFields);
     }
 
-    initProperties(){
+    initAdditionalFields(){
         this.price = this.comment = this.rating = this.title = null;
     }
-
+    
+    // $FlowFixMe
     loadAdditionalFields(additionalFields) {
         for (let [key, value] of Object.entries(this)) {
             if (additionalFields.hasOwnProperty(key)) {
+                // $FlowFixMe
                 this[key] = additionalFields[key];
             }
         }
@@ -81,6 +84,7 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
         let af = this.getFilledAdditionalFields();
         let afString = "";
         for (let [key, value] of Object.entries(af)) {
+            //$FlowIssue
             afString += "| " + key + " : " + value + " ";
         }
         return this.baseGame.toString() 
@@ -88,7 +92,6 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
         + afString
         +"\n";
     }
-
 }
 
 export default GameAdditionalFieldsDecorator;
