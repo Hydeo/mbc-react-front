@@ -6,8 +6,6 @@ import { check_token_before_query } from "./utils_actions";
 //----- Action Names --
 export const URL_API = conf_dev.url_api;
 export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
-export const ADD_GAME_TO_COLLECTION = "ADD_GAME_TO_COLLECTION";
-export const REMOVE_GAME_FROM_COLLECTION = "REMOVE_GAME_FROM_COLLECTION";
 export const CREATE_GAME_MASK = "CREATE_GAME_MASK";
 export const TOOGLE_IN_COLLECTION = "TOOGLE_IN_COLLECTION";
 
@@ -16,13 +14,15 @@ export const get_user_game_collection = () => {
         axios.post(URL_API + "/GameCollection/", { token: token }).then(request => {
             dispatch({
                 type: GET_USER_GAME_COLLECTION,
-                payload: Utils.init_game_collection(request.data.gameList,request.data.gameMask,request.data)
+                payload: Utils.init_game_collection(request.data.gameList, request.data.gameMask, request.data)
             });
         });
     };
     return check_token_before_query(callback);
 };
 
+
+/*
 export const add_game_to_collection = game_id => {
     var callback = (token, dispatch) => {
         axios.post(URL_API + "/GameCollection/addToCollection", { token: token, gameId: game_id }).then(request => {
@@ -46,12 +46,12 @@ export const remove_game_from_collection = game_id => {
     };
     return check_token_before_query(callback);
 };
-
+*/
 
 export const create_game_mask = (game_data) => {
     var game_mask = {}
     var base_fields = ["nb_player_min", "nb_player_max", "time_to_play_max", "time_to_play_min", "age_recommended", "complexity", "tags"];
-    var custom_fields = ["price", "comment", "rating","title","imageUrl"];
+    var custom_fields = ["price", "comment", "rating", "title", "imageUrl"];
     game_data["price"] = "100";
 
     var load_non_mendatory_fields = (game_data, game_mask, field_name) => {
@@ -65,14 +65,13 @@ export const create_game_mask = (game_data) => {
         var _gd = {}
         fields.forEach((e) => {
             if (game_data.hasOwnProperty(e)) {
-                if(e == "tags"){
+                if (e == "tags") {
                     let tagIdArray = [];
-                    game_data[e].forEach((c)=>{
-                        tagIdArray.push({_id :c.getId()});
+                    game_data[e].forEach((c) => {
+                        tagIdArray.push({ _id: c.getId() });
                     });
                     _gd[e] = tagIdArray;
-                }
-                else{
+                } else {
                     _gd[e] = game_data[e];
                 }
             }
@@ -80,7 +79,7 @@ export const create_game_mask = (game_data) => {
         return _gd;
     }
 
-    
+
     game_mask = load_fields(game_data, custom_fields);
     game_mask.override = load_fields(game_data, base_fields);
 
@@ -90,9 +89,9 @@ export const create_game_mask = (game_data) => {
     var callback = (token, dispatch) => {
         var data = {
             token: token,
-            gameId : game_data.game.getId(),
-            gameMask:{
-              ...game_mask
+            gameId: game_data.game.getId(),
+            gameMask: {
+                ...game_mask
             }
         }
 
@@ -113,7 +112,7 @@ export const toggle_in_collection = active_game => {
             .then(request => {
                 dispatch({
                     type: TOOGLE_IN_COLLECTION,
-                    payload: Utils.init_game_collection(request.data.gameList,request.data.gameMask)
+                    payload: Utils.init_game_collection(request.data.gameList, request.data.gameMask)
                 });
             });
     }

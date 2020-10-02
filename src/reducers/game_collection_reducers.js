@@ -2,13 +2,10 @@ import GameCollection from "../entities/GameCollection/GameCollection";
 
 import {
     GET_USER_GAME_COLLECTION,
-    ADD_GAME_TO_COLLECTION,
-    REMOVE_GAME_FROM_COLLECTION,
     CREATE_GAME_MASK,
     TOOGLE_IN_COLLECTION
 } from "../actions/game_collection_actions"
 
-import { yolo } from '../entities/Game/GameTest.js';
 
 const initialState = {
     game_collection: null
