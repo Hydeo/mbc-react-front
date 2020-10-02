@@ -1,3 +1,5 @@
+import GameCollection from "../entities/GameCollection/GameCollection";
+
 import {
   GET_USER_GAME_COLLECTION,
   ADD_GAME_TO_COLLECTION,
@@ -19,7 +21,8 @@ export default (state = initialState, action) => {
 
       let gameArray =action.payload;
       action.payload["gameList"] = gameArray;
-      console.log(action.payload);
+      let gc = new GameCollection("thisIsAnId",true,gameArray);
+      console.log(gc);
 
       return {
         ...state,
