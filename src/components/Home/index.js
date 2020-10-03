@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-
+import _ from 'lodash';
 import {connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import {
@@ -28,7 +28,7 @@ class HomePage extends Component<Props,{}> {
   constructor(props) {
     super(props);
     this.state = {
-      
+      user_games : null
     };  
   }
 
@@ -38,7 +38,7 @@ class HomePage extends Component<Props,{}> {
 
   render() {
     try{
-     alert("render Home with "+this.props.user_games.game_collection.gameList.length);
+     console.log(this.props.user_games.game_collection.gameList.length);
     }catch(e){}
     //const { users } = this.state;
     return (
@@ -46,11 +46,17 @@ class HomePage extends Component<Props,{}> {
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
 
-        {/*!!this.props.game_collection.game_collection && <GameList game_collection={this.props.game_collection.game_collection}/>*/}
-        <IsotopeList hydrated_game_list={this.props.user_games.game_collection} editable_items={true}/>
+        {_.has(this.state.user_games,"game_collection") && <IsotopeList hydrated_game_list={this.state.user_games.game_collection} editable_items={true}/>}
+        
       </div>
      
     );  
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.user_games !== this.props.user_games) {
+      this.setState({user_games: this.props.user_games});
+    }
   }
 }
 

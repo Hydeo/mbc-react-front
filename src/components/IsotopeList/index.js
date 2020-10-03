@@ -6,6 +6,7 @@ import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { update_isotope, set_isotope } from "../../actions/isotope_actions";
+import _ from 'lodash';
 
 import { conf_dev } from "../../config";
 import Utils from "../../utils.js";
@@ -137,9 +138,9 @@ class IsotopeList extends React.Component {
 
   shouldComponentUpdate = (nextProps, nextState) => {
   
-    if (document.getElementById("item_list").childElementCount > 3) {
+    /*if (document.getElementById("item_list").childElementCount > 3) {
       return false;
-    }
+    }*/
     return true;
   }
 
@@ -152,10 +153,10 @@ class IsotopeList extends React.Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    alert("Iso Updated");
     Object.entries(this.props).forEach(([key, val]) =>
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );
+
   };
 }
 
