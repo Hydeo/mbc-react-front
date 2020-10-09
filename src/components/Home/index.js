@@ -10,6 +10,7 @@ import {
 import withAuthorization from '../Session/withAuthorization';
 
 import IsotopeList from "../IsotopeList";
+import SwitchPrivacyGameCollection from "../SwitchPrivacyGameCollection";
 
 type Props = {
   user_games: {
@@ -45,7 +46,9 @@ class HomePage extends Component<Props,{}> {
       <div>
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
-
+        <p>Collection ID "{_.has(this.state.user_games,"game_collection") && this.state.user_games.game_collection.getUserId()}"</p>
+        <p>This collection is "{_.has(this.state.user_games,"game_collection") && this.state.user_games.game_collection.getIsPublic() ? "Public" : "Private"}"</p>
+        <SwitchPrivacyGameCollection/>
         {_.has(this.state.user_games,"game_collection") && <IsotopeList hydrated_game_list={this.state.user_games.game_collection} editable_items={true}/>}
         
       </div>

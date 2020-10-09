@@ -1,9 +1,11 @@
 import GameCollection from "../entities/GameCollection/GameCollection";
+import _ from "lodash";
 
 import {
     GET_USER_GAME_COLLECTION,
     CREATE_GAME_MASK,
-    TOOGLE_IN_COLLECTION
+    TOOGLE_IN_COLLECTION,
+    TOOGLE_PRIVACY_COLLECTION
 } from "../actions/game_collection_actions"
 
 
@@ -13,39 +15,58 @@ const initialState = {
 
 
 export default (state = initialState, action) => {
+    let gc = null;
     switch (action.type) {
         case GET_USER_GAME_COLLECTION:
+
+            gc = new GameCollection(
+                action.payload.id,
+                action.payload.userId,
+                action.payload.isPublic,
+                GameCollection.deserializationGameList(action.payload.gameList),
+                action.payload.gameMask
+            );
+
             return {
                 ...state,
-                game_collection: new GameCollection("thisIsAnId", true, action.payload)
+                game_collection: gc
             }
-
-            /*
-            case ADD_GAME_TO_COLLECTION:
-              return {
-                ...state,
-                game_collection: action.payload
-              }
-            */
-            /*
-            case REMOVE_GAME_FROM_COLLECTION:
-              return {
-                ...state,
-                game_collection: action.payload
-                //Trim the removed game from game_collection, but first we have to sort the "each time i mount the list i request it" issue
-              }
-            */
 
         case CREATE_GAME_MASK:
+            gc = new GameCollection(
+                action.payload.id,
+                action.payload.userId,
+                action.payload.isPublic,
+                GameCollection.deserializationGameList(action.payload.gameList),
+                action.payload.gameMask
+            );
             return {
                 ...state,
-                game_collection: new GameCollection("thisIsAnId", true, action.payload)
+                game_collection: gc
             }
+
         case TOOGLE_IN_COLLECTION:
+            gc = new GameCollection(
+                action.payload.id,
+                action.payload.userId,
+                action.payload.isPublic,
+                GameCollection.deserializationGameList(action.payload.gameList),
+                action.payload.gameMask
+            );
             return {
                 ...state,
-                game_collection: new GameCollection("thisIsAnId", true, action.payload)
+                game_collection: gc
             }
+
+        case TOOGLE_PRIVACY_COLLECTION:
+            let ns = {
+                ...state
+            }
+            if(_.has(ns,"game_collection")){
+                ns.game_collection.isPublic = !ns.game_collection.isPublic; 
+            }
+            return ns;
+
         default:
             return state;
     }

@@ -8,13 +8,14 @@ export const URL_API = conf_dev.url_api;
 export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
 export const CREATE_GAME_MASK = "CREATE_GAME_MASK";
 export const TOOGLE_IN_COLLECTION = "TOOGLE_IN_COLLECTION";
+export const TOOGLE_PRIVACY_COLLECTION = "TOOGLE_PRIVACY_COLLECTION";
 
 export const get_user_game_collection = () => {
     var callback = (token, dispatch) => {
         axios.post(URL_API + "/GameCollection/", { token: token }).then(request => {
             dispatch({
                 type: GET_USER_GAME_COLLECTION,
-                payload: Utils.init_game_collection(request.data.gameList, request.data.gameMask, request.data)
+                payload: request.data
             });
         });
     };
@@ -113,6 +114,21 @@ export const toggle_in_collection = active_game => {
                 dispatch({
                     type: TOOGLE_IN_COLLECTION,
                     payload: Utils.init_game_collection(request.data.gameList, request.data.gameMask)
+                });
+            });
+    }
+    return check_token_before_query(callback);
+}
+
+
+export const toggleIsPublicCollection = collection => {
+    var callback = (token, dispatch) => {
+        axios
+            .put(URL_API + "/GameCollection/privacy", { token: token })
+            .then(request => {
+                dispatch({
+                    type: TOOGLE_PRIVACY_COLLECTION,
+                    payload: request.data
                 });
             });
     }
