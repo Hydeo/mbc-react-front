@@ -9,6 +9,7 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
     comment: ? string;
     rating: ? number;
     title: ?string;
+    imageUrl: ?string;
 
     // $FlowFixMe
     constructor(baseGame: BaseGame, additionalFields) {
@@ -18,7 +19,7 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
     }
 
     initAdditionalFields(){
-        this.price = this.comment = this.rating = this.title = null;
+        this.price = this.comment = this.rating = this.title = this.imageUrl = null;
     }
     
     // $FlowFixMe
@@ -55,6 +56,13 @@ class GameAdditionalFieldsDecorator extends BaseGameDecorator {
             return this.price;
         }
         return null;
+    }
+
+    getImageUrl() {
+        if (this.imageUrl != null) {
+            return this.imageUrl;
+        }
+        return this.baseGame.getImageUrl();
     }
 
     getComment() {
