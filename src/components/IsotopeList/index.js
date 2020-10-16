@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { update_isotope, set_isotope } from "../../actions/isotope_actions";
+import { updateIsotope, set_isotope } from "../../actions/isotope_actions";
 import _ from 'lodash';
 
 import { conf_dev } from "../../config";
@@ -80,13 +80,13 @@ class IsotopeList extends React.Component {
       
       if (this.state.first_render == true) {
 
-        this.props.update_isotope(this.props.isotope_instance, true);
+        this.props.updateIsotope(this.props.isotope_instance, true);
         this.setState({
           first_render: false
         });
       }
       else {
-        this.props.update_isotope(this.props.isotope_instance, true);
+        this.props.updateIsotope(this.props.isotope_instance, true);
       }
 
     }
@@ -120,7 +120,7 @@ class IsotopeList extends React.Component {
                     game_data={item} 
                     item_width={first_item_sizer} 
                     set_active_game={this.set_active_game_details_dialog} 
-                    isotope_update={this.update_isotope} 
+                    isotope_update={this.updateIsotope} 
                     imgLoadedCounter={this.imgLoadedCounter} 
                     lang={this.props.i18n.cur_lang}
                     editable_games={this.props}
@@ -171,7 +171,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      update_isotope,
+      updateIsotope,
       set_isotope
     },
     dispatch

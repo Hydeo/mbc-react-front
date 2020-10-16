@@ -11,7 +11,7 @@ export const SET_ISOTOPE = 'SET_ISOTOPE'
 //export const URL_API = "https://my-link-list.herokuapp.com";
 export const URL_API = conf_dev.url_api;
 
-export const update_isotope = (iso_instance = null, force_new = false) => {
+export const updateIsotope = (iso_instance = null, force_new = false) => {
 	return dispatch => {
 		document.getElementById("item_list").style.opacity = "0";
 		if (iso_instance == null || force_new == true) {
@@ -42,9 +42,7 @@ export const update_isotope = (iso_instance = null, force_new = false) => {
 			iso_item_list.arrange();
 		}
 		else {
-			console.log("-- update_isotope -- update layout--");
 			iso_instance.reloadItems()
-			//iso_instance.layout();
 			iso_instance.arrange();
 		}
 		//Force check lazyload after isotope layout has been created

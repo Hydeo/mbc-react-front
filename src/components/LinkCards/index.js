@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as routes from "../../constants/routes";
-import { update_isotope, delete_link } from "../../actions/isotope_actions";
+import { updateIsotope, delete_link } from "../../actions/isotope_actions";
 import {
   add_game_to_collection,
   remove_game_from_collection
@@ -75,7 +75,7 @@ class LinkCard extends React.Component {
     });
   };
 
-  update_isotope_layout = () => {
+  updateIsotope_layout = () => {
     this.props.isotope_instance.layout();
   };
 
@@ -126,10 +126,10 @@ class LinkCard extends React.Component {
           <Collapse
             in={this.state.expanded}
             onExited={() => {
-              this.update_isotope_layout();
+              this.updateIsotope_layout();
             }}
             onEntered={() => {
-              this.update_isotope_layout();
+              this.updateIsotope_layout();
             }}
             timeout="auto"
             unmountOnExit
@@ -195,7 +195,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      update_isotope,
+      updateIsotope,
       delete_link,
       add_game_to_collection,
       remove_game_from_collection
