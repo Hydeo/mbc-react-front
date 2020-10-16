@@ -25,7 +25,7 @@ import {MODES_CRUD_GAME_VIEW} from '../CreateGame/'
 
 import Utils from "../../utils";
 import {
-    update_active_game_popup
+    updateActiveGamePopup
 } from "../../actions/game_cards_actions";
 
 
@@ -215,7 +215,7 @@ class ResponsiveDialog extends React.Component {
 
     handleClose = () => {
         this.setState({ open: false });
-        this.props.update_active_game_popup({ "active_game": this.props.game_data, open: false });
+        this.props.updateActiveGamePopup({ "active_game": this.props.game_data, open: false });
     };
 
     renderTagsChips = () => {
@@ -247,7 +247,7 @@ const mapStateToProps = state => ({
 //On injecte les actions possible au props ?
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
-            update_active_game_popup
+            updateActiveGamePopup
         },
         dispatch
     );

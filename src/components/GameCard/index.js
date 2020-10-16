@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-    update_active_game_popup
+    updateActiveGamePopup
 } from "../../actions/game_cards_actions";
 
 import PropTypes from 'prop-types';
@@ -107,7 +107,7 @@ class GameCard extends React.Component {
     };
 
     show_game_details = () => {
-        this.props.update_active_game_popup({"active_game":this.props.game_data, open:true});
+        this.props.updateActiveGamePopup({"active_game":this.props.game_data, open:true});
     }
 
     get_game_filter_tags = () => {
@@ -252,7 +252,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
-            update_active_game_popup
+            updateActiveGamePopup
         },
         dispatch
     );

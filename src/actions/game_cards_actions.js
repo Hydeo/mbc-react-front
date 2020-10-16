@@ -6,7 +6,7 @@ import { validateFirebaseToken } from "./utils_actions";
 export const URL_API = conf_dev.url_api;
 export const UPDATE_ACTIVE_GAME_POPUP = "UPDATE_ACTIVE_GAME_POPUP";
 
-export const update_active_game_popup = game_card_state =>{
+export const updateActiveGamePopup = game_card_state =>{
     return dispatch => {
 		dispatch({
 			type: UPDATE_ACTIVE_GAME_POPUP,
