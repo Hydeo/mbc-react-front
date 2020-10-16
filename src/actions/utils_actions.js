@@ -30,7 +30,7 @@ export const updateCurLang = (lang) =>{
   };
 }
 
-export const loading_request_start = (request_name) =>{
+export const loadingRequestStart = (request_name) =>{
     return dispatch => {
      dispatch(
       {
@@ -39,7 +39,7 @@ export const loading_request_start = (request_name) =>{
     }
 }
 
-export const loading_request_success = (request_name) =>{
+export const loadingRequestSuccess = (request_name) =>{
     return dispatch => {
      dispatch(
       {
@@ -48,7 +48,7 @@ export const loading_request_success = (request_name) =>{
     }
 }
 
-export const loading_request_failure = (request_name,error) =>{
+export const loadingRequestFailure = (request_name,error) =>{
     return dispatch => {
      dispatch(
       {
