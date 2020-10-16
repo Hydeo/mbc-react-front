@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import {
-  get_categories_by_lang,
+  getCategoriesByLang,
 } from "../../actions/state_init_actions";
 import {
   get_all_tags,
@@ -19,7 +19,7 @@ class AppStateInit extends Component {
     }
   
     componentDidMount() {
-      this.props.get_categories_by_lang();
+      this.props.getCategoriesByLang();
       this.props.get_all_tags();
     }
   
@@ -41,7 +41,7 @@ class AppStateInit extends Component {
   const mapDispatchToProps = dispatch =>
     bindActionCreators(
       {
-        get_categories_by_lang,
+        getCategoriesByLang,
         get_all_tags
       },
       dispatch
