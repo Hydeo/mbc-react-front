@@ -94,7 +94,7 @@ export const createGameMask = (game_data) => {
     return validateFirebaseToken(callback);
 }
 
-export const toggle_in_collection = active_game => {
+export const toggleInCollection = active_game => {
     var callback = (token, dispatch) => {
         axios
             .put(URL_API + "/GameCollection/", { token: token, gameId: active_game.getId() })

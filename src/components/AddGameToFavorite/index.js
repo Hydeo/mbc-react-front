@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-    toggle_in_collection
+    toggleInCollection
 } from "../../actions/game_collection_actions";
 
 class AddGameToFavorite extends React.Component {
@@ -25,7 +25,7 @@ class AddGameToFavorite extends React.Component {
         return ("\u2661")
     }
     handleClick = () => {
-        this.props.toggle_in_collection(this.state.active_game);
+        this.props.toggleInCollection(this.state.active_game);
     }
 
     render() {
@@ -46,7 +46,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            toggle_in_collection
+            toggleInCollection
         },
         dispatch
     );
