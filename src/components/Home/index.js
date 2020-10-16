@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import {
-  get_user_game_collection
+  getUserGameCollection
 } from "../../actions/game_collection_actions";
 
 import withAuthorization from '../Session/withAuthorization';
@@ -21,7 +21,7 @@ type Props = {
       uid:number
     }
   },
-  get_user_game_collection : (uid:number) => mixed
+  getUserGameCollection : (uid:number) => mixed
 };
 
 
@@ -34,7 +34,7 @@ class HomePage extends Component<Props,{}> {
   }
 
   componentDidMount() {
-    this.props.get_user_game_collection(this.props.user_state.user_authed.uid);
+    this.props.getUserGameCollection(this.props.user_state.user_authed.uid);
   }
 
   render() {
@@ -69,7 +69,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      get_user_game_collection
+      getUserGameCollection
     },
     dispatch
   );

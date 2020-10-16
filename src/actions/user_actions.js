@@ -13,7 +13,7 @@ import {
   getGameBrowserInitData
 } from './game_browser_actions'
 import{
-  get_user_game_collection
+  getUserGameCollection
 } from './game_collection_actions'
 
 export const AUTH_USER = "AUTH_USER";
@@ -144,7 +144,7 @@ export const promies_thunk = () => {
         return dispatch(()=>{
           dispatch(auth_user(user));
           dispatch(getGameBrowserInitData());
-          dispatch(get_user_game_collection());
+          dispatch(getUserGameCollection());
         });
         
       } else {

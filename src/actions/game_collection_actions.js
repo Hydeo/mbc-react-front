@@ -11,7 +11,7 @@ export const CREATE_GAME_MASK = "CREATE_GAME_MASK";
 export const TOOGLE_IN_COLLECTION = "TOOGLE_IN_COLLECTION";
 export const TOOGLE_PRIVACY_COLLECTION = "TOOGLE_PRIVACY_COLLECTION";
 
-export const get_user_game_collection = () => {
+export const getUserGameCollection = () => {
     var callback = (token, dispatch) => {
         axios.post(URL_API + "/GameCollection/", { token: token }).then(request => {
             dispatch({
@@ -123,7 +123,7 @@ export const toggleIsPublicCollection = collection => {
     return check_token_before_query(callback);
 }
 
-/*export const get_user_game_collection = uid => {
+/*export const getUserGameCollection = uid => {
   return dispatch => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
