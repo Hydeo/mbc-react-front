@@ -6,7 +6,7 @@ import {
   getCategoriesByLang,
 } from "../../actions/state_init_actions";
 import {
-  get_all_tags,
+  getAllTags,
 } from "../../actions/tag_actions";
 
 
@@ -20,7 +20,7 @@ class AppStateInit extends Component {
   
     componentDidMount() {
       this.props.getCategoriesByLang();
-      this.props.get_all_tags();
+      this.props.getAllTags();
     }
   
     render() {
@@ -42,7 +42,7 @@ class AppStateInit extends Component {
     bindActionCreators(
       {
         getCategoriesByLang,
-        get_all_tags
+        getAllTags
       },
       dispatch
     );
