@@ -27,3 +27,7 @@ yarn-error.log*
 *.log
 
 src/test.html
+
+package-lock.json
+
+src/config.js
