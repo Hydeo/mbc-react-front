@@ -36,7 +36,7 @@ export const getGameCollectionById = (id) => {
 };
 
 
-export const create_game_mask = (game_data) => {
+export const createGameMask = (game_data) => {
     var game_mask = {}
     //TODO : Replace these fields by the properties of Game objects
     var base_fields = ["nb_player_min", "nb_player_max", "time_to_play_max", "time_to_play_min", "age_recommended", "complexity", "tags"];

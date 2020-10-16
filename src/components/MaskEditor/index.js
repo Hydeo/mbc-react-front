@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import i18n from "i18next";
 import {
-  create_game_mask
+  createGameMask
 } from '../../actions/game_collection_actions';
 import Utils from "../../utils";
 import { withStyles } from "@material-ui/core/styles";
@@ -72,7 +72,7 @@ class MaskEditor extends Component {
 
   onSubmitMask = () => {
     if (this.validate()) {
-      this.props.create_game_mask(this.state);
+      this.props.createGameMask(this.state);
     }
   }
 
@@ -274,7 +274,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      create_game_mask
+      createGameMask
     },
     dispatch
   );

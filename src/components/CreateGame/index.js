@@ -5,7 +5,7 @@ import {
     createNewGame
 } from '../../actions/game_actions';
 import {
-    create_game_mask
+    createGameMask
 } from '../../actions/game_collection_actions';
 import { createLoadingSelector } from '../../selectors/selectors';
 import { I18n, Trans } from "react-i18next";
@@ -220,7 +220,7 @@ class CreateGame extends Component {
                     break;
 
                 case MODES_CRUD_GAME_VIEW["EDIT"]:
-                    this.props.create_game_mask(this.state);
+                    this.props.createGameMask(this.state);
                     break;
 
                 default:
@@ -424,7 +424,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
             createNewGame,
-            create_game_mask
+            createGameMask
         },
         dispatch
     );
