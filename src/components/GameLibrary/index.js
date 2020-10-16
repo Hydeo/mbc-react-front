@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     get_game_library
-} from "../../actions/game_actions";
+} from "../../actions/game_browser_actions";
 import IsotopeList from "../IsotopeList";
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';

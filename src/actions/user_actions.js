@@ -11,7 +11,7 @@ import {
 } from "../firebase/auth";
 import {
   get_game_library
-} from './game_actions'
+} from './game_browser_actions'
 import{
   get_user_game_collection
 } from './game_collection_actions'

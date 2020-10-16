@@ -4,7 +4,7 @@ import categories from "./categories_reducer";
 import tags from "./tag_reducers";
 import user from './user_reducers.js';
 import game_collection from "./game_collection_reducers";
-import game_library from "./game_reducer";
+import game_library from "./game_browser_reducer";
 import isotope from "./isotope_reducer";
 import game_cards from './game_cards_reducers'
 import i18n from './i18n_reducer';

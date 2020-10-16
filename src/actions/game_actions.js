@@ -49,14 +49,3 @@ export const create_new_game = new_game => {
   };
   return check_token_before_query(callback);
 };
-
-export const get_game_library = () => {
-  return dispatch => {
-    return axios.get(URL_API + "/game").then(request => {
-      dispatch({
-        type: GET_GAME_LIBRARY,
-        payload: Utils.init_game_collection(request.data)
-      });
-    });
-  };
-};
