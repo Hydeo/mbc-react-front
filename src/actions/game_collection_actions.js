@@ -1,7 +1,7 @@
 import axios from "axios";
 import { conf_dev } from "../config";
 import Utils from "../utils";
-import { check_token_before_query } from "./utils_actions";
+import { validateFirebaseToken } from "./utils_actions";
 
 //----- Action Names --
 export const URL_API = conf_dev.url_api;
@@ -20,7 +20,7 @@ export const getUserGameCollection = () => {
             });
         });
     };
-    return check_token_before_query(callback);
+    return validateFirebaseToken(callback);
 };
 
 export const getGameCollectionById = (id) => {
@@ -32,7 +32,7 @@ export const getGameCollectionById = (id) => {
             });
         });
     };
-    return check_token_before_query(callback);
+    return validateFirebaseToken(callback);
 };
 
 
@@ -91,7 +91,7 @@ export const create_game_mask = (game_data) => {
             });*/
         });
     };
-    return check_token_before_query(callback);
+    return validateFirebaseToken(callback);
 }
 
 export const toggle_in_collection = active_game => {
@@ -105,7 +105,7 @@ export const toggle_in_collection = active_game => {
                 });
             });
     }
-    return check_token_before_query(callback);
+    return validateFirebaseToken(callback);
 }
 
 
@@ -120,7 +120,7 @@ export const toggleIsPublicCollection = collection => {
                 });
             });
     }
-    return check_token_before_query(callback);
+    return validateFirebaseToken(callback);
 }
 
 /*export const getUserGameCollection = uid => {

@@ -3,7 +3,7 @@ import { conf_dev } from "../config";
 import Utils from "../utils";
  
 import { 
-  check_token_before_query,
+  validateFirebaseToken,
   loading_request_start,
   loading_request_success,
   loading_request_failure } from "./utils_actions";
@@ -47,5 +47,5 @@ export const create_new_game = new_game => {
          setTimeout(()=>{dispatch(loading_request_failure(CREATE_NEW_GAME,error))}, 300);
       })
   };
-  return check_token_before_query(callback);
+  return validateFirebaseToken(callback);
 };

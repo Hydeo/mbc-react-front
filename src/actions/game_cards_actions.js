@@ -1,7 +1,7 @@
 import axios from "axios";
 import { conf_dev } from "../config";
 
-import { check_token_before_query } from "./utils_actions";
+import { validateFirebaseToken } from "./utils_actions";
 
 export const URL_API = conf_dev.url_api;
 export const UPDATE_ACTIVE_GAME_POPUP = "UPDATE_ACTIVE_GAME_POPUP";

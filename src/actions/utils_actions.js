@@ -5,7 +5,7 @@ export const UPDATE_LANG = "UPDATE_LANG";
 
 //Before each request, we ask firebase if the user's token currently loged in (if there is one) is still correct
 //if it is not we log him off
-export const check_token_before_query = callback => {
+export const validateFirebaseToken = callback => {
     return dispatch => {
       return firebase.auth.onAuthStateChanged(user => {
         if (user) {
