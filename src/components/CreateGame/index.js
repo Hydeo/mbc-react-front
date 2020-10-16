@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-    create_new_game
+    createNewGame
 } from '../../actions/game_actions';
 import {
     create_game_mask
@@ -216,7 +216,7 @@ class CreateGame extends Component {
         if (this.validate()) {
             switch (this.state.mode) {
                 case MODES_CRUD_GAME_VIEW["CREATE"]:
-                    this.props.create_new_game(this.state);
+                    this.props.createNewGame(this.state);
                     break;
 
                 case MODES_CRUD_GAME_VIEW["EDIT"]:
@@ -423,7 +423,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
-            create_new_game,
+            createNewGame,
             create_game_mask
         },
         dispatch
