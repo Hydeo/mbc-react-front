@@ -25,22 +25,22 @@ export const URL_API = conf_dev.url_api;
 
 
 
-export const sign_up_user = credentials => {
+export const signUpUser = credentials => {
   return dispatch => {
     return doCreateUserWithEmailAndPassword(
       credentials.email,
       credentials.password
     )
       .then(response => {
-        dispatch(auth_user());
+        dispatch(authUser());
       })
       .catch(error => {
-        dispatch(auth_error({"type" : "sign_up_error", "error" : error }));
+        dispatch(authError({"type" : "sign_up_error", "error" : error }));
       });
   };
 };
 
-export const sign_up_copy_private_db = user =>{
+export const signUpCopyPrivateDb = user =>{
   const data = {
     uid: user.uid,
     identifier : user.identifier
@@ -58,41 +58,41 @@ export const sign_up_copy_private_db = user =>{
   }
 }
 
-export const sign_in_user = credentials => {
+export const signInUser = credentials => {
   return dispatch => {
     return doSignInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
-        dispatch(auth_user(response.user));
+        dispatch(authUser(response.user));
       })
       .catch(error => {
-        dispatch(auth_error({"type" : "sign_in_error",  "error" : error}));
+        dispatch(authError({"type" : "sign_in_error",  "error" : error}));
       });
   };
 };
 
-export const sign_in_user_google = ()=>{
+export const signInUserGoogle = ()=>{
   return dispatch=>{
     return doSignInWithGoogleAuthProvider()
       .then(response=>{
         if(response.additionalUserInfo.isNewUser){
-          dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
+          dispatch(signUpCopyPrivateDb({"uid" : response.user.uid, "identifier" : response.user.email}))
         }
       })
   }
 }
 
-export const sign_in_user_facebook = ()=>{
+export const signInUserFacebook = ()=>{
   return dispatch=>{
     return doSignInWithFacebookAuthProvider()
       .then(response=>{
         if(response.additionalUserInfo.isNewUser){
-          dispatch(sign_up_copy_private_db({"uid" : response.user.uid, "identifier" : response.user.email}))
+          dispatch(signUpCopyPrivateDb({"uid" : response.user.uid, "identifier" : response.user.email}))
         }
       })
   }
 }
 
-export const auth_user = (user) => {
+export const authUser = (user) => {
   return dispatch => {
     dispatch({
       type: AUTH_USER,
@@ -101,7 +101,7 @@ export const auth_user = (user) => {
   };
 };
 
-export const auth_error = error => {
+export const authError = error => {
   return dispatch => {
     dispatch({
       type: AUTH_ERROR,
@@ -110,7 +110,7 @@ export const auth_error = error => {
   };
 };
 
-export const sign_out_user = () =>{
+export const signOutUser = () =>{
 	return dispatch => {
 		return firebase.auth.signOut()
 		.then(() => {
@@ -124,31 +124,31 @@ export const sign_out_user = () =>{
 	}
 }
 
-export const verif_auth = () => {
+export const validateAuth = () => {
   return dispatch => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
-        dispatch(auth_user(user));
+        dispatch(authUser(user));
       } else {
-        dispatch(sign_out_user());
+        dispatch(signOutUser());
       }
     });
   };
 };
 
 
-export const promies_thunk = () => {
+export const userAuthInit = () => {
   return dispatch => {
     firebase.auth.onAuthStateChanged(user => {
       if (user) {
         return dispatch(()=>{
-          dispatch(auth_user(user));
+          dispatch(authUser(user));
           dispatch(getGameBrowserInitData());
           dispatch(getUserGameCollection());
         });
         
       } else {
-        return dispatch(sign_out_user());
+        return dispatch(signOutUser());
       }
     });
   };

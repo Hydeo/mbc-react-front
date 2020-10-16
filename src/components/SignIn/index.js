@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { 
-  sign_in_user
+  signInUser
 } from "../../actions/user_actions";
 
 import { SignUpLink } from "../SignUp";
@@ -54,7 +54,7 @@ class SignInForm extends Component {
     const { history } = this.props;
 
     this.props.parentProps
-      .sign_in_user({ email: email, password: password })
+      .signInUser({ email: email, password: password })
       .then((arg) => {
         this.setState(() => ({ ...INITIAL_STATE }));
         if(this.props.parentProps.user_state.authenticated)
@@ -115,7 +115,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      sign_in_user
+      signInUser
     },
     dispatch
   );

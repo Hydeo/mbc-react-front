@@ -33,6 +33,6 @@ const store = createStore(
   composedEnhancers
 )
 
-store.dispatch(UserActions.promies_thunk());
+store.dispatch(UserActions.userAuthInit());
 
 export default store

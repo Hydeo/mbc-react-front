@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sign_out_user } from "../../actions/user_actions";
+import { signOutUser } from "../../actions/user_actions";
 
 class SignOutButton extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class SignOutButton extends Component {
 
   render() {
     return (
-      <button type="button" onClick={this.props.sign_out_user}>
+      <button type="button" onClick={this.props.signOutUser}>
         Sign Out
       </button>
     );
@@ -19,7 +19,7 @@ class SignOutButton extends Component {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    sign_out_user,
+    signOutUser,
   },
   dispatch);
 

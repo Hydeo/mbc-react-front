@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sign_up_user } from "../../actions/user_actions";
+import { signUpUser } from "../../actions/user_actions";
 
 import { auth, db } from "../../firebase";
 import * as routes from "../../constants/routes";
@@ -38,7 +38,7 @@ class SignUpForm extends Component {
     const { history } = this.props;
     event.preventDefault();
 
-    this.props.sign_up_user({ "email": email, "password": passwordOne }).then(() => {
+    this.props.signUpUser({ "email": email, "password": passwordOne }).then(() => {
       this.setState(() => ({ ...INITIAL_STATE }));
       if(this.props.user_state.authanticated)
         history.push(routes.HOME);
@@ -129,7 +129,7 @@ const SignUpLink = () => (
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    sign_up_user,
+    signUpUser,
   },
   dispatch);
 

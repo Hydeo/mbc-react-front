@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { 
-  sign_in_user_google
+  signInUserGoogle
 } from "../../actions/user_actions";
 
 class GoogleLogin extends Component{
@@ -12,7 +12,7 @@ class GoogleLogin extends Component{
 
 	render(){
 		return(
-			<div style={{"display": "table"}} onClick={this.props.sign_in_user_google}>
+			<div style={{"display": "table"}} onClick={this.props.signInUserGoogle}>
 				<button className="loginBtn loginBtn--google">
 					Login with Google
 				</button>
@@ -29,7 +29,7 @@ class GoogleLogin extends Component{
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      sign_in_user_google
+      signInUserGoogle
     },
     dispatch
   );

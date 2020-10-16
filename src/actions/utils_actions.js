@@ -1,5 +1,5 @@
 import { firebase, db } from "../firebase";
-import { auth_user,sign_out_user } from "./user_actions";
+import { authUser,signOutUser } from "./user_actions";
 
 export const UPDATE_LANG = "UPDATE_LANG";
 
@@ -9,13 +9,13 @@ export const validateFirebaseToken = callback => {
     return dispatch => {
       return firebase.auth.onAuthStateChanged(user => {
         if (user) {
-          dispatch(auth_user(user));
+          dispatch(authUser(user));
 
           user.getIdToken()
           .then(token => callback(token, dispatch));
 
         } else {
-          dispatch(sign_out_user());
+          dispatch(signOutUser());
         }
       });
     };

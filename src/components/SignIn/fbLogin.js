@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { 
-  sign_in_user_facebook
+  signInUserFacebook
 } from "../../actions/user_actions";
 
 class FbLogin extends Component{
@@ -12,7 +12,7 @@ class FbLogin extends Component{
 
 	render(){
 		return(
-			<div style={{"display": "table"}} onClick={this.props.sign_in_user_facebook}>
+			<div style={{"display": "table"}} onClick={this.props.signInUserFacebook}>
 				<button className="loginBtn loginBtn--facebook">
 					Login with Facebook
 				</button>
@@ -32,7 +32,7 @@ class FbLogin extends Component{
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      sign_in_user_facebook
+      signInUserFacebook
     },
     dispatch
   );
