@@ -50,7 +50,7 @@ export const updateIsotope = (iso_instance = null, force_new = false) => {
 	}
 }
 
-export const set_isotope = (isotope) => {
+export const setIsotope = (isotope) => {
 	return dispatch => {
 		dispatch({
 			type: SET_ISOTOPE,

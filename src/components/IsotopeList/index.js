@@ -5,7 +5,7 @@ import React, { Fragment } from "react";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateIsotope, set_isotope } from "../../actions/isotope_actions";
+import { updateIsotope, setIsotope } from "../../actions/isotope_actions";
 import _ from 'lodash';
 
 import { conf_dev } from "../../config";
@@ -172,7 +172,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       updateIsotope,
-      set_isotope
+      setIsotope
     },
     dispatch
   );

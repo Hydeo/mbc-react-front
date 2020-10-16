@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { updateIsotope, set_isotope } from "../../actions/isotope_actions";
+import { updateIsotope, setIsotope } from "../../actions/isotope_actions";
 import Chip from '@material-ui/core/Chip';
 import Utils from "../../utils";
 
@@ -95,7 +95,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             updateIsotope,
-            set_isotope
+            setIsotope
         },
         dispatch
     );
