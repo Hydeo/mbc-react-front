@@ -22,7 +22,65 @@ const styles = theme => ({
     alignTextItem: {
         display: "flex",
         alignItems: "center"
+    },
+
+    container: {
+      position: "relative",
+      width: "100%",
+      maxWidth: "320px",
+      marginTop: "1%",
+      "&:hover" :{
+        "& $overlay": {
+            opacity: 0.5
+        },
+        "& $info":{
+            opacity: 1
+        }
+      }
+    },
+    /* Make the image to responsive */
+    cover: {
+      display: "block",
+      width: "100%",
+      height: "auto",
+      borderRadius:" 8px"
+    },
+
+    /* The overlay effect (full height and width) - lays on top of the container and over the image */
+    overlay: {
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "auto",
+      width: "100%",
+      opacity: 0,
+      transition: ".3s ease",
+      backgroundColor: "black",
+      borderRadius: "8px"
+    },
+
+    info: {
+      color : "white",
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "auto",
+      opacity: 0,
+      transition: ".3s ease",
+      margin: "5%"
     }
+
+    /* When you mouse over the container, fade in the overlay icon*/
+    /*.container:hover .overlay {
+      opacity: 0.5;
+    },
+    .container:hover .info {
+      opacity: 1;
+    }*/
 
 });
 
@@ -104,14 +162,14 @@ class GameCard extends React.Component {
         const { classes, game_data, item_width } = this.props;
         return (
             <Fragment>
-                <div className={"container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
+                <div className={classes.container + " container item_iso "+" "+this.get_game_filter_tags()+" "} style={{ width: item_width }}>
                     <LazyLoad>
-                        <img className="cover" src={game_data.getImageUrl()} alt={
+                        <img className={classes.cover} src={game_data.getImageUrl()} alt={
                             game_data.getTitle()
                         } onLoad={this.props.imgLoadedCounter} onError={this.props.imgLoadedCounter}/>
                     </LazyLoad>
-                    <div className="overlay" />
-                    <div className="info" onClick={this.show_game_details}>
+                    <div className={classes.overlay} />
+                    <div className={classes.info} onClick={this.show_game_details}>
 
                         <div style={{ height: "100%" }}>
                             <Grid container className={classes.root}>
