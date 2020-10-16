@@ -30,7 +30,7 @@ class Collection extends Component {
         return (
             <div>
                 <p>Public collection : {this.state.idCollection}</p>
-                {!_.isUndefined(this.props.publicCollection) && <IsotopeList hydrated_game_list={this.props.publicCollection}/>}
+                {!_.isUndefined(this.props.publicCollection) && <IsotopeList isoGames={this.props.publicCollection}/>}
             </div>
         );
     }

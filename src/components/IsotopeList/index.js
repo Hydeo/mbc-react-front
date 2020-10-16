@@ -76,7 +76,7 @@ class IsotopeList extends React.Component {
   imgLoadedCounter = () => {
     imgLoaded++;
    
-    if (imgLoaded == this.props.hydrated_game_list.gameList.length) {
+    if (imgLoaded == this.props.isoGames.gameList.length) {
       
       if (this.state.first_render == true) {
 
@@ -103,14 +103,14 @@ class IsotopeList extends React.Component {
           <div style={first_item_sizer} className="item_sizer" />
           <div style={item_gutter} className="item_gutter" />
 
-          {!!this.props.hydrated_game_list &&
-            this.props.hydrated_game_list.gameList.map(
+          {!!this.props.isoGames &&
+            this.props.isoGames.gameList.map(
 
               function(item, index){
                
-                /*if(this.props.hydrated_game_list.hasOwnProperty("gameMask")){
-                  if(this.props.hydrated_game_list.gameMask.hasOwnProperty(item._id)){
-                    Utils.apply_game_mask(item,this.props.hydrated_game_list.gameMask[item._id]);
+                /*if(this.props.isoGames.hasOwnProperty("gameMask")){
+                  if(this.props.isoGames.gameMask.hasOwnProperty(item._id)){
+                    Utils.apply_game_mask(item,this.props.isoGames.gameMask[item._id]);
                   } 
                 }*/
                 
@@ -163,7 +163,7 @@ class IsotopeList extends React.Component {
 //On recupere la tate dans les props
 const mapStateToProps = (state, ownProps) => ({
   isotope_instance: state.isotope.isotope_instance,
-  hydrated_game_list: ownProps.hydrated_game_list,
+  isoGames: ownProps.isoGames,
   i18n : state.i18n
 });
 

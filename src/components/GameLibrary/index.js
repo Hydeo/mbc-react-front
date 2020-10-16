@@ -27,7 +27,7 @@ class GameLibrary extends Component {
     render() {
         return (
             <div>
-                <IsotopeList hydrated_game_list={this.props.game_library}/>
+                <IsotopeList isoGames={this.props.game_library}/>
             </div>
         );
     }
