@@ -6,7 +6,7 @@ export const URL_API = conf_dev.url_api;
 
 export const GET_GAME_LIBRARY = "GET_GAME_LIBRARY";
 
-export const get_game_library = () => {
+export const getGameBrowserInitData = () => {
   return dispatch => {
     return axios.get(URL_API + "/game").then(request => {
       dispatch({

@@ -10,7 +10,7 @@ import {
   doSignOut
 } from "../firebase/auth";
 import {
-  get_game_library
+  getGameBrowserInitData
 } from './game_browser_actions'
 import{
   get_user_game_collection
@@ -143,7 +143,7 @@ export const promies_thunk = () => {
       if (user) {
         return dispatch(()=>{
           dispatch(auth_user(user));
-          dispatch(get_game_library());
+          dispatch(getGameBrowserInitData());
           dispatch(get_user_game_collection());
         });
         

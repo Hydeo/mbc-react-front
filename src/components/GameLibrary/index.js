@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-    get_game_library
+    getGameBrowserInitData
 } from "../../actions/game_browser_actions";
 import IsotopeList from "../IsotopeList";
 import withAuthorization from '../Session/withAuthorization';
@@ -21,7 +21,7 @@ class GameLibrary extends Component {
     }
 
     componentDidMount() {
-        this.props.get_game_library();
+        this.props.getGameBrowserInitData();
     }
 
     render() {
@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 //On injecte les actions possible au props ?
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
-            get_game_library
+            getGameBrowserInitData
         },
         dispatch
     );
