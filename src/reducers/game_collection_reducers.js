@@ -3,6 +3,7 @@ import _ from "lodash";
 
 import {
     GET_USER_GAME_COLLECTION,
+    GET_COLLECTION,
     CREATE_GAME_MASK,
     TOOGLE_IN_COLLECTION,
     TOOGLE_PRIVACY_COLLECTION
@@ -31,6 +32,21 @@ export default (state = initialState, action) => {
                 ...state,
                 game_collection: gc
             }
+
+        case GET_COLLECTION:
+
+                gc = new GameCollection(
+                    action.payload.id,
+                    action.payload.userId,
+                    action.payload.isPublic,
+                    GameCollection.deserializationGameList(action.payload.gameList),
+                    action.payload.gameMask
+                );
+
+                return {
+                    ...state,
+                    publicCollection: gc
+                }
 
         case CREATE_GAME_MASK:
             gc = new GameCollection(

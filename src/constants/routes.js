@@ -7,3 +7,4 @@ export const ACCOUNT = '/account';
 export const CREATE_GAME = '/create-game';
 export const GAME_LIBRARY = '/game-library';
 export const CREATE_MASK = '/create-mask';
+export const COLLECTION = '/collection';

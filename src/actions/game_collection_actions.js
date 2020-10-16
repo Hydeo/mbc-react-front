@@ -6,6 +6,7 @@ import { check_token_before_query } from "./utils_actions";
 //----- Action Names --
 export const URL_API = conf_dev.url_api;
 export const GET_USER_GAME_COLLECTION = "GET_USER_GAME_COLLECTION";
+export const GET_COLLECTION = "GET_COLLECTION";
 export const CREATE_GAME_MASK = "CREATE_GAME_MASK";
 export const TOOGLE_IN_COLLECTION = "TOOGLE_IN_COLLECTION";
 export const TOOGLE_PRIVACY_COLLECTION = "TOOGLE_PRIVACY_COLLECTION";
@@ -22,12 +23,11 @@ export const get_user_game_collection = () => {
     return check_token_before_query(callback);
 };
 
-/*
-export const add_game_to_collection = game_id => {
+export const getGameCollectionById = (id) => {
     var callback = (token, dispatch) => {
-        axios.post(URL_API + "/GameCollection/addToCollection", { token: token, gameId: game_id }).then(request => {
+        axios.get(URL_API + "/GameCollection/" + id, { token: token }).then(request => {
             dispatch({
-                type: ADD_GAME_TO_COLLECTION,
+                type: GET_COLLECTION,
                 payload: request.data
             });
         });
@@ -35,18 +35,6 @@ export const add_game_to_collection = game_id => {
     return check_token_before_query(callback);
 };
 
-export const remove_game_from_collection = game_id => {
-    var callback = (token, dispatch) => {
-        axios.post(URL_API + "/GameCollection/removeFromCollection", { token: token, gameId: game_id }).then(request => {
-            dispatch({
-                type: REMOVE_GAME_FROM_COLLECTION,
-                payload: request.data
-            });
-        });
-    };
-    return check_token_before_query(callback);
-};
-*/
 
 export const create_game_mask = (game_data) => {
     var game_mask = {}

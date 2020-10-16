@@ -16,6 +16,7 @@ import AccountPage from '../Account';
 import CreateGamePage from '../CreateGame';
 import GameLibraryPage from '../GameLibrary';
 import CreateMaskPage from '../MaskEditor';
+import Collection from '../Collection';
 import withAuthentication from '../Session/withAuthentication';
 import * as routes from '../../constants/routes';
 import { withStyles } from '@material-ui/core/styles';
@@ -53,6 +54,7 @@ class App extends React.Component{
                   <Route exact path={routes.ACCOUNT} component={() => <AccountPage />} />
                   <Route exact path={routes.GAME_LIBRARY} component={() => <GameLibraryPage />} />
                   <Route exact path={routes.CREATE_MASK} component={(props) => <CreateMaskPage {...props}/>} />
+                  <Route exact path={routes.COLLECTION + "/:idCollection"} component={(props) => <Collection/>} />
                 </ErrorBoundary>
               <hr/>
             </Navigation>

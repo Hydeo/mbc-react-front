@@ -38,10 +38,6 @@ class HomePage extends Component<Props,{}> {
   }
 
   render() {
-    try{
-     console.log(this.props.user_games.game_collection.gameList.length);
-    }catch(e){}
-    //const { users } = this.state;
     return (
       <div>
         <h1>Home</h1>
@@ -49,10 +45,8 @@ class HomePage extends Component<Props,{}> {
         <p>Collection ID "{_.has(this.state.user_games,"game_collection") && this.state.user_games.game_collection.getUserId()}"</p>
         <p>This collection is "{_.has(this.state.user_games,"game_collection") && this.state.user_games.game_collection.getIsPublic() ? "Public" : "Private"}"</p>
         <SwitchPrivacyGameCollection/>
-        {_.has(this.state.user_games,"game_collection") && <IsotopeList hydrated_game_list={this.state.user_games.game_collection} editable_items={true}/>}
-        
+        {_.has(this.state.user_games,"game_collection") && <IsotopeList hydrated_game_list={this.state.user_games.game_collection} editable_items={true}/>}  
       </div>
-     
     );  
   }
 
