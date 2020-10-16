@@ -21,7 +21,7 @@ export const validateFirebaseToken = callback => {
     };
   };
 
-export const update_cur_lang = (lang) =>{
+export const updateCurLang = (lang) =>{
   return dispatch => {
     dispatch({
       type: UPDATE_LANG,

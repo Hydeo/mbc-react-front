@@ -5,7 +5,7 @@ import i18n from "i18next";
 
 import {connect } from "react-redux";
 import {bindActionCreators} from "redux";
-import {update_cur_lang} from "../../actions/utils_actions"
+import {updateCurLang} from "../../actions/utils_actions"
 
 class LangSwitcher extends React.Component {
   constructor(props){
@@ -22,7 +22,7 @@ class LangSwitcher extends React.Component {
       selected_lang = "ENG";
     }
     i18n.changeLanguage(selected_lang);
-    this.props.update_cur_lang(selected_lang.toLowerCase());
+    this.props.updateCurLang(selected_lang.toLowerCase());
   }
 }
 
@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      update_cur_lang
+      updateCurLang
     },
     dispatch
   );
