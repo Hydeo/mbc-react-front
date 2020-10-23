@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
                 action.payload.id,
                 action.payload.userId,
                 action.payload.isPublic,
-                GameCollection.deserializationGameList(action.payload.gameList,action.payload.gameMask),
+                GameCollection.deserializationGameList(action.payload.gameList),
                 action.payload.gameMask
             );
             return {

@@ -1,7 +1,7 @@
 // @flow
 import i18n from "i18next";
 import { conf_dev } from "../../config";
-
+import _ from 'lodash';
 //----- Entities -----
 import TagEntity from '../Tag';
 import GameMaskDecorator from '../Game/GameMaskDecorator';
@@ -14,13 +14,15 @@ class GameCollection {
     userId: string;
     isPublic : bool;
     gameList : Array<Game>;
+    gameMaskList : {};
 
-
-    constructor( _id : string, userId: string, isPublic : bool, gameList : Array<Game>) {
+    constructor( _id : string, userId: string, isPublic : bool, gameList : Array<Game>, gameMaskList = {}) {
         this._id = _id;
         this.userId = userId;
         this.isPublic = isPublic;
         this.gameList = gameList;
+        this.gameMaskList = gameMaskList;
+        this.applyGameMaskToCollection();
     }
 
     getId(): string {
@@ -59,17 +61,25 @@ class GameCollection {
                         return new TagEntity(t._id, t.tagName, t.localization)
                     }), e.localization
                 );
-                //If current game game has a mask in current collection
-                if (this != null && this.hasOwnProperty(e._id)) {
-                    g = new GameMaskDecorator(g, this[e._id].override);
-                    g = new GameAdditionalFieldsDecorator(g, this[e._id]);
-                }
                 gameList.push(
                     g
                 );
             }, maskData)
         }
         return gameList;
+    }
+
+    applyGameMaskToCollection() {
+        if(_.size(this.gameMaskList) > 0){
+            for(let i = 0 ; i < _.size(this.gameList); i++){
+                let curGame = this.gameList[i];
+                if(this.gameMaskList.hasOwnProperty(curGame.getId())){
+                    let g = new GameMaskDecorator(curGame, this.gameMaskList[curGame.getId()].override);
+                    g = new GameAdditionalFieldsDecorator(g, this.gameMaskList[curGame.getId()]);
+                    this.gameList[i] = g;
+                }
+            }
+        }
     }
 
 }
