@@ -11,7 +11,7 @@ import {
 
 
 const initialState = {
-    game_collection: null
+    userGameCollection: null
 }
 
 
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
 
             return {
                 ...state,
-                game_collection: gc
+                userGameCollection: gc
             }
 
         case GET_COLLECTION:
@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
             );
             return {
                 ...state,
-                game_collection: gc
+                userGameCollection: gc
             }
 
         case TOOGLE_IN_COLLECTION:
@@ -71,15 +71,15 @@ export default (state = initialState, action) => {
             );
             return {
                 ...state,
-                game_collection: gc
+                userGameCollection: gc
             }
 
         case TOOGLE_PRIVACY_COLLECTION:
             let ns = {
                 ...state
             }
-            if(_.has(ns,"game_collection")){
-                ns.game_collection.isPublic = !ns.game_collection.isPublic; 
+            if(_.has(ns,"userGameCollection")){
+                ns.userGameCollection.isPublic = !ns.userGameCollection.isPublic; 
             }
             return ns;
 

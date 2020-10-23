@@ -15,9 +15,9 @@ class AddGameToFavorite extends React.Component {
     }
 
     isGameInCollection = () =>{
-        if(this.props.game_collection.game_collection != null){
-            for(var i = 0 ; i < this.props.game_collection.game_collection.gameList.length ; i++){
-                if(this.props.game_collection.game_collection.gameList[i]._id == this.state.active_game._id){
+        if(this.props.userGameCollection.userGameCollection != null){
+            for(var i = 0 ; i < this.props.userGameCollection.userGameCollection.gameList.length ; i++){
+                if(this.props.userGameCollection.userGameCollection.gameList[i]._id == this.state.active_game._id){
                     return ("\u2764")
                 }
             };
@@ -40,7 +40,7 @@ class AddGameToFavorite extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    game_collection: state.game_collection
+    userGameCollection: state.userGameCollection
 });
 
 const mapDispatchToProps = dispatch =>

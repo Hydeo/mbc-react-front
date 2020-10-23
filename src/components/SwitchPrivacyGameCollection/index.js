@@ -19,13 +19,13 @@ class SwitchPrivacyGameCollection extends React.Component{
   };
 
   render(){
-    if(typeof this.props.userCollection.game_collection != "undefined" &&  this.props.userCollection.game_collection != null){
+    if(typeof this.props.userCollection.userGameCollection != "undefined" &&  this.props.userCollection.userGameCollection != null){
       return (
         <FormGroup row>
           <FormControlLabel
             control={
               <Switch
-                checked={this.props.userCollection.game_collection.isPublic}
+                checked={this.props.userCollection.userGameCollection.isPublic}
                 onChange={this.handleChange}
                 name="isPublic"
                 color="primary"
@@ -44,7 +44,7 @@ class SwitchPrivacyGameCollection extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    userCollection: state.game_collection
+    userCollection: state.userGameCollection
 });
 
 const mapDispatchToProps = dispatch =>

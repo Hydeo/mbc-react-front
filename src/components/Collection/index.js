@@ -40,7 +40,7 @@ const authCondition = (authUser) => !!authUser;
 
 const mapStateToProps = state => ({
     user_state: state.user,
-    publicCollection: state.game_collection.publicCollection,
+    publicCollection: state.userGameCollection.publicCollection,
     i18n: state.i18n
 });
 

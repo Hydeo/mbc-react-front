@@ -33,7 +33,7 @@ class AppStateInit extends Component {
   
   const mapStateToProps = state => ({
     categories: state.state_init,
-    user_games : state.game_collection,
+    user_games : state.userGameCollection,
     tags : state.tags
   });
   

@@ -14,7 +14,7 @@ import SwitchPrivacyGameCollection from "../SwitchPrivacyGameCollection";
 
 type Props = {
   user_games: {
-    game_collection : {}
+    userGameCollection : {}
   },
   user_state: {
     user_authed: {
@@ -42,10 +42,10 @@ class HomePage extends Component<Props,{}> {
       <div>
         <h1>Home</h1>
         <p>The Home Page is accessible by every signed in user.</p>
-        <p>Collection ID "{_.has(this.state.user_games,"game_collection") && this.state.user_games.game_collection.getUserId()}"</p>
-        <p>This collection is "{_.has(this.state.user_games,"game_collection") && this.state.user_games.game_collection.getIsPublic() ? "Public" : "Private"}"</p>
+        <p>Collection ID "{_.has(this.state.user_games,"userGameCollection") && this.state.user_games.userGameCollection.getUserId()}"</p>
+        <p>This collection is "{_.has(this.state.user_games,"userGameCollection") && this.state.user_games.userGameCollection.getIsPublic() ? "Public" : "Private"}"</p>
         <SwitchPrivacyGameCollection/>
-        {_.has(this.state.user_games,"game_collection") && <IsotopeList isoGames={this.state.user_games.game_collection} editable_items={true}/>}  
+        {_.has(this.state.user_games,"userGameCollection") && <IsotopeList isoGames={this.state.user_games.userGameCollection} editable_items={true}/>}  
       </div>
     );  
   }
@@ -61,7 +61,7 @@ const authCondition = (authUser) => !!authUser;
 
 const mapStateToProps = state => ({
   user_state: state.user,
-  user_games : state.game_collection,
+  user_games : state.userGameCollection,
   "i18n" : state.i18n
 });
 
