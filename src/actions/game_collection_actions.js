@@ -101,7 +101,7 @@ export const toggleInCollection = active_game => {
             .then(request => {
                 dispatch({
                     type: TOOGLE_IN_COLLECTION,
-                    payload: Utils.init_game_collection(request.data.gameList, request.data.gameMask)
+                    payload: request.data
                 });
             });
     }
