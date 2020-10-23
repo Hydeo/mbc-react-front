@@ -27,7 +27,7 @@ class GameLibrary extends Component {
     render() {
         return (
             <div>
-                <IsotopeList isoGames={this.props.game_library}/>
+                <IsotopeList isoGames={this.props.gameBrowserGameCollection}/>
             </div>
         );
     }
@@ -37,7 +37,7 @@ const authCondition = (authUser) => !!authUser;
 
 const mapStateToProps = state => ({
     user_state: state.user,
-    game_library: state.game_library,
+    gameBrowserGameCollection: state.gameBrowserGameCollection,
     i18n: state.i18n
 });
 

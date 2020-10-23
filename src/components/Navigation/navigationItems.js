@@ -123,7 +123,7 @@ export const AuthNavbarListItems = props => {
               disableTypography
               primary={
                 <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
-                  {t("navigation.game_library")}
+                  {t("navigation.gameBrowserGameCollection")}
                 </Typography>
               }
             />
@@ -236,7 +236,7 @@ export const nonAuthDrawerListItems = (
               disableTypography
               primary={
                 <Typography variant={typo_variant} style={{ color: "#FFFFFF" }}>
-                  {t("navigation.game_library")}
+                  {t("navigation.gameBrowserGameCollection")}
                 </Typography>
               }
             />

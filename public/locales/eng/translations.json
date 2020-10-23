@@ -11,7 +11,7 @@
     "sign_out": "Sign Out",
     "sign_in" : "Sign In",
     "create_game" : "Add Game",
-    "game_library" : "Game Library"
+    "gameBrowserGameCollection" : "Game Library"
   },
   "create_game" : {
     "title" : "Create Game Submission",

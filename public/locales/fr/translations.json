@@ -11,6 +11,6 @@
         "sign_out" : "Se Déconnecter",
         "sign_in" : "Se Connecter",
         "create_game" : "Ajouter un Jeu",
-        "game_library" : "Catalogue des Jeux"
+        "gameBrowserGameCollection" : "Catalogue des Jeux"
     }
   }
