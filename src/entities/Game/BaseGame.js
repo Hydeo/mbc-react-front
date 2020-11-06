@@ -79,7 +79,7 @@ class BaseGame {
     getLocalizedProperty(property: string): string {
         if(this.localizations != null){
             let gameLang = this.localizations.hasOwnProperty(this.geti18nLang()) ? this.geti18nLang() : 'eng';
-            if (this.localizations[gameLang].hasOwnProperty(property)) {
+            if (this.localizations.hasOwnProperty(gameLang) && this.localizations[gameLang].hasOwnProperty(property)) {
                 return this.localizations[gameLang][property];
             }
         }

@@ -37,7 +37,7 @@ class TagTrad {
         }    
     }
 
-    static deserializeArray(jsonObject){
+    static deserializeToHashMap(jsonObject){
         let tagTragHashMap = _.mapValues(jsonObject, function(curTagTradJson){
             return TagTrad.deserialize(curTagTradJson); 
         })

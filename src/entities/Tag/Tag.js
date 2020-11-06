@@ -13,7 +13,7 @@ class Tag {
     constructor(id:string, name : ?string, localization : { [string] /*lang*/ : { "lang" : string, "trad" : string } } = {}) {
     	this.id = id;
     	this.name = name;
-    	this.localization = TagTrad.deserializeArray(localization);
+    	this.localization = TagTrad.deserializeToHashMap(localization);
     }
 
     getId(){

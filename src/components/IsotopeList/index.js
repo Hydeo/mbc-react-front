@@ -73,10 +73,10 @@ class IsotopeList extends React.Component {
     }
   };
 
-  imgLoadedCounter = () => {
+  imgLoadedCounter = _.bind(function(){
     imgLoaded++;
    
-    if (imgLoaded == this.props.isoGames.gameList.length) {
+    //if (imgLoaded == this.props.isoGames.gameList.length) {
       
       if (this.state.first_render == true) {
 
@@ -89,8 +89,8 @@ class IsotopeList extends React.Component {
         this.props.updateIsotope(this.props.isotope_instance, true);
       }
 
-    }
-  }
+   //}
+  },this)
 
   //<div id="loadingding" style={{height:"1000px", width:"100%"}}> <h2>loading...</h2></div>
   render() {

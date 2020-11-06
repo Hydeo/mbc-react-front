@@ -1,5 +1,6 @@
 // @flow
 import Tag from '../Tag/Tag';
+import GameLocalization from './GameLocalization';
 import BaseGame from './BaseGame';
 import i18n from "i18next";
 import _ from 'lodash';
@@ -48,7 +49,7 @@ class Game extends BaseGame{
                 jsonObject.tags.map((t) => {
                     return Tag.deserialize(t);
                 }), 
-                jsonObject.localizations
+                GameLocalization.deserializeToHashMap(jsonObject.localizations)
             )
         } 
         else{
