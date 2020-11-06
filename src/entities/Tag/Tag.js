@@ -20,6 +20,10 @@ class Tag {
         return this.id;
     }
     
+    getName(){
+        return this.name;
+    }
+    
     getTrad(lang:string = "eng"){
         
         if(typeof this.localization == 'object' && !_.isEmpty(this.localization)){

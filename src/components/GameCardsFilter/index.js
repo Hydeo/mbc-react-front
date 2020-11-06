@@ -76,7 +76,7 @@ class GameCardsFilter extends React.Component {
             this.props.tags,
             _.bind(function(e){
                 if(!_.isEmpty(e.localization)){
-                    return this.renderChips(e.localization[this.props.i18n.cur_lang].trad,e.tagName);
+                    return this.renderChips(e.getTrad(this.props.i18n.cur_lang),e.getId());
                 }
             },this)
         );
