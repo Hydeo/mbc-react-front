@@ -2,7 +2,7 @@ import { conf_dev } from './config';
 import i18n from "i18next";
 
 //----- Entities -----
-import TagEntity from './entities/Tag';
+import Tag from './entities/Tag/Tag';
 import GameMaskDecorator from './entities/Game/GameMaskDecorator';
 import GameAdditionalFieldsDecorator from './entities/Game/GameAdditionalFieldsDecorator';
 import Game from './entities/Game/Game';
@@ -74,7 +74,7 @@ class Utils {
                 //Init all Games Object from the server response
                 let g = new Game(e._id, e.nb_player_min, e.nb_player_max, e.time_to_play_min, e.time_to_play_max, e.age_recommended, e.complexity,
                     e.tags.map((t) => {
-                        return new TagEntity(t._id, t.tagName, t.localization)
+                        return new Tag(t._id, t.tagName, t.localization)
                     }), e.localization
                 );
 

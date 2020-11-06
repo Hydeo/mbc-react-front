@@ -2,7 +2,7 @@
 import BaseGameDecorator from './BaseGameDecorator';
 import BaseGame from './BaseGame';
 import Game from './Game';
-import TagEntity from '../Tag';
+import TagEntity from '../Tag/Tag';
 import { conf_dev } from "../../config";
 class GameMaskDecorator extends BaseGameDecorator {
 

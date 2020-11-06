@@ -1,5 +1,5 @@
 //@flow	
-import TagEntity from '../Tag';
+import TagEntity from '../Tag/Tag';
 import GameMaskDecorator from './GameMaskDecorator';
 import GameAdditionalFieldsDecorator from './GameAdditionalFieldsDecorator';
 import Game from './Game';

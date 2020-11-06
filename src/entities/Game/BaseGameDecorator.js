@@ -1,6 +1,6 @@
 //@flow
 import BaseGame from './BaseGame';
-import TagEntity from '../Tag';
+import TagEntity from '../Tag/Tag';
 
 class BaseGameDecorator extends BaseGame {
 

@@ -1,16 +1,16 @@
 // @flow
-import TagEntity from '../Tag';
+import TagEntity from '../Tag/Tag';
 import i18n from "i18next";
 import { conf_dev } from "../../config";
 
 class BaseGame {
 
-    _id: string
-    nb_player_min: number;
-    nb_player_max: number;
-    time_to_play_min: number;
-    time_to_play_max: number;
-    age_recommended: number;
+    id: string
+    nbPlayerMin: number;
+    nbPlayerMax: number;
+    timeToPlayMin: number;
+    timeToPlayMax: number;
+    ageRecommended: number;
     complexity: number;
     tags: Array < TagEntity > ;
     localization: {
@@ -26,7 +26,7 @@ class BaseGame {
     }
 
     getId(): string {
-        return this._id;
+        return this.id;
     }
 
     getTags() : Array < TagEntity>{
@@ -34,22 +34,22 @@ class BaseGame {
     }
 
     getNbPlayerMin(): number {
-        return this.nb_player_min;
+        return this.nbPlayerMin;
     }
 
     getNbPlayerMax(): number {
-        return this.nb_player_max;
+        return this.nbPlayerMax;
     }
 
     getTimeToPlayMin(): number {
-        return this.time_to_play_min;
+        return this.timeToPlayMin;
     }
     getTimeToPlayMax(): number {
-        return this.time_to_play_max;
+        return this.timeToPlayMax;
     }
 
     getAgeRecommended(): number {
-        return this.age_recommended;
+        return this.ageRecommended;
     }
 
     getComplexity(): number {

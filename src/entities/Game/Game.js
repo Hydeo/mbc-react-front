@@ -1,5 +1,5 @@
 // @flow
-import TagEntity from '../Tag';
+import TagEntity from '../Tag/Tag';
 import BaseGame from './BaseGame';
 import i18n from "i18next";
 

@@ -3,7 +3,7 @@ import i18n from "i18next";
 import { conf_dev } from "../../config";
 import _ from 'lodash';
 //----- Entities -----
-import TagEntity from '../Tag';
+import Tag from '../Tag/Tag';
 import GameMaskDecorator from '../Game/GameMaskDecorator';
 import GameAdditionalFieldsDecorator from '../Game/GameAdditionalFieldsDecorator';
 import Game from '../Game/Game';
@@ -58,7 +58,7 @@ class GameCollection {
                     e.age_recommended, 
                     e.complexity,
                     e.tags.map((t) => {
-                        return new TagEntity(t._id, t.tagName, t.localization)
+                        return Tag.deserialize(t);
                     }), e.localization
                 );
                 gameList.push(
