@@ -115,7 +115,12 @@ class GameCard extends React.Component {
             var tag_string = "";
             this.props.game_data.tags.forEach(t => {
                 //For the filters, we use the english version of the tags, whatever is the current lang
-                tag_string += " " + t.getTrad();
+                try{
+                    tag_string += " " + t.getTrad();
+                }
+                catch(e){
+                    //TODO : Report tag without localization
+                }
             });
             return tag_string;
         }

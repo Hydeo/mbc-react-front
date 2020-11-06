@@ -49,21 +49,14 @@ class GameCollection {
         if(data != null && data.length > 0){   
             data.forEach(function(e, index) {
                 //Init all Games Object from the server response
-                let g = new Game(
-                    e._id,
-                    e.nb_player_min, 
-                    e.nb_player_max, 
-                    e.time_to_play_min, 
-                    e.time_to_play_max, 
-                    e.age_recommended, 
-                    e.complexity,
-                    e.tags.map((t) => {
-                        return Tag.deserialize(t);
-                    }), e.localization
-                );
-                gameList.push(
-                    g
-                );
+                try{
+                    gameList.push(
+                        Game.deserialize(e)
+                    );
+                }
+                catch(e){
+                    console.log("Undeserializable gameJsonObject "+e.id);
+                }
             }, maskData)
         }
         return gameList;

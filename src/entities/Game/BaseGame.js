@@ -13,7 +13,7 @@ class BaseGame {
     ageRecommended: number;
     complexity: number;
     tags: Array < TagEntity > ;
-    localization: {
+    localizations: {
         [string] /*lang*/: {
             "title": string,
             "description": string,
@@ -22,7 +22,15 @@ class BaseGame {
     }
 
     constructor() {
-
+        this.id = 
+        this.nbPlayerMin = 
+        this.nbPlayerMax = 
+        this.timeToPlayMin = 
+        this.timeToPlayMax = 
+        this.ageRecommended = 
+        this.complexity = 
+        this.tags = 
+        this.localizations = null;
     }
 
     getId(): string {
@@ -69,10 +77,10 @@ class BaseGame {
     }
 
     getLocalizedProperty(property: string): string {
-        if(this.localization != null){
-            let gameLang = this.localization.hasOwnProperty(this.geti18nLang()) ? this.geti18nLang() : 'eng';
-            if (this.localization[gameLang].hasOwnProperty(property)) {
-                return this.localization[gameLang][property];
+        if(this.localizations != null){
+            let gameLang = this.localizations.hasOwnProperty(this.geti18nLang()) ? this.geti18nLang() : 'eng';
+            if (this.localizations[gameLang].hasOwnProperty(property)) {
+                return this.localizations[gameLang][property];
             }
         }
         return "";

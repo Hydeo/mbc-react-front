@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { updateIsotope, setIsotope } from "../../actions/isotope_actions";
 import Chip from '@material-ui/core/Chip';
 import Utils from "../../utils";
+import _ from 'lodash';
 
 class GameCardsFilter extends React.Component {
 
@@ -63,12 +64,24 @@ class GameCardsFilter extends React.Component {
 
         var cur_lang = this.props.i18n.cur_lang;
         var renderChips = this.renderChips;
-        const filters_chip_renderer = Utils.objectMap(
+        /*const filters_chip_renderer = Utils.objectMap(
             this.props.tags,
             (e, key, index, context)=>{
+
                 return this.renderChips(e.localization[this.props.i18n.cur_lang].trad,e.tagName);
+
             }
+        );*/
+        const filters_chip_renderer = _.map(
+            this.props.tags,
+            _.bind(function(e){
+                if(!_.isEmpty(e.localization)){
+                    return this.renderChips(e.localization[this.props.i18n.cur_lang].trad,e.tagName);
+                }
+            },this)
         );
+
+
 
         return (
             <Fragment>

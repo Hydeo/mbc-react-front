@@ -21,13 +21,15 @@ class Tag {
     }
     
     getTrad(lang:string = "eng"){
-        if(typeof this.localization == 'object'){
+        
+        if(typeof this.localization == 'object' && !_.isEmpty(this.localization)){
             if(_.has(this.localization,lang)){
                return this.localization[lang]["trad"];
             }
             return this.localization["eng"]["trad"];
         }
-        throw "Trying to access getTrad with a reference Tag (ony id available)";
+        
+        throw "No localization available for this Tag (id: "+this.getId()+")";
     }
 
     static deserialize(jsonObject){
