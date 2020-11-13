@@ -14,6 +14,12 @@ class Tag {
     	this.id = id;
     	this.name = name;
     	this.localization = TagTrad.deserializeToHashMap(localization);
+
+        //Eng translation is mandatory, any tag without it need to be discarded
+        //Caller has to handle the error
+        if(this.getTrad() == ""){
+             throw "No ENG localization available for this Tag (id: "+this.getId()+")";
+        }
     }
 
     getId(){
@@ -23,17 +29,16 @@ class Tag {
     getName(){
         return this.name;
     }
-    
+
     getTrad(lang:string = "eng"){
-        
         if(typeof this.localization == 'object' && !_.isEmpty(this.localization)){
             if(_.has(this.localization,lang)){
                return this.localization[lang]["trad"];
             }
             return this.localization["eng"]["trad"];
         }
-        
-        throw "No localization available for this Tag (id: "+this.getId()+")";
+
+        return "";
     }
 
     static deserialize(jsonObject){
@@ -51,6 +56,19 @@ class Tag {
             data : jsonObject
         }
         
+    }
+
+    static deserializeToArray(jsonObject){
+        let tagsArray = [];
+        jsonObject.map((t) => {
+            try{
+                tagsArray.push(Tag.deserialize(t));
+            }
+            catch(err){
+                /* If a Tag couldn't be deserialized we ignore it and go to the next */
+            }
+        })        
+        return tagsArray;
     }
 }
 

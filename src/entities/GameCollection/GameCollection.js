@@ -43,19 +43,18 @@ class GameCollection {
             + "\n";
     }
 
-    static deserializationGameList(data, maskData: [] = []){ 
+    //
+    static deserialize(data, maskData: [] = []){ 
         let gameList = [];
-
         if(data != null && data.length > 0){   
-            data.forEach(function(e, index) {
-                //Init all Games Object from the server response
+            data.forEach(function(e, index) {          
                 try{
                     gameList.push(
                         Game.deserialize(e)
                     );
                 }
-                catch(e){
-                    console.log("Undeserializable gameJsonObject "+e.id);
+                catch(err){
+                    console.log(err);
                 }
             }, maskData)
         }

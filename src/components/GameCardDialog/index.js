@@ -220,14 +220,16 @@ class ResponsiveDialog extends React.Component {
 
     renderTagsChips = () => {
         return this.state.active_game.getTags().map(function(e, index) {
-            return (
-                <Chip
-                    key={index}
-                    label={this.game_tags[e.getId()].getTrad(this.i18n.cur_lang)}
-                    href="#chip"
-                    clickable
-                />
-            )
+            try{
+                return (
+                    <Chip
+                        key={index}
+                        label={this.game_tags[e.getId()].getTrad(this.i18n.cur_lang)}
+                        href="#chip"
+                        clickable
+                    />
+                )
+            }catch(e){}
         }, this.props)
 
     }

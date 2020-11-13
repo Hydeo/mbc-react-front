@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
                 action.payload.id,
                 action.payload.userId,
                 action.payload.isPublic,
-                GameCollection.deserializationGameList(action.payload.gameList),
+                GameCollection.deserialize(action.payload.gameList),
                 action.payload.gameMask
             );
 
@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
                     action.payload.id,
                     action.payload.userId,
                     action.payload.isPublic,
-                    GameCollection.deserializationGameList(action.payload.gameList),
+                    GameCollection.deserialize(action.payload.gameList),
                     action.payload.gameMask
                 );
 
@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
                 action.payload.id,
                 action.payload.userId,
                 action.payload.isPublic,
-                GameCollection.deserializationGameList(action.payload.gameList),
+                GameCollection.deserialize(action.payload.gameList),
                 action.payload.gameMask
             );
             return {
@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
                 action.payload.id,
                 action.payload.userId,
                 action.payload.isPublic,
-                GameCollection.deserializationGameList(action.payload.gameList),
+                GameCollection.deserialize(action.payload.gameList),
                 action.payload.gameMask
             );
             return {
